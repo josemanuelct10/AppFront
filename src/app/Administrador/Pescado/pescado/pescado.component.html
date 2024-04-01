@@ -1,0 +1,54 @@
+<app-menu-dashboard></app-menu-dashboard>
+
+<br>
+<div class="divAnadir">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPescado">
+    <i class="fa fa-plus"></i>
+  </button>
+
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio KG</th>
+      <th scope="col">Cantidad</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pescado of pescados">
+      <td>{{pescado.id}}</td>
+      <td>{{pescado.nombre}}</td>
+      <td>{{pescado.precioKG}}</td>
+      <td>{{pescado.cantidad}}</td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showPescado" (click)="setPescadoAEliminar(pescado.id, pescado.nombre)" >
+          <i class="fa fa-eye"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarPescado" (click)="setPescadoAEliminar(pescado.id, pescado.nombre)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-primary">
+          <i class="fa fa-pen"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<app-add-pescado></app-add-pescado>
+<app-rm-pescado [id]="id" [nombre]="nombre"></app-rm-pescado>
+<app-show-pescado [id]="id" [nombre]="nombre"></app-show-pescado>

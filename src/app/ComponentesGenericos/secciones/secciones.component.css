@@ -1,0 +1,10 @@
+.custom-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.custom-card > div {
+  margin: 10px; /* Espacio entre las tarjetas */
+  text-align: center; /* Para centrar el contenido */
+}

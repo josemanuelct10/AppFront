@@ -1,0 +1,57 @@
+<div class="modal fade" id="addPescado" tabindex="-1" aria-labelledby="addPescado" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addPescado">Nuevo Pescado</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #formPescado="ngForm" (ngSubmit)="guardarDatos()">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="nombre" id="nombre" placeholder="Nombre" alt="Nombre">
+            <label for="nombre">Nombre</label>
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Descripcion" name="descripcion"  [(ngModel)]="descripcion" alt="descripcion" id="descripcion" style="height: 100px"></textarea>
+            <label for="descripcion">Descripcion</label>
+          </div>
+          <br>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="origen" name="origen"  [(ngModel)]="origen" placeholder="Origen" alt="Origen">
+            <label for="origen">Origen</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="precioKG" name="precioKG"  [(ngModel)]="precioKG" placeholder="Precio del KG" alt="Precio del Kilogramo">
+            <label for="precioKG">Precio del KG</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="cantidad" name="cantidad"  [(ngModel)]="cantidad" placeholder="Cantidad" alt="Cantidad">
+            <label for="cantidad">Precio del KG</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaCompra" name="fechaCompra"  [(ngModel)]="fechaCompra" placeholder="Fecha de Compra" alt="Fecha de Compra">
+            <label for="fechaCompra">Fecha de Compra</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="categoria" name="categoria" [(ngModel)]="categoria" placeholder="Categoria" alt="Categoria">
+            <label for="categoria">Categoria</label>
+          </div>
+
+          <div>
+            <label for="formFileLg" class="form-label">Imagen</label>
+            <input class="form-control form-control-lg" id="formFileLg" type="file">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
