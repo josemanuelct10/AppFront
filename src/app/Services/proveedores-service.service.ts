@@ -20,4 +20,17 @@ export class ProveedoresServiceService {
   add(data: any){
     return this.http.post<any>(this.apiUrl + '/create', data);
   }
+
+  rm(id: any){
+    return this.http.delete<any>(`${this.apiUrl}/rm/${id}`);
+  }
+
+  getById(id: any){
+    return this.http.get(`${this.apiUrl}/getById/${id}`);
+  }
+
+  update(id: any, proveedorActualizado: any){
+    return this.http.put(`${this.apiUrl}/update/${id}`, proveedorActualizado);
+  }
+
 }

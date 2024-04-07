@@ -17,8 +17,9 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Nombre</th>
-      <th scope="col">Precio KG</th>
-      <th scope="col">Cantidad</th>
+      <th scope="col">Dirección</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">CIF</th>
       <th></th>
       <th></th>
       <th></th>
@@ -28,20 +29,21 @@
     <tr *ngFor="let proveedor of proveedores">
       <td>{{proveedor.id}}</td>
       <td>{{proveedor.nombre}}</td>
-      <td>{{proveedor.precioKG}}</td>
-      <td>{{proveedor.cantidad}}</td>
+      <td>{{proveedor.direccion}}</td>
+      <td>{{proveedor.telefono}}</td>
+      <td>{{proveedor.cif}}</td>
       <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showproveedor" (click)="buscarProveedor(proveedor.id)" >
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showProveedor" (click)="buscarProveedor(proveedor.id)" >
           <i class="fa fa-eye"></i>
         </button>
       </td>
       <td>
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarproveedor" (click)="setProveedorAEliminar(proveedor.id, proveedor.nombre)">
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarProveedor" (click)="setProveedorAEliminar(proveedor.id, proveedor.nombre)">
           <i class="fa fa-trash"></i>
         </button>
       </td>
       <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editproveedor" (click)="buscarProveedor(proveedor.id)">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProveedor" (click)="buscarProveedor(proveedor.id)">
           <i class="fa fa-pen"></i>
         </button>
       </td>

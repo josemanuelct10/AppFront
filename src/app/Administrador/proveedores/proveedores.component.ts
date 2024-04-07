@@ -27,7 +27,11 @@ export class ProveedoresComponent implements OnInit {
   }
 
   buscarProveedor(id: number){
-
+    this.proveedoresService.getById(id).subscribe(data=> {
+      this.proveedor = data;
+      console.log(this.proveedor);
+      console.log(id, "aaaa");
+    })
   }
 
   setProveedorAEliminar(id: number, nombre: string){
