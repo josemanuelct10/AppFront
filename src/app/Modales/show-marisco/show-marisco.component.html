@@ -1,0 +1,32 @@
+<div class="modal fade" id="showMarisco" tabindex="-1" aria-labelledby="showMarisco" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="showMarisco">{{marisco.nombre}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+            <label for="nombre">Nombre: {{marisco.nombre}}</label>
+            <br>
+            <label for="descripcion">Descripción: {{marisco.descripcion}}</label>
+            <br>
+            <label for="origen">Origen: {{marisco.origen}}</label>
+            <br>
+            <label for="precioKG">Precio del KG: {{marisco.precioKG}}</label>
+            <br>
+            <label for="cantidad">Cantidad: {{marisco.cantidad}}</label>
+            <br>
+            <label for="fechaCompra">Fecha de Compra: {{marisco.fechaCompra}}</label>
+            <br>
+            <label for="categoria">Categoría: {{marisco.categoria}}</label>
+            <br>
+            <label for="cocido">Cocido: {{ marisco.cocido ? 'Sí' : 'No' }}</label>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Ok</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

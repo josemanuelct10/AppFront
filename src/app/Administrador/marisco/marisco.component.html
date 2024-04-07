@@ -1,0 +1,58 @@
+<app-menu-dashboard></app-menu-dashboard>
+
+<br>
+<div class="d-flex">
+  <h2 class="h2">Marisco</h2>
+  <div class="divAnadir">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMarisco">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+
+
+<div class="table-responsive mx-5">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio KG</th>
+      <th scope="col">Cantidad</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let marisco of mariscos">
+      <td>{{marisco.id}}</td>
+      <td>{{marisco.nombre}}</td>
+      <td>{{marisco.precioKG}}</td>
+      <td>{{marisco.cantidad}}</td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showMarisco" (click)="buscarMarisco(marisco.id)">
+          <i class="fa fa-eye"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarMarisco" (click)="setMariscoAEliminar(marisco.id, marisco.nombre)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editMarisco" (click)="buscarMarisco(marisco.id)">
+          <i class="fa fa-pen"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<app-add-marisco></app-add-marisco>
+<!-- Aquí pasamos el pescado seleccionado al componente -->
+<app-show-marisco *ngIf="marisco" [marisco]="marisco"></app-show-marisco>
+<app-edit-marisco *ngIf="marisco" [marisco]="marisco"></app-edit-marisco>
+<app-rm-marisco [id]="id" [nombre]="nombre"></app-rm-marisco>

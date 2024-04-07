@@ -15,8 +15,20 @@ import { PescadoComponent } from './Administrador/Pescado/pescado/pescado.compon
 import { MenuDashboardComponent } from './Menus/menu-dashboard/menu-dashboard.component';
 import { SeccionesComponent } from './ComponentesGenericos/secciones/secciones.component';
 import { AddPescadoComponent } from './Modales/add-pescado/add-pescado.component';
-import { RmPescadoComponent } from './modales/rm-pescado/rm-pescado.component';
+import { RmPescadoComponent } from './Modales/rm-pescado/rm-pescado.component';
 import { ShowPescadoComponent } from './Modales/show-pescado/show-pescado.component';
+import { EditPescadoComponent } from './Modales/edit-pescado/edit-pescado.component';
+import { MariscoComponent } from './Administrador/marisco/marisco.component';
+import { AddMariscoComponent } from './Modales/add-marisco/add-marisco.component';
+import { RmMariscoComponent } from './Modales/rm-marisco/rm-marisco.component';
+import { ShowMariscoComponent } from './Modales/show-marisco/show-marisco.component';
+import { EditMariscoComponent } from './Modales/edit-marisco/edit-marisco.component';
+import { ProductosComponent } from './Administrador/productos/productos.component';
+import { ProveedoresComponent } from './Administrador/proveedores/proveedores.component';
+import { AddProveedorComponent } from './Modales/add-proveedor/add-proveedor.component';
+import { RmProveedorComponent } from './Modales/rm-proveedor/rm-proveedor.component';
+import { ShowProveedorComponent } from './Modales/show-proveedor/show-proveedor.component';
+import { EditProveedorComponent } from './Modales/edit-proveedor/edit-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +41,19 @@ import { ShowPescadoComponent } from './Modales/show-pescado/show-pescado.compon
     SeccionesComponent,
     AddPescadoComponent,
     RmPescadoComponent,
-    ShowPescadoComponent
+    ShowPescadoComponent,
+    EditPescadoComponent,
+    MariscoComponent,
+    AddMariscoComponent,
+    RmMariscoComponent,
+    ShowMariscoComponent,
+    EditMariscoComponent,
+    ProductosComponent,
+    ProveedoresComponent,
+    AddProveedorComponent,
+    RmProveedorComponent,
+    ShowProveedorComponent,
+    EditProveedorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,58 @@
+<app-menu-dashboard></app-menu-dashboard>
+
+<br>
+<div class="d-flex">
+  <h2 class="h2">Pescados</h2>
+</div>
+
+
+<div class="table-responsive mx-5">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio KG</th>
+      <th scope="col">Cantidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pescado of pescados">
+      <td>{{pescado.id}}</td>
+      <td>{{pescado.nombre}}</td>
+      <td>{{pescado.precioKG}}</td>
+      <td>{{pescado.cantidad}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<div class="d-flex">
+  <h2 class="h2">Mariscos</h2>
+</div>
+<div class="table-responsive mx-5">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio KG</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Cocido</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let marisco of mariscos">
+        <td>{{marisco.id}}</td>
+        <td>{{marisco.nombre}}</td>
+        <td>{{marisco.precioKG}}</td>
+        <td>{{marisco.cantidad}}</td>
+        <td>{{ marisco.cocido ? 'Sí' : 'No' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>

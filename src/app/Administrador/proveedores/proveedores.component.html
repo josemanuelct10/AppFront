@@ -1,0 +1,57 @@
+<app-menu-dashboard></app-menu-dashboard>
+<br>
+<div class="d-flex">
+  <h2 class="h2">Proveedores</h2>
+  <div class="divAnadir">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProveedor">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+
+
+<div class="table-responsive mx-5">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio KG</th>
+      <th scope="col">Cantidad</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let proveedor of proveedores">
+      <td>{{proveedor.id}}</td>
+      <td>{{proveedor.nombre}}</td>
+      <td>{{proveedor.precioKG}}</td>
+      <td>{{proveedor.cantidad}}</td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showproveedor" (click)="buscarProveedor(proveedor.id)" >
+          <i class="fa fa-eye"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarproveedor" (click)="setProveedorAEliminar(proveedor.id, proveedor.nombre)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editproveedor" (click)="buscarProveedor(proveedor.id)">
+          <i class="fa fa-pen"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<app-add-proveedor></app-add-proveedor>
+<!-- Aquí pasamos el proveedor seleccionado al componente -->
+<app-show-proveedor *ngIf="proveedor" [proveedor]="proveedor"></app-show-proveedor>
+<app-edit-proveedor *ngIf="proveedor" [proveedor]="proveedor"></app-edit-proveedor>
+<app-rm-proveedor [id]="id" [nombre]="nombre"></app-rm-proveedor>

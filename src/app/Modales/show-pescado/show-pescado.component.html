@@ -2,36 +2,24 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="showPescado">Pescado</h1>
+        <h1 class="modal-title fs-5" id="showPescado">{{pescado.nombre}}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <div class="form-floating mb-3">
-            <label for="nombre">{{pescado.nombre}}</label>
-          </div>
-          <div class="form-floating">
-            <label for="descripcion">{{pescado.descripcion}}</label>
-          </div>
-          <br>
-          <div class="form-floating mb-3">
-            <label for="origen">{{pescado.origen}}</label>
-          </div>
 
-          <div class="form-floating mb-3">
-            <label for="precioKG">{{pescado.precioKG}}</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <label for="cantidad">{{pescado.cantidad}}</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <label for="fechaCompra">{{pescado.fechaCompra}}</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <label for="categoria">{{pescado.categoria}}</label>
-          </div>
+            <label for="nombre">Nombre: {{pescado.nombre}}</label>
+            <br>
+            <label for="descripcion">Descripción: {{pescado.descripcion}}</label>
+            <br>
+            <label for="origen">Origen: {{pescado.origen}}</label>
+            <br>
+            <label for="precioKG">Precio del KG: {{pescado.precioKG}}</label>
+            <br>
+            <label for="cantidad">Cantidad: {{pescado.cantidad}}</label>
+            <br>
+            <label for="fechaCompra">Fecha de Compra: {{pescado.fechaCompra}}</label>
+            <br>
+            <label for="categoria">Categoría: {{pescado.categoria}}</label>
 
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Ok</button>

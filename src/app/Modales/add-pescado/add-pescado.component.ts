@@ -39,16 +39,11 @@ export class AddPescadoComponent {
       categoria: this.categoria
     }
 
-
     this.pescadoService.add(formData).subscribe( data=> {
       alert("Pescado guardado correctamente.");
       this.pescadoService.notificarActualizacion();
     });
 
-
-
-
     console.log(formData);
-
   }
 }

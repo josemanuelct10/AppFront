@@ -1,18 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PescadoServiceService {
+export class MariscoServiceService {
 
-  apiUrl: string = 'http://127.0.0.1:8000/api/pescados';
+  apiUrl: string = 'http://127.0.0.1:8000/api/mariscos';
 
-  private datosActualizados = new Subject<void>();
 
   constructor(
-    private http: HttpClient
+    private http : HttpClient
   ) { }
 
   getAll(){
@@ -31,12 +29,7 @@ export class PescadoServiceService {
     return this.http.get(`${this.apiUrl}/getById/${id}`);
   }
 
-  update(id: any, pescadoActualizado: any){
-    return this.http.put(`${this.apiUrl}/update/${id}`, pescadoActualizado);
-  }
-
-
-  notificarActualizacion(): void{
-    this.datosActualizados.next();
+  update(id: any, mariscoActualizado: any){
+    return this.http.put(`${this.apiUrl}/update/${id}`, mariscoActualizado);
   }
 }

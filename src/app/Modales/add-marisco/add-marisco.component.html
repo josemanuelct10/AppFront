@@ -1,12 +1,12 @@
-<div class="modal fade" id="addPescado" tabindex="-1" aria-labelledby="addPescado" aria-hidden="true">
+<div class="modal fade" id="addMarisco" tabindex="-1" aria-labelledby="addMarisco" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="addPescado">Nuevo Pescado</h1>
+        <h1 class="modal-title fs-5" id="addMarisco">Nuevo Marisco</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form #formPescado="ngForm" (ngSubmit)="guardarDatos()">
+        <form #formMarisco="ngForm" (ngSubmit)="guardarDatos()">
           <div class="form-floating mb-3">
             <input type="text" class="form-control" name="nombre" [(ngModel)]="nombre" id="nombre" placeholder="Nombre" alt="Nombre">
             <label for="nombre">Nombre</label>
@@ -39,6 +39,12 @@
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="categoria" name="categoria" [(ngModel)]="categoria" placeholder="Categoria" alt="Categoria">
             <label for="categoria">Categoria</label>
+          </div>
+
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="cocido" id="cocido" [(ngModel)]="cocido">
+            <label class="form-check-label" for="cocido">Cocido</label>
           </div>
 
           <div>

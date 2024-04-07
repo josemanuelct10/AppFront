@@ -7,43 +7,35 @@ import { Subscription } from 'rxjs';
   templateUrl: './pescado.component.html',
   styleUrl: './pescado.component.css'
 })
-export class PescadoComponent implements OnInit, OnDestroy {
-  pescados: any[] = [];
-  private datosActualizadosSubscription: Subscription;
+export class PescadoComponent implements OnInit {
+  pescados: any;
+  pescado: any;
+  id: any;
+  nombre: string;
 
   constructor(
     private pescadosService: PescadoServiceService
   ) {}
 
-  ngOnDestroy(): void {
-    // Desuscribirse de las suscripciones para evitar fugas de memoria
-    this.datosActualizadosSubscription.unsubscribe();
-  }
+
 
   ngOnInit(): void {
-    this.actualizarDatos();
-    this.datosActualizadosSubscription = this.pescadosService.getAll().subscribe((data: any) => {
-      this.actualizarDatos();
-    });
-  }
-
-  actualizarPagina(): void {
-    window.location.reload();
-  }
-
-  actualizarDatos(): void {
-    this.datosActualizadosSubscription = this.pescadosService.getAll().subscribe((data: any) => {
+    this.pescadosService.getAll().subscribe(data  => {
       this.pescados = data;
+      console.log(this.pescados);
     });
   }
-
-  id: any;
-  nombre: string;
 
   setPescadoAEliminar(id: any, nombre: any): void {
     this.id = id;
     this.nombre = nombre;
   }
 
-
+  buscarPescado(id: any){
+    this.pescadosService.getById(id).subscribe(data=> {
+      this.pescado = data;
+      console.log(this.pescado);
+      console.log(id, "aaaa");
+    })
+  }
 }

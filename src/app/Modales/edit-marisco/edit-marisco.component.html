@@ -1,0 +1,67 @@
+<div class="modal fade" id="editMarisco" tabindex="-1" aria-labelledby="editMarisco" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editMarisco">Actualizar Marisco</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #formMarisco="ngForm" (ngSubmit)="guardarDatos()">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="id" [(ngModel)]="marisco.id" id="id" placeholder="Id" alt="Id" readonly>
+            <label for="id">Id</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="marisco.nombre" id="nombre" placeholder="Nombre" alt="Nombre">
+            <label for="nombre">Nombre</label>
+          </div>
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Descripcion" name="descripcion"  [(ngModel)]="marisco.descripcion" alt="descripcion" id="descripcion" style="height: 100px"></textarea>
+            <label for="descripcion">Descripcion</label>
+          </div>
+          <br>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="origen" name="origen"  [(ngModel)]="marisco.origen" placeholder="Origen" alt="Origen">
+            <label for="origen">Origen</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="precioKG" name="precioKG"  [(ngModel)]="marisco.precioKG" placeholder="Precio del KG" alt="Precio del Kilogramo">
+            <label for="precioKG">Precio del KG</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="cantidad" name="cantidad"  [(ngModel)]="marisco.cantidad" placeholder="Cantidad" alt="Cantidad">
+            <label for="cantidad">Cantidad</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaCompra" name="fechaCompra"  [(ngModel)]="marisco.fechaCompra" placeholder="Fecha de Compra" alt="Fecha de Compra">
+            <label for="fechaCompra">Fecha de Compra</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="categoria" name="categoria" [(ngModel)]="marisco.categoria" placeholder="Categoria" alt="Categoria">
+            <label for="categoria">Categoria</label>
+          </div>
+
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="cocido" id="cocido" [(ngModel)]="marisco.cocido">
+            <label class="form-check-label" for="cocido">Cocido</label>
+          </div>
+
+          <div>
+            <label for="formFileLg" class="form-label">Imagen</label>
+            <input class="form-control form-control-lg" id="formFileLg" type="file">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
