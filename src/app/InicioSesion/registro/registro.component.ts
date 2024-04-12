@@ -21,6 +21,7 @@ export class RegistroComponent {
   fechaNacimiento: Date;
   telefono: string;
   direccion: string;
+  categoria_usuario: number = 2;
 
   onSubmit(){
     const formData = {
@@ -30,8 +31,11 @@ export class RegistroComponent {
       password: this.password,
       fecha_nacimiento: this.fechaNacimiento,
       telefono: this.telefono,
-      direccion: this.direccion
+      direccion: this.direccion,
+      categoria_usuario_id: this.categoria_usuario
     }
+
+    console.log(formData);
 
     this.inicioSesion.registro(formData)
       .subscribe(response => {

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PescadoServiceService } from '../../Services/pescado-service.service';
+import { PescadoServiceService } from '../../../Services/pescado-service.service';
 
 @Component({
   selector: 'app-rm-pescado',

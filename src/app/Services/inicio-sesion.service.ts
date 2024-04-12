@@ -15,8 +15,8 @@ export class InicioSesionService {
 
   }
 
-  login(formData: any) {
-    return this.http.post<any>(this.apiUrl + '/login', formData);
+  login(email: any, password: any) {
+    return this.http.post<any>(this.apiUrl + '/login', { email, password });
   }
 
 }

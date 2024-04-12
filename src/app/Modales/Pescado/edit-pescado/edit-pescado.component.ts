@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PescadoServiceService } from '../../Services/pescado-service.service';
+import { PescadoServiceService } from '../../../Services/pescado-service.service';
 import { Router } from '@angular/router';
 
 @Component({

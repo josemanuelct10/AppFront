@@ -1,0 +1,40 @@
+<app-menu-dashboard></app-menu-dashboard>
+<br>
+<div class="d-flex">
+  <h2 class="h2">Categorias de Usuarios</h2>
+  <div class="divAnadir">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoria">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+
+
+<div class="table-responsive mx-5">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Descripción</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let categoria of categoriasUsuarios">
+      <td>{{categoria.id}}</td>
+      <td>{{categoria.descripcion}}</td>
+      <td>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarCategoria" (click)="setCategoriaAEliminar(categoria.id, categoria.descripcion)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<app-add-categoria-usuarios></app-add-categoria-usuarios>
+<app-rm-categorias-usuarios [id]="id" [descripcion]="descripcion"></app-rm-categorias-usuarios>
+
+

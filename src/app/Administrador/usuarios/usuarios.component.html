@@ -1,0 +1,48 @@
+<app-menu-dashboard></app-menu-dashboard>
+<br>
+<div class="d-flex">
+  <h2 class="h2">Usuarios</h2>
+  <div class="divAnadir">
+  </div>
+</div>
+
+
+<div class="table-responsive mx-5">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Teléfono</th>
+      <th scope="col">Puesto</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{usuario.id}}</td>
+      <td>{{usuario.name}}</td>
+      <td>{{usuario.telefono}}</td>
+      <td>{{usuario.categoria_usuario.descripcion}}</td>
+      <td>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProveedor" (click)="buscarUsuario(usuario.id)">
+          <i class="fa fa-pen"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarProveedor" (click)="setUsuarioAEliminar(usuario.id, usuario.nombre)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarProveedor" (click)="setUsuarioAEliminar(usuario.id, usuario.nombre)">
+          <i class="fa fa-file"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

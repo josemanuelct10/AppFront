@@ -32,12 +32,9 @@
                           Usuarios
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
-                          <a class="dropdown-item"  style="color: black;">Mostrar Usuarios</a>
-                          <a class="dropdown-item"  style="color: black;">Editar Usuarios</a>
+                          <a class="dropdown-item"  style="color: black;" [routerLink]="['/administrador/usuarios']">Usuarios</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" >Mostrar Categorías de Usuario</a>
-                          <a class="dropdown-item" >Añadir Categoría de Usuario</a>
-                          <a class="dropdown-item" >Eliminar Categoría de Usuario</a>
+                          <a class="dropdown-item" [routerLink]="['/administrador/categorias_usuarios']">Categorías de Usuario</a>
                       </div>
                   </li>
               </ul>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MariscoServiceService } from '../../Services/marisco-service.service';
+import { MariscoServiceService } from '../../../Services/marisco-service.service';
 
 @Component({
   selector: 'app-add-marisco',
