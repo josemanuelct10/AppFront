@@ -10,4 +10,8 @@ export class RmUsuarioComponent {
   @Input() id: any;
   @Input() nombre: any;
 
+  eliminarUsuario(){
+
+  }
+
 }

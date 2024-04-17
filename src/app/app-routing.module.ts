@@ -9,17 +9,18 @@ import { ProductosComponent } from './Administrador/productos/productos.componen
 import { ProveedoresComponent } from './Administrador/proveedores/proveedores.component';
 import { CategoriasUsuariosComponent } from './Administrador/categorias-usuarios/categorias-usuarios.component';
 import { UsuariosComponent } from './Administrador/usuarios/usuarios.component';
+import { AuthGuardService } from './Services/auth-guard.service';
 
 const routes: Routes = [
   {path: '', component: InicioSesionComponent},
   {path: 'registro', component: RegistroComponent},
-  {path: 'administrador/inicio', component: InicioComponent},
-  {path: 'administrador/pescado', component: PescadoComponent},
-  {path: 'administrador/marisco', component: MariscoComponent},
-  {path: 'administrador/productos', component: ProductosComponent},
-  {path: 'administrador/proveedores', component: ProveedoresComponent},
-  {path: 'administrador/categorias_usuarios', component: CategoriasUsuariosComponent},
-  {path: 'administrador/usuarios', component: UsuariosComponent}
+  {path: 'administrador/inicio', component: InicioComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/pescado', component: PescadoComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/marisco', component: MariscoComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/productos', component: ProductosComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/proveedores', component: ProveedoresComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/categorias_usuarios', component: CategoriasUsuariosComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/usuarios', component: UsuariosComponent, canActivate: [AuthGuardService]}
 
 ];
 

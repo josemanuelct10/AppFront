@@ -20,14 +20,9 @@ export class InicioSesionComponent {
 
   onSubmit(){
 
-
-
     this.inicioSesion.login(this.email, this.password)
       .subscribe(response=>{
-        console.log(response);
         this.router.navigate(['/administrador/inicio']);
-        localStorage.setItem('token', response.token);
-        console.log(localStorage.getItem('token'));
 
       }, error=> {
           // Manejar errores de inicio de sesión

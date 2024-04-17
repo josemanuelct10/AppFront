@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,8 @@ export class CategoriaUsuariosService {
   check(id: any){
     return this.http.get<boolean>(`${this.apiUrl}/check/${id}`);
   }
+
+  isNavCollapsed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 
 }

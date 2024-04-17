@@ -35,6 +35,9 @@ import { RmCategoriasUsuariosComponent } from './Modales/Categorias-Usuarios/rm-
 import { UsuariosComponent } from './Administrador/usuarios/usuarios.component';
 import { RmUsuarioComponent } from './Modales/Usuarios/rm-usuario/rm-usuario.component';
 import { EditUsuarioComponent } from './Modales/Usuarios/edit-usuario/edit-usuario.component';
+import { CleanupService } from './Services/cleanup.service';
+import { PruebaComponent } from './Menus/prueba/prueba.component';
+
 
 @NgModule({
   declarations: [
@@ -65,7 +68,8 @@ import { EditUsuarioComponent } from './Modales/Usuarios/edit-usuario/edit-usuar
     RmCategoriasUsuariosComponent,
     UsuariosComponent,
     RmUsuarioComponent,
-    EditUsuarioComponent
+    EditUsuarioComponent,
+    PruebaComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,9 @@ import { EditUsuarioComponent } from './Modales/Usuarios/edit-usuario/edit-usuar
     RouterModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    CleanupService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -20,7 +20,10 @@ export class PescadoServiceService {
   }
 
   add(data: any){
-    return this.http.post<any>(this.apiUrl + '/create', data);
+    const headers = new HttpHeaders();
+    // Establecer el encabezado Content-Type como multipart/form-data
+    headers.append('Content-Type', 'application/json');
+    return this.http.post<any>(this.apiUrl + '/create', data, {headers: headers});
   }
 
   rm(id: any){

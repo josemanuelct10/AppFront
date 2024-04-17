@@ -11,6 +11,9 @@ import { CategoriaUsuariosService } from '../../Services/categoria-usuarios.serv
 export class UsuariosComponent implements OnInit {
 
   usuarios: any;
+  usuario: any;
+  id: any;
+  nombre: string;
 
   constructor(
     private usuariosService: UsuariosServiceService,
@@ -27,7 +30,11 @@ export class UsuariosComponent implements OnInit {
 
   }
 
-  buscarUsuario(id: any){}
+  buscarUsuario(id: any){
+    this.usuariosService.getById(id).subscribe(data=> {
+      this.usuario = data;
+    })
+  }
 
   setUsuarioAEliminar(id: any, nombre: any){
 

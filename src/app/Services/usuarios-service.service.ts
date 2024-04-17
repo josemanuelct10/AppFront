@@ -16,5 +16,13 @@ export class UsuariosServiceService {
     return this.http.get(this.apiUrl + '/show')
   }
 
+  update(id: any, usuarioActualizado: any){
+    return this.http.put(`${this.apiUrl}/update/${id}`, usuarioActualizado);
+  }
+
+  getById(id: any){
+    return this.http.get(`${this.apiUrl}/getById/${id}`);
+  }
+
 
 }

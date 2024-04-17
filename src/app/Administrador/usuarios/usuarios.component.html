@@ -28,7 +28,7 @@
       <td>{{usuario.telefono}}</td>
       <td>{{usuario.categoria_usuario.descripcion}}</td>
       <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProveedor" (click)="buscarUsuario(usuario.id)">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUsuario" (click)="buscarUsuario(usuario.id)">
           <i class="fa fa-pen"></i>
         </button>
       </td>
@@ -46,3 +46,5 @@
   </tbody>
 </table>
 </div>
+<app-edit-usuario *ngIf="usuario" [usuario]="usuario"></app-edit-usuario>
+
