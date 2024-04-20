@@ -14,6 +14,7 @@
     <tr>
       <th scope="col">Id</th>
       <th scope="col">Nombre</th>
+      <th scope="col">Email</th>
       <th scope="col">Teléfono</th>
       <th scope="col">Puesto</th>
       <th></th>
@@ -25,6 +26,7 @@
     <tr *ngFor="let usuario of usuarios">
       <td>{{usuario.id}}</td>
       <td>{{usuario.name}}</td>
+      <td>{{usuario.email}}</td>
       <td>{{usuario.telefono}}</td>
       <td>{{usuario.categoria_usuario.descripcion}}</td>
       <td>
@@ -33,7 +35,7 @@
         </button>
       </td>
       <td>
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarProveedor" (click)="setUsuarioAEliminar(usuario.id, usuario.nombre)">
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarUsuario" (click)="setUsuarioAEliminar(usuario.id, usuario.name)">
           <i class="fa fa-trash"></i>
         </button>
       </td>
@@ -45,6 +47,7 @@
     </tr>
   </tbody>
 </table>
-</div>
 <app-edit-usuario *ngIf="usuario" [usuario]="usuario"></app-edit-usuario>
+<app-rm-usuario [id]="id" [nombre]="nombre"></app-rm-usuario>
+
 

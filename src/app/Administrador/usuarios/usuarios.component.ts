@@ -36,8 +36,9 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
-  setUsuarioAEliminar(id: any, nombre: any){
-
+  setUsuarioAEliminar(id: any, name: any){
+    this.id = id;
+    this.nombre = name;
   }
 
 

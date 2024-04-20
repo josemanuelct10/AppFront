@@ -25,4 +25,9 @@ export class UsuariosServiceService {
   }
 
 
+  rm(id: any){
+    return this.http.delete<any>(`${this.apiUrl}/rm/${id}`);
+  }
+
+
 }
