@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { RegistroComponent } from './InicioSesion/registro/registro.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 
 import { RouterModule } from '@angular/router';
 import { InicioSesionComponent } from './InicioSesion/inicio-sesion/inicio-sesion.component';
@@ -36,7 +36,8 @@ import { UsuariosComponent } from './Administrador/usuarios/usuarios.component';
 import { RmUsuarioComponent } from './Modales/Usuarios/rm-usuario/rm-usuario.component';
 import { EditUsuarioComponent } from './Modales/Usuarios/edit-usuario/edit-usuario.component';
 import { CleanupService } from './Services/cleanup.service';
-import { PruebaComponent } from './Menus/prueba/prueba.component';
+import { provideToastr } from 'ngx-toastr';
+import { MenuClienteComponent } from './Menus/menu-cliente/menu-cliente.component';
 
 
 @NgModule({
@@ -69,8 +70,8 @@ import { PruebaComponent } from './Menus/prueba/prueba.component';
     UsuariosComponent,
     RmUsuarioComponent,
     EditUsuarioComponent,
-    PruebaComponent
-  ],
+    MenuClienteComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -80,7 +81,9 @@ import { PruebaComponent } from './Menus/prueba/prueba.component';
     HttpClientModule,
   ],
   providers: [
-    CleanupService
+    CleanupService,
+    provideAnimations(), // required animations providers
+    provideToastr(),
   ],
   bootstrap: [AppComponent]
 })

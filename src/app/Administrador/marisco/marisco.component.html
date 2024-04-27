@@ -11,7 +11,7 @@
 </div>
 
 
-<div class="table-responsive mx-5">
+<div class="table-responsive mx-5" *ngIf="mariscos">
 
 <table class="table">
   <thead>
@@ -51,8 +51,8 @@
 </table>
 </div>
 
-<app-add-marisco></app-add-marisco>
+<app-add-marisco (onChange)="actualizarMariscos($event)"></app-add-marisco>
 <!-- Aquí pasamos el pescado seleccionado al componente -->
 <app-show-marisco *ngIf="marisco" [marisco]="marisco"></app-show-marisco>
-<app-edit-marisco *ngIf="marisco" [marisco]="marisco"></app-edit-marisco>
-<app-rm-marisco [id]="id" [nombre]="nombre"></app-rm-marisco>
+<app-edit-marisco *ngIf="marisco" [marisco]="marisco" (onChange)="actualizarMariscos($event)"></app-edit-marisco>
+<app-rm-marisco [id]="id" [nombre]="nombre" (onChange)="actualizarMariscos($event)"></app-rm-marisco>

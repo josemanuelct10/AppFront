@@ -19,6 +19,11 @@ export class ProveedoresComponent implements OnInit {
     private proveedoresService: ProveedoresServiceService
   ){}
 
+  actualizarProveedores(proveedoresActualizados: any){
+    this.proveedores = proveedoresActualizados;
+  }
+
+
   ngOnInit(): void {
     this.proveedoresService.getAll().subscribe(data  => {
       this.proveedores = data;

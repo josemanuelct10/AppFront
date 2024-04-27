@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MariscoServiceService } from '../../../Services/marisco-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-marisco',
@@ -8,9 +9,12 @@ import { MariscoServiceService } from '../../../Services/marisco-service.service
 })
 export class EditMariscoComponent {
   @Input() marisco: any;
+  @Output() onChange = new EventEmitter<any>();
+
 
   constructor(
-    private mariscoService: MariscoServiceService
+    private mariscoService: MariscoServiceService,
+    private toast: ToastrService
   ){}
 
   guardarDatos(){
@@ -26,7 +30,18 @@ export class EditMariscoComponent {
     }
 
     this.mariscoService.update(this.marisco.id, formData).subscribe( data =>{
-      alert("marisco actualizado correctamente.");
+
+      if (data) {
+        this.mariscoService.getAll().subscribe(
+          mariscos => {
+            this.onChange.emit(mariscos);
+            this.toast.success('Marisco editado correctamente.', 'Success');
+          }
+        )
+      } else {
+        // Manejar el caso en el que 'success' no sea verdadero
+        console.error('Error al editar el marisco:', data); // Otra acción de manejo de error
+      }
     })
 
     console.log(formData);

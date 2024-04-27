@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { MariscoServiceService } from '../../Services/marisco-service.service';
 
+export interface Marisco {
+  id: number;
+  // Otros campos del objeto marisco
+}
+
 @Component({
   selector: 'app-marisco',
   templateUrl: './marisco.component.html',
   styleUrl: './marisco.component.css'
 })
+
+
 export class MariscoComponent implements OnInit {
 
   mariscos: any;
@@ -18,11 +25,19 @@ export class MariscoComponent implements OnInit {
   }
 
 
+  actualizarMariscos(mariscosActualizados: any){
+    this.mariscos = mariscosActualizados;
+  }
+
   ngOnInit(): void {
     this.mariscoService.getAll().subscribe(data  => {
       this.mariscos = data;
       console.log(this.mariscos);
     });
+  }
+
+  onMariscoEliminado(id: number){
+    this.mariscos = this.mariscos.filter((marisco: any) => marisco.id !== id);
   }
 
 

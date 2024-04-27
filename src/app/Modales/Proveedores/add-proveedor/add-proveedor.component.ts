@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ProveedoresServiceService } from '../../../Services/proveedores-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-proveedor',
@@ -13,8 +14,12 @@ export class AddProveedorComponent {
   categoria: string;
   cif: string;
 
+  @Output() onChange = new EventEmitter<any>();
+
+
   constructor(
-    private proveedorService: ProveedoresServiceService
+    private proveedorService: ProveedoresServiceService,
+    private toast: ToastrService,
   ){}
 
 
@@ -28,7 +33,14 @@ export class AddProveedorComponent {
     }
 
     this.proveedorService.add(formData).subscribe( data=> {
-      alert("Proveedor guardado correctamente.");
+      if (data.success === true){
+        this.proveedorService.getAll().subscribe(
+          proveedores => {
+            this.onChange.emit(proveedores);
+            this.toast.success("Proveedor Añadido Correctamente.", "Success!");
+          }
+        )
+      }
     });
 
     console.log(formData);

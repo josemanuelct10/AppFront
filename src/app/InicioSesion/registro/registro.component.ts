@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { InicioSesionService } from '../../Services/inicio-sesion.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registro',
@@ -11,7 +12,8 @@ export class RegistroComponent {
 
   constructor (
     private inicioSesion: InicioSesionService,
-    private router: Router
+    private router: Router,
+    private toast: ToastrService
     ){}
 
   nombre: string;
@@ -39,8 +41,10 @@ export class RegistroComponent {
 
     this.inicioSesion.registro(formData)
       .subscribe(response => {
-        alert('Se ha registrado correctamente.');
+        this.toast.success("Se ha registrado correctamente.", "Success!");
+        console.log(response);
         this.router.navigate(['/']);
+
 
       }, error => {
         alert("Error al registrarsse");

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PescadoServiceService } from '../../../Services/pescado-service.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-pescado',
@@ -10,10 +11,14 @@ import { Router } from '@angular/router';
 export class EditPescadoComponent {
 
   @Input() pescado: any;
+  @Output() onChange = new EventEmitter<any>();
+
+  pescados: any;
 
   constructor(
     private pescadoService: PescadoServiceService,
-    private router: Router
+    private router: Router,
+    private toast: ToastrService
   ) {}
 
 
@@ -30,7 +35,16 @@ export class EditPescadoComponent {
     }
 
     this.pescadoService.update(this.pescado.id, formData).subscribe( data =>{
-      alert("Pescado actualizado correctamente.");
+
+      if (data){
+        this.pescadoService.getAll().subscribe(
+          pescados => {
+            this.pescados = pescados;
+            this.onChange.emit(this.pescados);
+            this.toast.success("Pescado actualizado correctamente", "Success!");
+          }
+        )
+      }
     })
 
     console.log(formData);

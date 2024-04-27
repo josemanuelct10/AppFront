@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CategoriaUsuariosService } from '../../../Services/categoria-usuarios.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-categoria-usuarios',
@@ -10,7 +11,8 @@ export class AddCategoriaUsuariosComponent {
   descripcion: string;
 
   constructor(
-    private categoriasService: CategoriaUsuariosService
+    private categoriasService: CategoriaUsuariosService,
+    private toast: ToastrService
   ){}
 
   guardarDatos(){
@@ -19,6 +21,8 @@ export class AddCategoriaUsuariosComponent {
     }
 
     this.categoriasService.add(formData).subscribe( data=> {
-      alert("Categoría de Usuarios guardada correctamente.");
-    });  }
+      this.toast.success('La categoria ha sido borrada correctamente.', 'Success');
+      window.location.reload();
+    });
+  }
 }

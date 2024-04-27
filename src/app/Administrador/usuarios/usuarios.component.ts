@@ -17,7 +17,6 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     private usuariosService: UsuariosServiceService,
-    private categoriasService: CategoriaUsuariosService
   ){}
 
   ngOnInit(): void {

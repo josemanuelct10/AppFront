@@ -14,14 +14,12 @@ export class InicioSesionService {
 
   registro(datosUsuario: any){
     return this.http.post(this.apiUrl + '/create', datosUsuario);
-
   }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password }).pipe(
       tap(response => {
-        this.token = response.access_token;
-        this.guardarToken(response.access_token);
+        this.guardarToken(response.token);
       })
     );
   }
@@ -32,6 +30,7 @@ export class InicioSesionService {
 
 
   private guardarToken(token: string): void {
+    console.log(token);
     localStorage.setItem('token', token);
   }
 
@@ -43,7 +42,8 @@ export class InicioSesionService {
   logout(): void {
     this.token = null;
     localStorage.removeItem('token');
-    console.log(this.token);
+    localStorage.removeItem('idUsuario');
+    localStorage.removeItem('categoriaUsuario');
   }
 
   getToken(): string | null {

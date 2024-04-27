@@ -1,0 +1,64 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+      <div class="container-fluid">
+          <a class="navbar-brand" >
+              <img src="assets/logos/logo.png" alt="Logo de Pescados Cañete Trillo" width="100" height="100" class="d-inline-block align-top" loading="lazy">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon" style="background-color: white;"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link" [routerLink]="['/administrador/inicio']"  style="color: white;">Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" [routerLink]="['/administrador/productos']"  style="color: white;">Productos</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link"  [routerLink]="['/administrador/pescado']"  style="color: white;">Pescado</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" [routerLink]="['/administrador/marisco']" style="color: white;">Marisco</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link"  [routerLink]="['/administrador/proveedores']" style="color: white;">Proveedores</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link"  style="color: white;">Facturas</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsuarios" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">
+                          Usuarios
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
+                          <a class="dropdown-item"  style="color: black;" [routerLink]="['/administrador/usuarios']">Usuarios</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" [routerLink]="['/administrador/categorias_usuarios']">Categorías de Usuario</a>
+                      </div>
+                  </li>
+              </ul>
+              <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-light" type="submit">Search</button>
+              </form>
+              <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="assets/logos/ajustes.png" alt="Icono de ajustes" width="20" height="20">
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="" style="color: black;">Perfil</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                        <button type="submit" class="dropdown-item" style="color: black;" (click)="logout()">Cerrar Sesión</button>
+                      </li>
+                  </ul>
+              </div>
+
+          </div>
+      </div>
+  </nav>
+</header>
+
+<router-outlet></router-outlet>
+

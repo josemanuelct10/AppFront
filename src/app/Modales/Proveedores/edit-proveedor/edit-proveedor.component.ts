@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProveedoresServiceService } from '../../../Services/proveedores-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-proveedor',
@@ -9,9 +10,11 @@ import { ProveedoresServiceService } from '../../../Services/proveedores-service
 export class EditProveedorComponent {
 
   @Input() proveedor: any;
+  @Output() onChange = new EventEmitter<any>();
 
   constructor(
-    private proveedorService: ProveedoresServiceService
+    private proveedorService: ProveedoresServiceService,
+    private toast: ToastrService
   ){}
 
   guardarDatos(){
@@ -24,7 +27,14 @@ export class EditProveedorComponent {
     }
 
     this.proveedorService.update(this.proveedor.id, formData).subscribe( data =>{
-      alert("Proveedor actualizado correctamente.");
+      if (data){
+        this.proveedorService.getAll().subscribe(
+          proveedores=>{
+            this.onChange.emit(proveedores);
+            this.toast.success("Proveedor actualizado correctamente.", "Success!");
+          }
+        )
+      }
     })
 
     console.log(formData);

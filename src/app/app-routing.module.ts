@@ -11,16 +11,19 @@ import { CategoriasUsuariosComponent } from './Administrador/categorias-usuarios
 import { UsuariosComponent } from './Administrador/usuarios/usuarios.component';
 import { AuthGuardService } from './Services/auth-guard.service';
 
+
+
 const routes: Routes = [
   {path: '', component: InicioSesionComponent},
   {path: 'registro', component: RegistroComponent},
-  {path: 'administrador/inicio', component: InicioComponent, canActivate: [AuthGuardService]},
+  { path: 'administrador/inicio', component: InicioComponent, data: { menuType: 'dashboard' }, canActivate: [AuthGuardService] },
   {path: 'administrador/pescado', component: PescadoComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/marisco', component: MariscoComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/productos', component: ProductosComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/proveedores', component: ProveedoresComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/categorias_usuarios', component: CategoriasUsuariosComponent, canActivate: [AuthGuardService]},
-  {path: 'administrador/usuarios', component: UsuariosComponent, canActivate: [AuthGuardService]}
+  {path: 'administrador/usuarios', component: UsuariosComponent, canActivate: [AuthGuardService]},
+  { path: 'inicio', component: InicioComponent, data: { menuType: 'cliente' }, canActivate: [AuthGuardService] },
 
 ];
 

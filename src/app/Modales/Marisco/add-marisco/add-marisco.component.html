@@ -32,14 +32,10 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="fechaCompra" name="fechaCompra"  [(ngModel)]="fechaCompra" placeholder="Fecha de Compra" alt="Fecha de Compra">
-            <label for="fechaCompra">Fecha de Compra</label>
-          </div>
-
-          <div class="form-floating mb-3">
             <input type="text" class="form-control" id="categoria" name="categoria" [(ngModel)]="categoria" placeholder="Categoria" alt="Categoria">
             <label for="categoria">Categoria</label>
           </div>
+
 
 
           <div class="form-check">
@@ -47,10 +43,18 @@
             <label class="form-check-label" for="cocido">Cocido</label>
           </div>
 
+          <div class="form-floating">
+            <select class="form-select" id="proveedor" name="proveedor" aria-label="Floating label select example" [(ngModel)]="proveedor_id">
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
+            </select>
+            <label for="proveedor">Proveedor</label>
+          </div>
+
           <div>
             <label for="formFileLg" class="form-label">Imagen</label>
-            <input class="form-control form-control-lg" id="formFileLg" type="file">
+            <input class="form-control form-control-lg" (change)="capturarImagen($event)" id="imagen" name="imagen" type="file">
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>

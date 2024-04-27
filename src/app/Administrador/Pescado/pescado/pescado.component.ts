@@ -18,6 +18,10 @@ export class PescadoComponent implements OnInit {
   ) {}
 
 
+  actualizarPescados(pescadosActualizados: any){
+    this.pescados = pescadosActualizados;
+  }
+
 
   ngOnInit(): void {
     this.pescadosService.getAll().subscribe(data  => {

@@ -22,7 +22,17 @@ export class InicioSesionComponent {
 
     this.inicioSesion.login(this.email, this.password)
       .subscribe(response=>{
-        this.router.navigate(['/administrador/inicio']);
+        localStorage.setItem('idUsuario',  response.user.id);
+        localStorage.setItem('categoriaUsuario',  response.user.categoria_usuario_id);
+
+
+        if (response.user.categoria_usuario_id === 1){
+          this.router.navigate(['/administrador/inicio']);
+        }
+        else{
+          this.router.navigate(['/inicio']);
+        }
+
 
       }, error=> {
           // Manejar errores de inicio de sesión
