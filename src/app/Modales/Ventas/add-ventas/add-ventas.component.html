@@ -1,0 +1,43 @@
+<div class="modal fade" id="addVenta" tabindex="-1" aria-labelledby="addVenta" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header  bg-custom">
+        <h1 class="modal-title fs-5" id="addVenta">Nueva Venta</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #formCategorias="ngForm" (ngSubmit)="guardarDatos()">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="descripcion" [(ngModel)]="descripcion" id="descripcion" placeholder="Descripcion" alt="Descripcion">
+            <label for="descripcion">Descripción</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fecha" name="fecha" [(ngModel)]="fecha" placeholder="Fecha" alt="Fecha">
+            <label for="fecha">Fecha</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" name="cantidad" [(ngModel)]="cantidad" id="cantidad" placeholder="Cantidad" alt="Cantidad">
+            <label for="cantidad">Cantidad</label>
+          </div>
+
+
+          <div class="form-floating mb-3">
+            <select class="form-select" id="selectPesc" name="selectPesc" [(ngModel)]="seleccion">
+              <option *ngFor="let opcion of opciones" [value]="opcion">{{ opcion }}</option>
+            </select>
+            <label for="selectPesc">Selecciona una opción</label>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+

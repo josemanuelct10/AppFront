@@ -10,6 +10,8 @@ import { ProveedoresComponent } from './Administrador/proveedores/proveedores.co
 import { CategoriasUsuariosComponent } from './Administrador/categorias-usuarios/categorias-usuarios.component';
 import { UsuariosComponent } from './Administrador/usuarios/usuarios.component';
 import { AuthGuardService } from './Services/auth-guard.service';
+import { GastosComponent } from './Administrador/gastos/gastos.component';
+import { VentasComponent } from './Administrador/ventas/ventas.component';
 
 
 
@@ -23,6 +25,8 @@ const routes: Routes = [
   {path: 'administrador/proveedores', component: ProveedoresComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/categorias_usuarios', component: CategoriasUsuariosComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/usuarios', component: UsuariosComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/gastos', component: GastosComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/ventas', component: VentasComponent, canActivate: [AuthGuardService]},
   { path: 'inicio', component: InicioComponent, data: { menuType: 'cliente' }, canActivate: [AuthGuardService] },
 
 ];

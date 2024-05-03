@@ -29,8 +29,8 @@
     <tr *ngFor="let pescado of pescados">
       <td>{{pescado.id}}</td>
       <td>{{pescado.nombre}}</td>
-      <td>{{pescado.precioKG}}</td>
-      <td>{{pescado.cantidad}}</td>
+      <td>{{ pescado.precioKG | number:'1.2-2' }} €</td>
+      <td>{{pescado.cantidad}} KG</td>
       <td>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showPescado" (click)="buscarPescado(pescado.id)" >
           <i class="fa fa-eye"></i>
@@ -52,7 +52,10 @@
 </div>
 
 <app-add-pescado (onChange)="actualizarPescados($event)"></app-add-pescado>
-<!-- Aquí pasamos el pescado seleccionado al componente -->
-<app-show-pescado *ngIf="pescado" [pescado]="pescado"></app-show-pescado>
-<app-edit-pescado *ngIf="pescado" [pescado]="pescado"  (onChange)="actualizarPescados($event)"></app-edit-pescado>
+
 <app-rm-pescado [id]="id" [nombre]="nombre" (onChange)="actualizarPescados($event)"></app-rm-pescado>
+
+<app-edit-pescado  [pescado]="pescado"  (onChange)="actualizarPescados($event)"></app-edit-pescado>
+
+
+<app-show-pescado [pescado]="pescado"></app-show-pescado>

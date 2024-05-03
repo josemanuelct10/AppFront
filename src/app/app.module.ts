@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistroComponent } from './InicioSesion/registro/registro.component';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 
@@ -38,6 +38,17 @@ import { EditUsuarioComponent } from './Modales/Usuarios/edit-usuario/edit-usuar
 import { CleanupService } from './Services/cleanup.service';
 import { provideToastr } from 'ngx-toastr';
 import { MenuClienteComponent } from './Menus/menu-cliente/menu-cliente.component';
+import { GastosComponent } from './Administrador/gastos/gastos.component';
+import { AddNominaComponent } from './Modales/Gastos/add-nomina/add-nomina.component';
+import { AddCompraComponent } from './Modales/Gastos/add-compra/add-compra.component';
+import { AddGastosExtraComponent } from './Modales/Gastos/add-gastos-extra/add-gastos-extra.component';
+import { RmGastoComponent } from './Modales/Gastos/rm-gasto/rm-gasto.component';
+import { FilterPipe } from './Interfaces/Filtros';
+import { ShowGastosComponent } from './Modales/Proveedores/show-gastos/show-gastos.component';
+import { ShowNominasComponent } from './Modales/Usuarios/show-nominas/show-nominas.component';
+import { VentasComponent } from './Administrador/ventas/ventas.component';
+import { AddVentasComponent } from './Modales/Ventas/add-ventas/add-ventas.component';
+import { RmVentasComponent } from './Modales/Ventas/rm-ventas/rm-ventas.component';
 
 
 @NgModule({
@@ -70,7 +81,18 @@ import { MenuClienteComponent } from './Menus/menu-cliente/menu-cliente.componen
     UsuariosComponent,
     RmUsuarioComponent,
     EditUsuarioComponent,
-    MenuClienteComponent
+    MenuClienteComponent,
+    GastosComponent,
+    AddNominaComponent,
+    AddCompraComponent,
+    AddGastosExtraComponent,
+    RmGastoComponent,
+    FilterPipe,
+    ShowGastosComponent,
+    ShowNominasComponent,
+    VentasComponent,
+    AddVentasComponent,
+    RmVentasComponent
     ],
   imports: [
     BrowserModule,
@@ -79,6 +101,7 @@ import { MenuClienteComponent } from './Menus/menu-cliente/menu-cliente.componen
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     CleanupService,

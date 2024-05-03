@@ -1,0 +1,55 @@
+<app-menu-dashboard></app-menu-dashboard>
+
+
+<br>
+<div class="d-flex">
+  <h2 class="h2">Ventas</h2>
+  <div class="divAnadir">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addVenta">
+      <i class="fa fa-plus"></i>
+    </button>
+  </div>
+</div>
+
+<div class="input-group mb-3" style="width: 20%; margin-left:50px;">
+  <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+  <button class="btn btn-primary" type="button" (click)="limpiarFiltro()">Limpiar</button>
+</div>
+
+<div class="table-responsive mx-5" *ngIf="ventas">
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Referencia</th>
+      <th scope="col">Fecha</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let venta of ventas  | filter: filtro">
+      <td>{{venta.id}}</td>
+      <td>{{venta.descripcion}}</td>
+      <td>{{ venta.cantidad | number:'1.2-2' }}€</td>
+      <td>{{venta.referencia}}</td>
+      <td>{{ venta.fecha }}</td>
+      <td>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarVenta" (click)="setVentaAEliminar(venta.id, venta.referencia)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<app-add-ventas (onChange)="ventasActualizadas($event)"></app-add-ventas>
+<app-rm-ventas [id]="id" [referencia]="referencia" (onChange)="ventasActualizadas($event)"></app-rm-ventas>
+  <!-- Línea que muestra la suma total -->
+  <div class="total-line text-end mx-5" *ngIf="ventas && ventas.length > 0">
+    <hr>
+    <div>TOTAL: {{calcularTotalFiltrado()}}€</div>
+  </div>

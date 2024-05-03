@@ -15,7 +15,9 @@ export class PescadoComponent implements OnInit {
 
   constructor(
     private pescadosService: PescadoServiceService
-  ) {}
+  ) {
+    this.pescado = null;
+  }
 
 
   actualizarPescados(pescadosActualizados: any){

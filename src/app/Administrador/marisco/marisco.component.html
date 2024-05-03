@@ -35,6 +35,7 @@
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showMarisco" (click)="buscarMarisco(marisco.id)">
           <i class="fa fa-eye"></i>
         </button>
+
       </td>
       <td>
         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarMarisco" (click)="setMariscoAEliminar(marisco.id, marisco.nombre)">
@@ -51,8 +52,9 @@
 </table>
 </div>
 
+
 <app-add-marisco (onChange)="actualizarMariscos($event)"></app-add-marisco>
-<!-- Aquí pasamos el pescado seleccionado al componente -->
-<app-show-marisco *ngIf="marisco" [marisco]="marisco"></app-show-marisco>
-<app-edit-marisco *ngIf="marisco" [marisco]="marisco" (onChange)="actualizarMariscos($event)"></app-edit-marisco>
+
+<app-edit-marisco [marisco]="marisco" (onChange)="actualizarMariscos($event)"></app-edit-marisco>
 <app-rm-marisco [id]="id" [nombre]="nombre" (onChange)="actualizarMariscos($event)"></app-rm-marisco>
+<app-show-marisco  [marisco]="marisco"></app-show-marisco>

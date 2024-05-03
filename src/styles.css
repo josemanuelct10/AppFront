@@ -34,3 +34,36 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.bg-custom {
+  background-color: #052659; /* Cambia #00ff00 por tu color de fondo personalizado */
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.btn-custom:hover {
+  background-color: white; /* Cambia #cc0000 por tu color personalizado en el hover */
+  border-color: #5483B3; /* Cambia #cc0000 por tu color personalizado en el hover */
+}
+
+
+
+
+.secciones-container {
+  display: flex;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  gap: 20px; /* Espacio entre los elementos */
+}
+
+.divAnadir{
+  margin-left: auto; /* Esto empujará el div hacia la derecha */
+  margin-right: 100px;
+
+}
+
+.h2{
+  margin-left: 50px;
+}

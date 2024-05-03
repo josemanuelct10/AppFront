@@ -40,14 +40,15 @@
         </button>
       </td>
       <td>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarProveedor" (click)="setUsuarioAEliminar(usuario.id, usuario.nombre)">
+        <button *ngIf="usuario.categoria_usuario_id === 1 || usuario.categoria_usuario_id === 2" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#showGastos" (click)="buscarUsuario(usuario.id)">
           <i class="fa fa-file"></i>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
-<app-edit-usuario *ngIf="usuario" [usuario]="usuario"></app-edit-usuario>
-<app-rm-usuario [id]="id" [nombre]="nombre"></app-rm-usuario>
+<app-edit-usuario *ngIf="usuario" [usuario]="usuario" (onChange)="actualizarProveedores($event)"></app-edit-usuario>
+<app-rm-usuario [id]="id" [nombre]="nombre" (onChange)="actualizarProveedores($event)"></app-rm-usuario>
+<app-show-nominas *ngIf="usuario" [usuario]="usuario"></app-show-nominas>
 
 

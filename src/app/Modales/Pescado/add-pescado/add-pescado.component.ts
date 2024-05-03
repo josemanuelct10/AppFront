@@ -24,6 +24,7 @@ export class AddPescadoComponent implements OnInit  {
     this.proveedorService.getAll().subscribe(
       data => {
         this.proveedores = data;
+        console.log(data);
         console.log(this.proveedores);
       }
     )

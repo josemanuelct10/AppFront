@@ -6,6 +6,7 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProveedor">
       <i class="fa fa-plus"></i>
     </button>
+    <app-add-proveedor (onChange)="actualizarProveedores($event)"></app-add-proveedor>
   </div>
 </div>
 
@@ -47,13 +48,18 @@
           <i class="fa fa-pen"></i>
         </button>
       </td>
+      <td>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#showGastos" (click)="buscarProveedor(proveedor.id)">
+          <i class="fa fa-file"></i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
 </div>
 
-<app-add-proveedor (onChange)="actualizarProveedores($event)"></app-add-proveedor>
 <!-- Aquí pasamos el proveedor seleccionado al componente -->
-<app-show-proveedor *ngIf="proveedor" [proveedor]="proveedor"></app-show-proveedor>
+<app-show-proveedor *ngIf="proveedor"[proveedor]="proveedor"></app-show-proveedor>
 <app-edit-proveedor *ngIf="proveedor" [proveedor]="proveedor" (onChange)="actualizarProveedores($event)"></app-edit-proveedor>
-<app-rm-proveedor [id]="id" [nombre]="nombre"></app-rm-proveedor>
+<app-rm-proveedor [id]="id" [nombre]="nombre" (onChange)="actualizarProveedores($event)"></app-rm-proveedor>
+<app-show-gastos *ngIf="proveedor" [proveedor]="proveedor"></app-show-gastos>

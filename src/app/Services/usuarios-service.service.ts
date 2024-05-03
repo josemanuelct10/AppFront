@@ -29,5 +29,9 @@ export class UsuariosServiceService {
     return this.http.delete<any>(`${this.apiUrl}/rm/${id}`);
   }
 
+  getByCategoria(id: any){
+    return this.http.get(`${this.apiUrl}/getByCategoria/${id}`);
+  }
+
 
 }

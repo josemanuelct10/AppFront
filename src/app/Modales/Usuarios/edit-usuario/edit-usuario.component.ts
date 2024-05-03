@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsuariosServiceService } from '../../../Services/usuarios-service.service';
 import { CategoriaUsuariosService } from '../../../Services/categoria-usuarios.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-usuario',
@@ -10,12 +11,16 @@ import { CategoriaUsuariosService } from '../../../Services/categoria-usuarios.s
 export class EditUsuarioComponent implements OnInit {
 
   @Input() usuario: any;
+  @Output() onChange = new EventEmitter<any>();
+
+  usuarios: any;
 
   categorias: any;
 
   constructor(
     private usuarioService: UsuariosServiceService,
-    private categoriasService: CategoriaUsuariosService
+    private categoriasService: CategoriaUsuariosService,
+    private toast: ToastrService
   ){}
   ngOnInit(): void {
     this.categoriasService.getAll().subscribe(
@@ -35,11 +40,19 @@ export class EditUsuarioComponent implements OnInit {
 
     this.usuarioService.update(this.usuario.id, formData).subscribe(
       data => {
-        alert("Usuario actualizado correctamente.");
+        console.log(data);
+        if (data){
+          this.usuarioService.getAll().subscribe(
+            usuarios => {
+              this.onChange.emit(usuarios);
+              this.toast.success("Usuario actualizado correctamente.", "Success!");
+            }
+          )
+        }
       },
       error => {
         console.error("Error al actualizar usuario:", error);
-        alert("Ocurrió un error al actualizar el usuario.");
+        this.toast.error("No se ha podido actualizar el usuario.", "Error!");
       }
     );
   }

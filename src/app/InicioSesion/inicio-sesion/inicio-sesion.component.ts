@@ -24,6 +24,7 @@ export class InicioSesionComponent {
       .subscribe(response=>{
         localStorage.setItem('idUsuario',  response.user.id);
         localStorage.setItem('categoriaUsuario',  response.user.categoria_usuario_id);
+        console.log(response);
 
 
         if (response.user.categoria_usuario_id === 1){

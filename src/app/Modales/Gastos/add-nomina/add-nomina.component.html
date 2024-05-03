@@ -1,0 +1,47 @@
+<div class="modal fade" id="addNomina" tabindex="-1" aria-labelledby="addNomina" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-custom">
+        <h1 class="modal-title fs-5" id="addProveedor">Nueva Nomina</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="guardarDatos()">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="descripcion" [(ngModel)]="descripcion" id="descripcion" placeholder="Descripcion" alt="Descripcion">
+            <label for="descripcion">Descripcion</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="cantidad" name="cantidad"  [(ngModel)]="cantidad" placeholder="Cantidad" alt="Cantidad">
+            <label for="cantidad">Cantidad de Dinero</label>
+          </div>
+
+          <div>
+            <label for="formFileLg" class="form-label">Documento</label>
+            <input class="form-control form-control-lg" id="documento" name="documento" type="file" (change)="onFileSelected($event)">
+          </div>
+
+          <div class="form-group">
+            <label for="fecha ">Fecha</label>
+            <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" name="fecha" >
+          </div>
+
+          <br>
+          <div class="form-floating">
+            <select class="form-select" id="trabajador" name="trabajador" aria-label="Floating label select example" [(ngModel)]="trabajador_id">
+              <option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">{{ trabajador.name }}</option>
+            </select>
+            <label for="trabajador">Trabajador</label>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

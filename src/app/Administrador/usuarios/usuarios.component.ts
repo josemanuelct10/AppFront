@@ -19,14 +19,14 @@ export class UsuariosComponent implements OnInit {
     private usuariosService: UsuariosServiceService,
   ){}
 
+  actualizarProveedores(usuariosActualizados: any){
+    this.usuarios = usuariosActualizados;
+  }
+
   ngOnInit(): void {
-    this.usuariosService.getAll().subscribe(data => { // Asegúrate de que data sea un array de cualquier tipo
+    this.usuariosService.getAll().subscribe(data => {
       this.usuarios = data;
-
-      console.log(this.usuarios);
     });
-
-
   }
 
   buscarUsuario(id: any){
@@ -39,6 +39,4 @@ export class UsuariosComponent implements OnInit {
     this.id = id;
     this.nombre = name;
   }
-
-
 }
