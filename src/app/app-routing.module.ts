@@ -12,6 +12,8 @@ import { UsuariosComponent } from './Administrador/usuarios/usuarios.component';
 import { AuthGuardService } from './Services/auth-guard.service';
 import { GastosComponent } from './Administrador/gastos/gastos.component';
 import { VentasComponent } from './Administrador/ventas/ventas.component';
+import { FacturasComponent } from './Administrador/facturas/facturas.component';
+import { AddFacturaComponent } from './Administrador/add-factura/add-factura.component';
 
 
 
@@ -27,6 +29,8 @@ const routes: Routes = [
   {path: 'administrador/usuarios', component: UsuariosComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/gastos', component: GastosComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/ventas', component: VentasComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/facturas', component: FacturasComponent, canActivate: [AuthGuardService]},
+  {path: 'administrador/addFacturas', component: AddFacturaComponent, canActivate: [AuthGuardService]},
   { path: 'inicio', component: InicioComponent, data: { menuType: 'cliente' }, canActivate: [AuthGuardService] },
 
 ];

@@ -15,13 +15,22 @@ export class AddVentasComponent{
   fecha: Date;
   referencia: string;
   cantidad: number;
-  opciones: string[] = ['BAENA', 'DONA MENCIA'];
+  opciones: string[] = ['BAENA', 'DOÑA MENCÍA'];
   seleccion: string;
 
   constructor(
     private ventasService: VentasService,
     private toast: ToastrService
   ){}
+
+  onChangeOpcion(): void{
+    if (this.seleccion == "BAENA"){
+      this.descripcion = "Venta de Baena";
+    }
+    else{
+      this.descripcion = "Venta de Doña Mencía";
+    }
+  }
 
 
   guardarDatos(){
@@ -31,7 +40,7 @@ export class AddVentasComponent{
       this.referencia = "VEN-BAE-" + this.fecha;
     }
     else{
-      this.referencia = "VEN_DOM-" + this.fecha;
+      this.referencia = "VEN-DOM-" + this.fecha;
     }
 
     console.log(this.referencia);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MariscoServiceService } from '../../Services/marisco-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Marisco {
   id: number;
@@ -20,8 +21,10 @@ export class MariscoComponent implements OnInit {
   id: any;
   nombre: string;
 
-  constructor(private mariscoService: MariscoServiceService){
-
+  constructor(
+    private mariscoService: MariscoServiceService,
+    private toast: ToastrService
+  ){
   }
 
 

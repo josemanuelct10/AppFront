@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { InicioSesionService } from '../../Services/inicio-sesion.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -13,7 +14,8 @@ export class InicioSesionComponent {
 
   constructor(
     private router: Router,
-    private inicioSesion: InicioSesionService
+    private inicioSesion: InicioSesionService,
+    private toast: ToastrService
     ){}
 
 
@@ -29,9 +31,11 @@ export class InicioSesionComponent {
 
         if (response.user.categoria_usuario_id === 1){
           this.router.navigate(['/administrador/inicio']);
+          this.toast.success("Bienvenido Administrador!", "Success!");
         }
         else{
           this.router.navigate(['/inicio']);
+          this.toast.success("Se ha iniciado sesion correctamente!", "Success!");
         }
 
 
@@ -39,7 +43,7 @@ export class InicioSesionComponent {
           // Manejar errores de inicio de sesión
           console.error('Error de inicio de sesión:', error);
           this.password = "";
-          alert('Credenciales incorrectas');
+          this.toast.error("Credenciales Incorrectas!", "Error!");
       })
 
       console.log(this.password, this.email);

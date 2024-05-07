@@ -44,12 +44,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 
-.btn-custom:hover {
-  background-color: white; /* Cambia #cc0000 por tu color personalizado en el hover */
-  border-color: #5483B3; /* Cambia #cc0000 por tu color personalizado en el hover */
-}
-
-
 
 
 .secciones-container {

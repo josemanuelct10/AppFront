@@ -99,7 +99,6 @@ export class AddMariscoComponent implements OnInit {
         console.log("AAA", error);
         this.toastr.error("Ocurrió un error al añadir el marisco", "Error");
         console.error("Error al añadir el marisco:", error);
-        window.location.reload();
       }
     );
 

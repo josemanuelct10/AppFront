@@ -88,12 +88,14 @@ export class AddPescadoComponent implements OnInit  {
             data =>{
               this.pescados = data;
               this.onChange.emit(this.pescados);
-              console.log(this.pescados);
+              this.toastr.success("Pescado añadido correctamente", "Success!");
             }
           )
         }
+        else {
+          this.toastr.error("Ha ocurrido un error al crearse el pescado.", "Error!");
+        }
         console.log(data);
-        this.toastr.success("Pescado añadido correctamente", "Success!");
       },
       error => {
         console.log("AAA", error);

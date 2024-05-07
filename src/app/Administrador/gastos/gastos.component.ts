@@ -57,11 +57,10 @@ export class GastosComponent implements OnInit {
   abrirDocumento(nombreArchivo: string){
     this.gastosService.getDocumento(nombreArchivo).subscribe(
       (documento: Blob) => {
-        const fileURL = URL.createObjectURL(documento);
-        // Abrir el PDF en una nueva pestaña del navegador
-        window.open(fileURL, '_blank');
+        const url = window.URL.createObjectURL(documento);
 
-        this.toast.success("Documento abierto correctamente.", "Success!");
+        window.open(url);
+
 
       },
       (error) => {
@@ -97,9 +96,5 @@ export class GastosComponent implements OnInit {
   limpiarFiltro() {
     this.filtro = '';
   }
-
-
-
-
 
 }

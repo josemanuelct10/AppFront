@@ -42,7 +42,7 @@
         <th scope="col">Fecha</th>
         <th scope="col">Referencia</th>
         <th scope="col">Involucrado</th>
-        <th>Nomina</th>
+        <th scope="col">Documento</th>
         <th></th>
         <th></th>
       </tr>
@@ -54,10 +54,13 @@
         <td>{{gasto.cantidad}}€</td>
         <td>{{gasto.fecha}}</td>
         <td>{{gasto.referencia}}</td>
-        <td></td>
+        <td>
+          {{ gasto.user ? gasto.user.name : (gasto.proveedor ? gasto.proveedor.nombre : 'N/A') }}
+        </td>
+
 
         <td>
-          <button type="button" class="btn btn-primary"  (click)="abrirDocumento('NOM-20240429-3.pdf')">Abrir Documento</button>
+          <button type="button" class="btn btn-primary"  (click)="abrirDocumento(gasto.documento)">Abrir Documento</button>
         </td>
 
         <td>

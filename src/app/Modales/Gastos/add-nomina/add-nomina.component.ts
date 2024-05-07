@@ -64,7 +64,7 @@ export class AddNominaComponent implements OnInit {
         console.log(documentoBase64);
 
         const formData = {
-          trabajador_id: this.trabajador_id,
+          user_id: this.trabajador_id,
           referencia: "NOM-" + fechaString.replace(/-/g, '') + "-" + this.trabajador_id,
           descripcion: this.descripcion,
           cantidad: this.cantidad,

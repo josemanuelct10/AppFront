@@ -28,7 +28,7 @@ export class PescadoComponent implements OnInit {
   ngOnInit(): void {
     this.pescadosService.getAll().subscribe(data  => {
       this.pescados = data;
-      console.log(this.pescados);
+      console.log(">>>>",this.pescados);
     });
   }
 

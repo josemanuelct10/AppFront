@@ -49,6 +49,9 @@ import { ShowNominasComponent } from './Modales/Usuarios/show-nominas/show-nomin
 import { VentasComponent } from './Administrador/ventas/ventas.component';
 import { AddVentasComponent } from './Modales/Ventas/add-ventas/add-ventas.component';
 import { RmVentasComponent } from './Modales/Ventas/rm-ventas/rm-ventas.component';
+import { FacturasComponent } from './Administrador/facturas/facturas.component';
+import { AddLineaComponent } from './Modales/Facturas/add-linea/add-linea.component';
+import { AddFacturaComponent } from './Administrador/add-factura/add-factura.component';
 
 
 @NgModule({
@@ -92,7 +95,10 @@ import { RmVentasComponent } from './Modales/Ventas/rm-ventas/rm-ventas.componen
     ShowNominasComponent,
     VentasComponent,
     AddVentasComponent,
-    RmVentasComponent
+    RmVentasComponent,
+    FacturasComponent,
+    AddLineaComponent,
+    AddFacturaComponent
     ],
   imports: [
     BrowserModule,

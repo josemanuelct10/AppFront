@@ -37,7 +37,7 @@ export class AddGastosExtraComponent {
       referencia: "GASEXT-" + fechaString.replace(/-/g, '') + "-" + uuidv4(),
       descripcion: this.descripcion,
       cantidad: this.cantidad,
-      documento: null as string | null, // Cambiar el tipo de documento
+      documento: null as string | null, // Inicialmente se establece en null
       fecha: this.fecha
     };
 
@@ -45,7 +45,7 @@ export class AddGastosExtraComponent {
       const reader = new FileReader();
 
       reader.onload = () => {
-        formData.documento = reader.result as string; // Asignar el documento leído
+        formData.documento = reader.result as string; // Se asigna el documento solo si se selecciona un archivo
 
         this.enviarGasto(formData); // Enviar el gasto con los datos completos
       };
@@ -55,6 +55,7 @@ export class AddGastosExtraComponent {
       this.enviarGasto(formData); // Enviar el gasto con el documento null
     }
   }
+
 
   enviarGasto(formData: any) {
     this.gastoService.add(formData).subscribe(
@@ -74,8 +75,5 @@ export class AddGastosExtraComponent {
       }
     );
   }
-
-
-
 
 }
