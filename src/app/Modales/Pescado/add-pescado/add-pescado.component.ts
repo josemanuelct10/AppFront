@@ -13,6 +13,8 @@ export class AddPescadoComponent implements OnInit  {
   @Output() onChange = new EventEmitter<any>();
   pescados: any;
 
+
+
   constructor(
     private pescadoService: PescadoServiceService,
     private proveedorService: ProveedoresServiceService,

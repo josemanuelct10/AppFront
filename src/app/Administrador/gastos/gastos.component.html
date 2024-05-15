@@ -48,7 +48,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let gasto of gastos | filter: filtro">
+      <tr *ngFor="let gasto of gastos | filter: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
         <td>{{gasto.id}}</td>
         <td>{{gasto.descripcion}}</td>
         <td>{{gasto.cantidad}}€</td>
@@ -72,6 +72,13 @@
       </tr>
     </tbody>
   </table>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <pagination-controls
+        (pageChange)="page = $event"
+        previousLabel="Anterior"
+        nextLabel="Siguiente">
+    </pagination-controls>
+  </div>
   </div>
 
   <!-- Línea que muestra la suma total -->

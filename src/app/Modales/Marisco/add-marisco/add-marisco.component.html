@@ -32,10 +32,13 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="categoria" name="categoria" [(ngModel)]="categoria" placeholder="Categoria" alt="Categoria">
-            <label for="categoria">Categoria</label>
-          </div>
-
+            <select class="form-select" id="categoria" name="categoria" [(ngModel)]="categoria">
+              <option value="Crustacéo">Crustacéo</option>
+              <option value="Molusco">Molusco</option>
+              <option value="Cefalopodo">Cefalopodo</option>
+            </select>
+            <label for="categoria">Categoría</label>
+         </div>
 
 
           <div class="form-check">
@@ -61,7 +64,6 @@
           </div>
         </form>
       </div>
-
     </div>
   </div>
 </div>

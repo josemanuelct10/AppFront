@@ -14,16 +14,22 @@ import { GastosComponent } from './Administrador/gastos/gastos.component';
 import { VentasComponent } from './Administrador/ventas/ventas.component';
 import { FacturasComponent } from './Administrador/facturas/facturas.component';
 import { AddFacturaComponent } from './Administrador/add-factura/add-factura.component';
+import { ListaPescadosComponent } from './Clientes/lista-pescados/lista-pescados.component';
+import { ListaMariscoComponent } from './Clientes/lista-marisco/lista-marisco.component';
+import { ListaProductosComponent } from './Clientes/lista-productos/lista-productos.component';
+import { DetalleProductoComponent } from './ComponentesGenericos/detalle-producto/detalle-producto.component';
+import { CarritoComponent } from './Clientes/carrito/carrito.component';
+import { PerfilComponent } from './ComponentesGenericos/perfil/perfil.component';
 
 
 
 const routes: Routes = [
   {path: '', component: InicioSesionComponent},
   {path: 'registro', component: RegistroComponent},
-  { path: 'administrador/inicio', component: InicioComponent, data: { menuType: 'dashboard' }, canActivate: [AuthGuardService] },
-  {path: 'administrador/pescado', component: PescadoComponent, canActivate: [AuthGuardService]},
-  {path: 'administrador/marisco', component: MariscoComponent, canActivate: [AuthGuardService]},
-  {path: 'administrador/productos', component: ProductosComponent, canActivate: [AuthGuardService]},
+  { path: 'trabajador/inicio', component: InicioComponent, data: { menuType: 'dashboard' }, canActivate: [AuthGuardService] },
+  {path: 'trabajador/pescado', component: PescadoComponent, canActivate: [AuthGuardService]},
+  {path: 'trabajador/marisco', component: MariscoComponent, canActivate: [AuthGuardService]},
+  {path: 'trabajador/productos', component: ProductosComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/proveedores', component: ProveedoresComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/categorias_usuarios', component: CategoriasUsuariosComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/usuarios', component: UsuariosComponent, canActivate: [AuthGuardService]},
@@ -32,6 +38,13 @@ const routes: Routes = [
   {path: 'administrador/facturas', component: FacturasComponent, canActivate: [AuthGuardService]},
   {path: 'administrador/addFacturas', component: AddFacturaComponent, canActivate: [AuthGuardService]},
   { path: 'inicio', component: InicioComponent, data: { menuType: 'cliente' }, canActivate: [AuthGuardService] },
+  { path: 'pescado', component: ListaPescadosComponent, data: { menuType: 'cliente' }, canActivate: [AuthGuardService]},
+  { path: 'marisco', component: ListaMariscoComponent, data: { menuType: 'cliente' }, canActivate: [AuthGuardService]},
+  { path: 'productos', component: ListaProductosComponent, data: { menuType: 'cliente' }, canActivate: [AuthGuardService]},
+  { path: 'detalleProducto/:tipo/:id', component: DetalleProductoComponent, data: {menuType: 'cliente'}, canActivate: [AuthGuardService]},
+  { path: 'carrito', component: CarritoComponent, data: {menuType: 'cliente'}, canActivate: [AuthGuardService]},
+  { path: 'perfil', component:PerfilComponent, canActivate: [AuthGuardService]},
+
 
 ];
 

@@ -41,19 +41,17 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="categoria" name="categoria" [(ngModel)]="marisco.categoria" placeholder="Categoria" alt="Categoria">
-            <label for="categoria">Categoria</label>
+            <select class="form-select" id="categoria" name="categoria" [(ngModel)]="marisco.categoria">
+              <option value="Crustacéo">Crustacéo</option>
+              <option value="Molusco">Molusco</option>
+              <option value="Cefalopodo">Cefalopodo</option>
+            </select>
+            <label for="categoria">Categoría</label>
           </div>
-
 
           <div class="form-check">
             <input class="form-check-input" type="checkbox" name="cocido" id="cocido" [(ngModel)]="marisco.cocido">
             <label class="form-check-label" for="cocido">Cocido</label>
-          </div>
-
-          <div>
-            <label for="formFileLg" class="form-label">Imagen</label>
-            <input class="form-control form-control-lg" id="formFileLg" type="file">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>

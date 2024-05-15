@@ -29,7 +29,6 @@ export class FacturasService {
 
     const url = `${this.apiUrl}/${id}/pdf`;
     console.log(url);
-;
 
     return this.http.get<Blob>(url, {responseType: 'blob' as 'json'});
   }

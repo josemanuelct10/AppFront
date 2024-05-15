@@ -34,7 +34,7 @@
     </thead>
     <tbody>
 
-      <tr *ngFor="let factura of facturas | filter: filtro">
+      <tr *ngFor="let factura of facturas | filter: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
         <td>{{factura.id}}</td>
         <td>{{factura.referencia}}</td>
         <td>{{factura.precioFactura}}€</td>
@@ -47,7 +47,7 @@
         </td>
 
         <td>
-          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarGasto" (click)="setFacturaAEliminar(factura.id, factura.referencia)">
+          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rmFactura" (click)="setFacturaAEliminar(factura.id, factura.referencia)">
             <i class="fa fa-trash"></i>
           </button>
 
@@ -55,6 +55,13 @@
       </tr>
     </tbody>
   </table>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <pagination-controls
+        (pageChange)="page = $event"
+        previousLabel="Anterior"
+        nextLabel="Siguiente">
+    </pagination-controls>
+  </div>
   </div>
 
   <!-- Línea que muestra la suma total -->
@@ -63,6 +70,6 @@
   <div>TOTAL: {{calcularTotalFiltrado()}}€</div>
 </div>
 
-
+<app-rm-factura [id]="id" [referencia]="referencia" (onChange)="actualizarFacturas($event)"></app-rm-factura>
 
 

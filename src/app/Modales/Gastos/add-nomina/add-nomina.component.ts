@@ -37,7 +37,7 @@ export class AddNominaComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin({
-      categoria1: this.usuariosService.getByCategoria(2),
+      categoria1: this.usuariosService.getByCategoria(3),
       categoria2: this.usuariosService.getByCategoria(1)
     }).subscribe({
       next: (resultados: { categoria1: any, categoria2: any }) => {

@@ -9,10 +9,18 @@ import { Router } from '@angular/router';
 })
 export class MenuDashboardComponent {
 
+  categoriaUsuario: number = 0; // Valor predeterminado
+
+
   constructor(
     private inicioSesionService: InicioSesionService,
     private router: Router
-  ){}
+  ){
+    const categoriaUsuarioStr = localStorage.getItem('categoriaUsuario');
+    if (categoriaUsuarioStr) {
+      this.categoriaUsuario = parseInt(categoriaUsuarioStr);
+    }
+  }
 
   logout(){
     this.inicioSesionService.logout();

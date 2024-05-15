@@ -14,12 +14,13 @@ export class UsuariosComponent implements OnInit {
   usuario: any;
   id: any;
   nombre: string;
+  page: number;
 
   constructor(
     private usuariosService: UsuariosServiceService,
   ){}
 
-  actualizarProveedores(usuariosActualizados: any){
+  actualizarUsuarios(usuariosActualizados: any){
     this.usuarios = usuariosActualizados;
   }
 
@@ -33,6 +34,7 @@ export class UsuariosComponent implements OnInit {
   buscarUsuario(id: any){
     this.usuariosService.getById(id).subscribe(data=> {
       this.usuario = data;
+      console.log("AAAAA",this.usuario);
     })
   }
 

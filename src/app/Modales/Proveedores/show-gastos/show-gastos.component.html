@@ -14,19 +14,31 @@
                 <th>Descripción</th>
                 <th>Cantidad</th>
                 <th>Fecha</th>
+                <th>Factura</th>
                 <!-- Agrega más columnas según sea necesario -->
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let gasto of proveedor.gastos">
+              <tr *ngFor="let gasto of proveedor.gastos | paginate: { itemsPerPage: 10, currentPage: page}">
                 <td>{{ gasto.id }}</td>
                 <td>{{ gasto.descripcion }}</td>
                 <td>{{ gasto.cantidad | number:'1.2-2' }}€</td>
                 <td>{{ gasto.fecha }}</td>
+                <td>
+                  <button class="btn btn-primary" (click)="abrirDocumento(gasto.documento)">Abrir Factura</button>
+                </td>
                 <!-- Agrega más celdas según sea necesario -->
               </tr>
             </tbody>
           </table>
+
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <pagination-controls
+                (pageChange)="page = $event"
+                previousLabel="Anterior"
+                nextLabel="Siguiente">
+            </pagination-controls>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

@@ -27,7 +27,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let proveedor of proveedores">
+    <tr *ngFor="let proveedor of proveedores  | paginate: { itemsPerPage: 10, currentPage: page} ">
       <td>{{proveedor.id}}</td>
       <td>{{proveedor.nombre}}</td>
       <td>{{proveedor.direccion}}</td>
@@ -56,6 +56,13 @@
     </tr>
   </tbody>
 </table>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente">
+  </pagination-controls>
+</div>
 </div>
 
 <!-- Aquí pasamos el proveedor seleccionado al componente -->

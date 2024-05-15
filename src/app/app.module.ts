@@ -52,6 +52,22 @@ import { RmVentasComponent } from './Modales/Ventas/rm-ventas/rm-ventas.componen
 import { FacturasComponent } from './Administrador/facturas/facturas.component';
 import { AddLineaComponent } from './Modales/Facturas/add-linea/add-linea.component';
 import { AddFacturaComponent } from './Administrador/add-factura/add-factura.component';
+import { RmFacturaComponent } from './Modales/Facturas/rm-factura/rm-factura.component';
+import { AddUsuarioComponent } from './Modales/Usuarios/add-usuario/add-usuario.component';
+import { ListaPescadosComponent } from './Clientes/lista-pescados/lista-pescados.component';
+import { CardProductoComponent } from './ComponentesGenericos/card-producto/card-producto.component';
+import { FooterComponent } from './ComponentesGenericos/footer/footer.component';
+import { ListaMariscoComponent } from './Clientes/lista-marisco/lista-marisco.component';
+import { ListaProductosComponent } from './Clientes/lista-productos/lista-productos.component';
+import { DetalleProductoComponent } from './ComponentesGenericos/detalle-producto/detalle-producto.component';
+import { CarritoComponent } from './Clientes/carrito/carrito.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { PerfilComponent } from './ComponentesGenericos/perfil/perfil.component';
+import { UpdtUsuarioComponent } from './Modales/Usuarios/updt-usuario/updt-usuario.component';
+import { UpdtPwdComponent } from './Modales/Usuarios/updt-pwd/updt-pwd.component';
+import { FiltroCategoriaPipe } from './Interfaces/FiltroCategoria';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 @NgModule({
@@ -91,6 +107,7 @@ import { AddFacturaComponent } from './Administrador/add-factura/add-factura.com
     AddGastosExtraComponent,
     RmGastoComponent,
     FilterPipe,
+    FiltroCategoriaPipe,
     ShowGastosComponent,
     ShowNominasComponent,
     VentasComponent,
@@ -98,7 +115,19 @@ import { AddFacturaComponent } from './Administrador/add-factura/add-factura.com
     RmVentasComponent,
     FacturasComponent,
     AddLineaComponent,
-    AddFacturaComponent
+    AddFacturaComponent,
+    RmFacturaComponent,
+    AddUsuarioComponent,
+    ListaPescadosComponent,
+    CardProductoComponent,
+    FooterComponent,
+    ListaMariscoComponent,
+    ListaProductosComponent,
+    DetalleProductoComponent,
+    CarritoComponent,
+    PerfilComponent,
+    UpdtUsuarioComponent,
+    UpdtPwdComponent
     ],
   imports: [
     BrowserModule,
@@ -107,7 +136,9 @@ import { AddFacturaComponent } from './Administrador/add-factura/add-factura.com
     BrowserAnimationsModule,
     RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot(), // Agrega el módulo de modales aquí
+    NgxPaginationModule
   ],
   providers: [
     CleanupService,

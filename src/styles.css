@@ -43,6 +43,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-family: 'Poppins', sans-serif;
 }
 
+.btn-primary{
+  background-color: #052659;
+  margin-left: 5px;
+  border: #052659;
+}
+
+
 
 
 

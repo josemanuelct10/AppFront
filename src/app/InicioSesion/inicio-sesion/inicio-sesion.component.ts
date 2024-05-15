@@ -29,8 +29,8 @@ export class InicioSesionComponent {
         console.log(response);
 
 
-        if (response.user.categoria_usuario_id === 1){
-          this.router.navigate(['/administrador/inicio']);
+        if (response.user.categoria_usuario_id === 1 || response.user.categoria_usuario_id == 3){
+          this.router.navigate(['/trabajador/inicio']);
           this.toast.success("Bienvenido Administrador!", "Success!");
         }
         else{

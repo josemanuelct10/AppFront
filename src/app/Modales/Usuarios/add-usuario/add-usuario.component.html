@@ -1,0 +1,56 @@
+<div class="modal fade" id="addUsuario" tabindex="-1" aria-labelledby="addUsuario" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-custom" >
+        <h1 class="modal-title fs-5" id="addUsuario">Nuevo Usuario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="guardarDatos()">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="nombre" id="nombre" placeholder="Nombre" alt="Nombre">
+            <label for="nombre">Nombre</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" placeholder="Email" name="email"  [(ngModel)]="email" alt="email" id="email">
+            <label for="email">Email</label>
+          </div>
+          <br>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="dni" name="dni"  [(ngModel)]="dni" placeholder="dni" alt="dni">
+            <label for="dni">DNI/CIF</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento"  [(ngModel)]="fechaNacimiento" placeholder="fechaNacimiento" alt="fechaNacimiento">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="telefono" placeholder="telefono" alt="telefono">
+            <label for="telefono">Teléfono</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="direccion" placeholder="direccion" alt="direccion">
+            <label for="direccion">Dirección</label>
+          </div>
+
+          <div class="form-floating">
+            <select class="form-select" id="categoria" name="categoria" aria-label="Floating label select example" [(ngModel)]="categoria_usuario_id">
+              <option *ngFor="let categoria of categoriasUsuarios" [value]="categoria.id">{{ categoria.descripcion }}</option>
+            </select>
+            <label for="categoria">Categoría de Usuario</label>
+          </div>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

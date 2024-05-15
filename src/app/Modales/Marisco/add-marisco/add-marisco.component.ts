@@ -24,7 +24,7 @@ export class AddMariscoComponent implements OnInit {
   cocido: boolean = false;
   imagen: string | null = null;
   user_id = localStorage.getItem('idUsuario');
-  proveedor_id: number;
+  proveedor_id: number = 0; // Inicializado con null por defecto
 
   proveedores: any;
 
@@ -35,7 +35,7 @@ export class AddMariscoComponent implements OnInit {
 
   constructor(
     private mariscoService: MariscoServiceService,
-    private toastr: ToastrService,
+    private toast: ToastrService,
     private proveedorService: ProveedoresServiceService
   ){
     this.fechaCompra = new Date();
@@ -90,14 +90,13 @@ export class AddMariscoComponent implements OnInit {
           this.mariscoService.getAll().subscribe(data =>{
             this.mariscos = data;
             this.onChange.emit(this.mariscos);
-            console.log(this.mariscos);
-            this.toastr.success("Marisco añadido correctamente", "Success!");
+            this.toast.success("Marisco añadido correctamente", "Success!");
           });
         }
       },
       error => {
         console.log("AAA", error);
-        this.toastr.error("Ocurrió un error al añadir el marisco", "Error");
+        this.toast.error("Ocurrió un error al añadir el marisco", "Error");
         console.error("Error al añadir el marisco:", error);
       }
     );

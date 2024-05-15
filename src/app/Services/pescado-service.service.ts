@@ -38,6 +38,10 @@ export class PescadoServiceService {
     return this.http.put(`${this.apiUrl}/update/${id}`, pescadoActualizado);
   }
 
+  updateCantidad(pescadoId: number, nuevaCantidad: number) {
+    return this.http.put<any>(`${this.apiUrl}/updateCantidad/${pescadoId}`, { cantidad: nuevaCantidad });
+  }
+
 
   notificarActualizacion(): void{
     this.datosActualizados.next();

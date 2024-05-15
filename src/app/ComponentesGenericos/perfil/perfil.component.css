@@ -1,0 +1,53 @@
+.profile-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  margin-bottom: 20px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.profile-content h3 {
+  margin-top: 0;
+  color: #052659;
+}
+
+.profile-content p {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.profile-actions button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+.profile-actions button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #052659; /* Color deseado */
+  color: #fff;
+  cursor: pointer;
+}
+
+.profile-actions button:hover {
+  background-color: #031b3d; /* Color oscuro al hacer hover */
+}

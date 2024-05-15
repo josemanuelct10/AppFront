@@ -12,6 +12,7 @@ export class PescadoComponent implements OnInit {
   pescado: any;
   id: any;
   nombre: string;
+  page: number;
 
   constructor(
     private pescadosService: PescadoServiceService

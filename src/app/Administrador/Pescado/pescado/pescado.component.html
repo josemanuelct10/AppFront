@@ -26,11 +26,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let pescado of pescados">
+    <tr *ngFor="let pescado of pescados | paginate: { itemsPerPage: 10, currentPage: page}">
       <td>{{pescado.id}}</td>
       <td>{{pescado.nombre}}</td>
       <td>{{ pescado.precioKG | number:'1.2-2' }} €</td>
-      <td>{{pescado.cantidad}} KG</td>
+      <td>{{pescado.cantidad | number:'1.2-2'}} KG</td>
       <td>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showPescado" (click)="buscarPescado(pescado.id)" >
           <i class="fa fa-eye"></i>
@@ -49,6 +49,14 @@
     </tr>
   </tbody>
 </table>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente">
+  </pagination-controls>
+</div>
+
 </div>
 
 <app-add-pescado (onChange)="actualizarPescados($event)"></app-add-pescado>

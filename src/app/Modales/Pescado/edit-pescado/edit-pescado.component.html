@@ -39,16 +39,22 @@
             <input type="date" class="form-control" id="fechaCompra" name="fechaCompra"  [(ngModel)]="pescado.fechaCompra" placeholder="Fecha de Compra" alt="Fecha de Compra">
             <label for="fechaCompra">Fecha de Compra</label>
           </div>
-
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="categoria" name="categoria" [(ngModel)]="pescado.categoria" placeholder="Categoria" alt="Categoria">
-            <label for="categoria">Categoria</label>
+            <select class="form-select" id="categoria" name="categoria" [(ngModel)]="pescado.categoria">
+              <option value="Pescado Azul">Pescado Azul</option>
+              <option value="Pescado Blanco">Pescado Blanco</option>
+              <option value="Pescado Salvaje">Pescado Salvaje</option>
+            </select>
+            <label for="categoria">Categoría</label>
           </div>
 
-          <div>
-            <label for="formFileLg" class="form-label">Imagen</label>
-            <input class="form-control form-control-lg" id="formFileLg" type="file">
+          <div class="form-floating">
+            <select class="form-select" id="proveedor" name="proveedor" aria-label="Floating label select example" [(ngModel)]="pescado.proveedor_id">
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
+            </select>
+            <label for="proveedor">Proveedor</label>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Actualizar</button>

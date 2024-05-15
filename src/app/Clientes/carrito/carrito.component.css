@@ -1,0 +1,15 @@
+.btn-primary{
+  background-color: #052659;
+  margin-left: 5px;
+  border: #052659;
+}
+
+/* Estilos personalizados para el input de hora de recogida */
+#horaRecogida {
+  width: 180px; /* Define el ancho deseado */
+}
+
+.border-primary {
+  border-color: #052659; /* Reemplaza "your_custom_color" con el color primario personalizado que desees */
+}
+

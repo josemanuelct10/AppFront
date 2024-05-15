@@ -1,0 +1,44 @@
+<app-menu-cliente></app-menu-cliente>
+<br>
+<div class="container mt-5" *ngIf="producto">
+  <div class="row align-items-center">
+    <div class="col-md-6 order-md-1">
+      <img [src]="'http://127.0.0.1:8000/storage/images/' + producto.imagen" class="img-fluid" alt="Imagen del producto">
+    </div>
+    <div class="col-md-6 order-md-2">
+      <h3>{{ producto.nombre }}</h3>
+      <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+      <p><strong>Origen:</strong> {{ producto.origen }}</p>
+      <p><strong>Precio del KG:</strong> {{ producto.precioKG | currency:'EUR':'symbol':'1.2-2' }}</p>
+      <p><strong>Cantidad Restante:</strong> {{ producto.cantidad | number:'1.2-2' }} KG</p>
+      <p><strong>Categoría:</strong> {{ producto.categoria }}</p>
+      <p *ngIf="tipo === 'marisco'">
+        <strong>Cocido:</strong> {{ producto.cocido === 1 ? 'Sí' : 'No' }}
+      </p>
+
+      <span *ngIf="!comprar" class="bg-danger text-white p-2 rounded">
+        Este producto ya está en el carrito
+      </span>
+
+      <form (ngSubmit)="guardarDatos(producto)" class="centered-form" *ngIf="comprar">
+        <div class="form-floating mb-3" >
+          <input type="number" class="form-control border-primary input-small" name="cantidad" [(ngModel)]="cantidad" id="cantidad" placeholder="Cantidad" alt="Cantidad">
+          <label for="cantidad">Cantidad</label>
+        </div>
+        <div class="form-floating mb-3" *ngIf="tipo === 'pescado' "  >
+          <input type="text" class="form-control border-primary input-small" placeholder="Preparacion" name="preparacion" [(ngModel)]="preparacion" id="Preparacion">
+          <label for="preparacion">Arreglo</label>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="tipo === 'pescado' && (!cantidad || !preparacion) || tipo === 'marisco' && !cantidad">
+          <i class="fa-solid fa-cart-shopping"></i>
+          Añadir al Carrito
+        </button>
+
+      </form>
+
+      <h4 *ngIf="comprar" class="mt-4">Precio Total: <strong>{{ (cantidad * producto.precioKG) | currency:'EUR':'symbol':'1.2-2' }}</strong></h4>
+    </div>
+  </div>
+</div>
+
+

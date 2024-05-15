@@ -1,0 +1,17 @@
+<app-menu-cliente></app-menu-cliente>
+
+<div class="form-floating" style="width: 170px; float: right; margin-right: 30px; margin-top: 10px;">
+  <select class="form-select" id="selectTipo" aria-label="Categorias Marisco" [(ngModel)]="categoriaSeleccionada">
+    <option value="todos">Todos</option>
+    <option value="Crustacéo">Crustáceo</option>
+    <option value="Cefalopodo">Cefalópodos</option>
+    <option value="Molusco">Moluscos</option>
+  </select>
+  <label for="categoria">Tipo Marisco</label>
+</div>
+
+<app-card-producto [productos]="filtrarMariscosPorCategoria()"></app-card-producto>
+
+
+
+

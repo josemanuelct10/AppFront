@@ -1,0 +1,47 @@
+<div class="modal fade" id="updtUsuario" tabindex="-1" aria-labelledby="updtUsuario" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header  bg-custom">
+        <h1 class="modal-title fs-5" id="updtUsuario">Actualizar Usuario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #formMarisco="ngForm" (ngSubmit)="guardarDatos()">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="id" [(ngModel)]="usuario.id" id="id" placeholder="Id" alt="Id" readonly>
+            <label for="id">Id</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="usuario.name" id="nombre" placeholder="Nombre" alt="Nombre">
+            <label for="nombre">Nombre</label>
+          </div>
+          <div class="form-floating">
+            <input type="email" class="form-control" placeholder="Email" name="email"  [(ngModel)]="usuario.email" alt="Email" id="email">
+            <label for="email">Email</label>
+          </div>
+          <br>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="telefono" name="telefono"  [(ngModel)]="usuario.telefono" placeholder="Telefono" alt="Telefono">
+            <label for="telefono">Télefono</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="direccion" name="direccion"  [(ngModel)]="usuario.direccion" placeholder="Dirección" alt="Dirección">
+            <label for="direccion">Dirección</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaCompra" name="fechaCompra"  [(ngModel)]="usuario.fechaNacimiento" placeholder="Fecha de Compra" alt="Fecha de Compra">
+            <label for="fechaCompra">Fecha de Nacimiento</label>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

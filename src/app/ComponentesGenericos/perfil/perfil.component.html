@@ -1,0 +1,29 @@
+<app-menu-dashboard *ngIf="categoriaUsuario == 1 || categoriaUsuario == 3"></app-menu-dashboard>
+<app-menu-cliente *ngIf="categoriaUsuario == 2"></app-menu-cliente>
+
+<div *ngIf="usuario" class="profile-container">
+  <div class="profile-header">
+    <div class="profile-info">
+      <h2>Bienvenido, {{ usuario.name }}</h2>
+      <p>Email: {{ usuario.email }}</p>
+      <p>Fecha de registro: {{ fechaRegistro }}</p>
+      <!-- Agregamos más información, como la última vez que inició sesión, su rol, etc. -->
+    </div>
+  </div>
+  <div class="profile-content">
+    <h3>Tus Datos</h3>
+    <p>Nombre: {{ usuario.name }}</p>
+    <p>Dirección: {{ usuario.direccion }}</p>
+    <p>Teléfono: {{ usuario.telefono }}</p>
+    <!-- Agregamos más campos según sea necesario -->
+  </div>
+  <div class="profile-actions">
+    <!-- Aquí puedes agregar botones para permitir al usuario realizar acciones, como editar su perfil, cambiar la contraseña, etc. -->
+    <button class="btn-edit-profile" data-bs-toggle="modal" data-bs-target="#updtUsuario">Editar perfil</button>
+    <button class="btn-change-password" data-bs-toggle="modal" data-bs-target="#updtPwd">Cambiar contraseña</button>
+  </div>
+</div>
+
+
+<app-updt-pwd></app-updt-pwd>
+<app-updt-usuario *ngIf="usuario" [usuario]="usuario" (onChange)="actualizarUsuario($event)"></app-updt-usuario>

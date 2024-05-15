@@ -12,6 +12,7 @@ export class ProveedoresComponent implements OnInit {
   proveedor: any;
   id: any;
   nombre: string;
+  page: number;
 
 
 

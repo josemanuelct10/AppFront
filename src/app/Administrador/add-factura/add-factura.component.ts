@@ -82,8 +82,6 @@ export class AddFacturaComponent implements OnInit {
                 data => {
                   console.log(data);
                   if (data.response == 1){
-                    this.router.navigate(['/administrador/facturas']);
-                    this.toast.success("Factura creada correctamente.", "Success!");
                   }
                   else this.toast.error("Error al crear la linea.", "Error!");
                 }
@@ -103,14 +101,15 @@ export class AddFacturaComponent implements OnInit {
                 data => {
                   console.log(data);
                   if (data.response == 1){
-                    this.router.navigate(['/administrador/facturas']);
-                    this.toast.success("Factura creada correctamente.", "Success!");
                   }
                   else this.toast.error("Error al crear la linea.", "Error!");
                 }
               );
             }
           }
+          this.router.navigate(['/administrador/facturas']);
+          this.toast.success("Factura creada correctamente.", "Success!");
+          this.lineasService.vaciarLineas();
         }
         else{
           this.toast.error("Error al crear la factura.", "Error!");

@@ -103,8 +103,6 @@ export class AddLineaComponent implements OnInit  {
           this.producto = data;
         }
       );
-      this.precioKG = this.producto.precioKG;
-      console.log(this.producto);
     }
     else {
       this.mariscosService.getById(this.producto_id).subscribe(
@@ -112,7 +110,6 @@ export class AddLineaComponent implements OnInit  {
           this.producto = data;
         }
       );
-      this.precioKG = this.producto.precioKG;
     }
 
   }

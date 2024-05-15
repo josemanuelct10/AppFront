@@ -1,0 +1,20 @@
+<app-menu-cliente></app-menu-cliente>
+
+
+
+  <div class="form-floating" style="width: 170px; float: right; margin-right: 30px; margin-top: 10px;">
+    <select class="form-select" id="selectPescado" aria-label="Categorias Pescado"  [(ngModel)]="categoriaSeleccionada" aria-placeholder="Elija una categoria">
+      <option value="todos">Todos</option>
+      <option value="Pescado Blanco">Pescado Blanco</option>
+      <option value="Pescado Azul">Pescado Azul</option>
+      <option value="Pescado Salvaje">Pescado Salvaje</option>
+    </select>
+    <label for="categoria">Tipo Pescado</label>
+  </div>
+
+
+<br><br>
+
+<app-card-producto [productos]="filtrarPescadosPorCategoria()"></app-card-producto>
+
+

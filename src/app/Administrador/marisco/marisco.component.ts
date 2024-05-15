@@ -20,11 +20,16 @@ export class MariscoComponent implements OnInit {
   marisco: any;
   id: any;
   nombre: string;
+  page: number;
 
   constructor(
     private mariscoService: MariscoServiceService,
     private toast: ToastrService
   ){
+    this.mariscoService.getAll().subscribe(data  => {
+      this.mariscos = data;
+      console.log(this.mariscos);
+    });
   }
 
 
@@ -33,10 +38,7 @@ export class MariscoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mariscoService.getAll().subscribe(data  => {
-      this.mariscos = data;
-      console.log(this.mariscos);
-    });
+
   }
 
   onMariscoEliminado(id: number){
@@ -49,6 +51,7 @@ export class MariscoComponent implements OnInit {
       this.marisco = data;
       console.log(this.marisco);
       console.log(id, "aaaa");
+
     })
   }
 

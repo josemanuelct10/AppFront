@@ -1,0 +1,45 @@
+.img-fluid {
+  max-width: 100%; /* Ajustamos el ancho máximo de la imagen */
+  height: auto; /* Permitimos que la altura de la imagen se ajuste automáticamente */
+}
+
+.container {
+  margin-top: 50px; /* Añadimos margen superior para bajar el contenido */
+}
+
+.row {
+  display: flex; /* Usamos flexbox para alinear los elementos */
+}
+
+.order-md-1 {
+  text-align: right; /* Alineamos el texto a la derecha */
+}
+
+.order-md-2 {
+  text-align: center; /* Alineamos la imagen al centro */
+}
+
+.btn-primary{
+  background-color: #052659;
+  margin-left: 5px;
+  border: #052659;
+}
+
+.border-primary {
+  border-color: #052659; /* Reemplaza "your_custom_color" con el color primario personalizado que desees */
+}
+
+/* Estilos para inputs más pequeños */
+.input-small {
+  width: 190px; /* Ancho personalizado */
+  height: 30px; /* Altura personalizada */
+  font-size: 14px; /* Tamaño de fuente personalizado */
+}
+
+.centered-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+

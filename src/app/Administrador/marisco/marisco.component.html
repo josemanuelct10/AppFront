@@ -7,6 +7,8 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMarisco">
       <i class="fa fa-plus"></i>
     </button>
+    <app-add-marisco (onChange)="actualizarMariscos($event)"></app-add-marisco>
+
   </div>
 </div>
 
@@ -26,11 +28,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let marisco of mariscos">
+    <tr *ngFor="let marisco of mariscos | paginate: { itemsPerPage: 10, currentPage: page}">
       <td>{{marisco.id}}</td>
       <td>{{marisco.nombre}}</td>
-      <td>{{marisco.precioKG}}</td>
-      <td>{{marisco.cantidad}}</td>
+      <td>{{marisco.precioKG | number:'1.2-2'}} €</td>
+      <td>{{marisco.cantidad | number:'1.2-2'}} KG</td>
       <td>
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showMarisco" (click)="buscarMarisco(marisco.id)">
           <i class="fa fa-eye"></i>
@@ -50,11 +52,17 @@
     </tr>
   </tbody>
 </table>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente">
+  </pagination-controls>
+</div>
 </div>
 
 
-<app-add-marisco (onChange)="actualizarMariscos($event)"></app-add-marisco>
 
-<app-edit-marisco [marisco]="marisco" (onChange)="actualizarMariscos($event)"></app-edit-marisco>
+<app-edit-marisco *ngIf="marisco" [marisco]="marisco" (onChange)="actualizarMariscos($event)"></app-edit-marisco>
 <app-rm-marisco [id]="id" [nombre]="nombre" (onChange)="actualizarMariscos($event)"></app-rm-marisco>
-<app-show-marisco  [marisco]="marisco"></app-show-marisco>
+<app-show-marisco  *ngIf="marisco" [marisco]="marisco"></app-show-marisco>

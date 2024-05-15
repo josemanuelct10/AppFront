@@ -19,6 +19,7 @@ export class GastosComponent implements OnInit {
   id: any;
   referencia: string;
   filtro: string;
+  page: number;
 
 
 

@@ -31,5 +31,9 @@ export class GestionLineasService {
     return this.http.post<any>(this.apiUrl, data);
   }
 
+  vaciarLineas() {
+    this.lineas = [];
+  }
+
 
 }

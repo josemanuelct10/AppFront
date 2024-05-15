@@ -1,0 +1,64 @@
+<app-menu-cliente></app-menu-cliente>
+
+<br>
+
+<div *ngIf="!productosCarrito || productosCarrito.length === 0" class="text-center mt-4">
+  <p>No hay productos en el carrito.</p>
+</div>
+
+
+<div class="table-responsive mx-5" *ngIf="productosCarrito && productosCarrito.length > 0">
+  <table class="table text-center"> <!-- Aplicamos la clase text-center a la tabla -->
+    <thead>
+      <tr>
+        <th scope="col">Imagen</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Preparación/Cocción</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio del KG</th>
+        <th scope="col">Precio Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productosCarrito">
+        <!-- Mostrar la imagen del pescado si es un pescado o la imagen del marisco si es un marisco -->
+        <td class="align-middle"><img [src]="producto.pescado !== null ? 'http://127.0.0.1:8000/storage/images/' + producto.pescado.imagen : 'http://127.0.0.1:8000/storage/images/' + producto.marisco.imagen" class="img-fluid" alt="Imagen del producto" width="75" ></td>
+        <td class="align-middle">{{producto.pescado !== null ? producto.pescado.nombre : producto.marisco.nombre}}</td>
+        <!-- Mostrar la preparación si es un pescado o la cocción si es un marisco -->
+        <td class="align-middle" *ngIf="producto.pescado !== null">{{producto.descripcion}}</td>
+        <td class="align-middle" *ngIf="producto.marisco !== null">{{producto.marisco.cocido === 1 ? 'Sí' : 'No'}}</td>
+        <td class="align-middle">{{producto.cantidad | number:'1.2-2'}} KG</td>
+        <td class="align-middle">{{producto.precioUnitario | number:'1.2-2'}}€</td>
+        <td class="align-middle"><strong>{{producto.precioLinea | number:'1.2-2'}}€</strong></td>
+
+
+        <td class="align-middle">
+          <button class="btn btn-danger" (click)="eliminarProducto(producto.id)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Línea que muestra la suma total -->
+<div class="total-line text-end mx-5" *ngIf="productosCarrito && productosCarrito.length > 0">
+  <hr>
+  <div style="font-size: 24px;">TOTAL: {{ calcularTotalFiltrado() | number:'1.2-2' }}€</div>
+</div>
+
+<!-- Input para seleccionar la hora de recogida del pedido -->
+<div class="d-flex justify-content-center">
+  <div class="form-floating mb-3">
+    <input type="time" class="form-control col-auto border-primary" name="horaRecogida" [(ngModel)]="horaRecogida" id="horaRecogida" placeholder="Hora de Recogida" alt="Hora de Recogida">
+    <label for="horaRecogida" class="text-center">Hora de Recogida</label>
+  </div>
+</div>
+
+<!-- Botón para finalizar compra -->
+<div class="text-center my-4">
+  <button class="btn btn-primary btn-lg" (click)="finalizarCompra()" [disabled]="!horaRecogida">Finalizar Compra</button>
+</div>
+

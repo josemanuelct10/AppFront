@@ -12,6 +12,7 @@ export class VentasComponent implements OnInit  {
   id: number;
   referencia: string;
   filtro: string;
+  page: number;
 
   constructor(
     private ventasService: VentasService

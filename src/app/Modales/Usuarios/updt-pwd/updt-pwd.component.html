@@ -1,0 +1,34 @@
+<div class="modal fade" id="updtPwd" tabindex="-1" aria-labelledby="updtPwd" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header  bg-custom">
+        <h1 class="modal-title fs-5" id="updtPwd">Actualizar Contraseña</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #formMarisco="ngForm" (ngSubmit)="guardarDatos()">
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="passwordOld" [(ngModel)]="contrasenaAntigua" id="passwordOld" placeholder="Contraseña Antigua" alt="Contraseña Antigua">
+            <label for="passwordOld">Contraseña Antigua</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="newPassword" [(ngModel)]="nuevaContrasena" id="newPassword" placeholder="Nueva Contraseña" alt="Nueva Contraseña">
+            <label for="newPassword">Nueva Contraseña</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" placeholder="Confirmación Contraseña" name="confirmPassword"  [(ngModel)]="confirmarContrasena" alt="Confirmación Contraseña" id="confirmPassword">
+            <label for="confirmPassword">Confirmación Contraseña</label>
+          </div>
+
+          <div *ngIf="!contrasenasValidas()" class="text-danger">Las contraseñas no coinciden o están vacías.</div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!contrasenasValidas()">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

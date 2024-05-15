@@ -1,25 +1,35 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PescadoServiceService } from '../../../Services/pescado-service.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ProveedoresServiceService } from '../../../Services/proveedores-service.service';
 
 @Component({
   selector: 'app-edit-pescado',
   templateUrl: './edit-pescado.component.html',
   styleUrl: './edit-pescado.component.css'
 })
-export class EditPescadoComponent {
+export class EditPescadoComponent implements OnInit {
 
   @Input() pescado: any;
   @Output() onChange = new EventEmitter<any>();
+
+  proveedores: any;
 
   pescados: any;
 
   constructor(
     private pescadoService: PescadoServiceService,
-    private router: Router,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private proveedorService: ProveedoresServiceService
   ) {}
+
+
+  ngOnInit(): void {
+    this.proveedorService.getAll().subscribe(
+      data => this.proveedores = data
+    )
+  }
 
 
 
@@ -46,8 +56,6 @@ export class EditPescadoComponent {
         )
       }
     })
-
-    console.log(formData);
   }
 
 }

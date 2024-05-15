@@ -13,6 +13,7 @@ export class FacturasComponent implements OnInit {
   filtro: string;
   id: number;
   referencia: string;
+  page: number;
 
   constructor(
     private facturasService: FacturasService,

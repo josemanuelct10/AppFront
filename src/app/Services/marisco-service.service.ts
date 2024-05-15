@@ -32,4 +32,8 @@ export class MariscoServiceService {
   update(id: any, mariscoActualizado: any){
     return this.http.put(`${this.apiUrl}/update/${id}`, mariscoActualizado);
   }
+
+  updateCantidad(mariscoId: number, nuevaCantidad: number) {
+    return this.http.put<any>(`${this.apiUrl}/updateCantidad/${mariscoId}`, { cantidad: nuevaCantidad });
+  }
 }

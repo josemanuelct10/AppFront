@@ -3,6 +3,10 @@
 <div class="d-flex">
   <h2 class="h2">Usuarios</h2>
   <div class="divAnadir">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUsuario">
+      <i class="fa fa-plus"></i>
+    </button>
+    <app-add-usuario (onChange)="actualizarUsuarios($event)"></app-add-usuario>
   </div>
 </div>
 
@@ -23,7 +27,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let usuario of usuarios">
+    <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 10, currentPage: page}">
       <td>{{usuario.id}}</td>
       <td>{{usuario.name}}</td>
       <td>{{usuario.email}}</td>
@@ -40,15 +44,22 @@
         </button>
       </td>
       <td>
-        <button *ngIf="usuario.categoria_usuario_id === 1 || usuario.categoria_usuario_id === 2" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#showGastos" (click)="buscarUsuario(usuario.id)">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#showNominas" (click)="buscarUsuario(usuario.id)">
           <i class="fa fa-file"></i>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
-<app-edit-usuario *ngIf="usuario" [usuario]="usuario" (onChange)="actualizarProveedores($event)"></app-edit-usuario>
-<app-rm-usuario [id]="id" [nombre]="nombre" (onChange)="actualizarProveedores($event)"></app-rm-usuario>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente">
+  </pagination-controls>
+</div>
+<app-edit-usuario *ngIf="usuario" [usuario]="usuario" (onChange)="actualizarUsuarios($event)"></app-edit-usuario>
+<app-rm-usuario [id]="id" [nombre]="nombre" (onChange)="actualizarUsuarios($event)"></app-rm-usuario>
 <app-show-nominas *ngIf="usuario" [usuario]="usuario"></app-show-nominas>
 
 

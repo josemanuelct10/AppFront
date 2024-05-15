@@ -30,7 +30,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let venta of ventas  | filter: filtro">
+    <tr *ngFor="let venta of ventas  | filter: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
       <td>{{venta.id}}</td>
       <td>{{venta.descripcion}}</td>
       <td>{{ venta.cantidad | number:'1.2-2' }}€</td>
@@ -44,6 +44,13 @@
     </tr>
   </tbody>
 </table>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Anterior"
+      nextLabel="Siguiente">
+  </pagination-controls>
+</div>
 </div>
 
 <app-add-ventas (onChange)="ventasActualizadas($event)"></app-add-ventas>
