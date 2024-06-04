@@ -1,1 +1,12 @@
+.container {
+  text-align: center;
+}
 
+.form-floating {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.form-floating select {
+  width: 100%;
+}

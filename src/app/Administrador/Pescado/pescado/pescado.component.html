@@ -1,69 +1,64 @@
 <app-menu-dashboard></app-menu-dashboard>
 
-<br>
-<div class="d-flex">
-  <h2 class="h2">Pescados</h2>
-  <div class="divAnadir">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPescado">
-      <i class="fa fa-plus"></i>
-    </button>
+<div class="container">
+  <div class="header">
+    <h2 class="title">Pescados</h2>
+    <div class="add-button-container">
+      <button type="button" class="btn add-btn" (click)="modalAdd()">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="search-container">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+      <button class="btn search-btn" type="button" (click)="limpiarFiltro()">Limpiar</button>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="pescados">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Precio KG</th>
+          <th>Cantidad</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pescado of pescados | filterProducto: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
+          <td>{{pescado.id}}</td>
+          <td>{{pescado.nombre}}</td>
+          <td>{{ pescado.precioKG | number:'1.2-2' }} €</td>
+          <td>{{pescado.cantidad | number:'1.2-2'}} KG</td>
+          <td>
+            <button class="btn action-btn" (click)="modalShow(pescado)">
+              <i class="fa fa-eye"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn action-btn danger-btn" (click)="modalRm(pescado.id, pescado.nombre)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn action-btn" (click)="modalEdit(pescado)">
+              <i class="fa fa-pen"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination-container">
+      <pagination-controls
+          (pageChange)="page = $event"
+          previousLabel="Anterior"
+          nextLabel="Siguiente">
+      </pagination-controls>
+    </div>
   </div>
 </div>
-
-
-<div class="table-responsive mx-5" *ngIf="pescados">
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Precio KG</th>
-      <th scope="col">Cantidad</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let pescado of pescados | paginate: { itemsPerPage: 10, currentPage: page}">
-      <td>{{pescado.id}}</td>
-      <td>{{pescado.nombre}}</td>
-      <td>{{ pescado.precioKG | number:'1.2-2' }} €</td>
-      <td>{{pescado.cantidad | number:'1.2-2'}} KG</td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showPescado" (click)="buscarPescado(pescado.id)" >
-          <i class="fa fa-eye"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarPescado" (click)="setPescadoAEliminar(pescado.id, pescado.nombre)">
-          <i class="fa fa-trash"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPescado" (click)="buscarPescado(pescado.id)">
-          <i class="fa fa-pen"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div style="display: flex; justify-content: center; align-items: center;">
-  <pagination-controls
-      (pageChange)="page = $event"
-      previousLabel="Anterior"
-      nextLabel="Siguiente">
-  </pagination-controls>
-</div>
-
-</div>
-
-<app-add-pescado (onChange)="actualizarPescados($event)"></app-add-pescado>
-
-<app-rm-pescado [id]="id" [nombre]="nombre" (onChange)="actualizarPescados($event)"></app-rm-pescado>
-
-<app-edit-pescado  [pescado]="pescado"  (onChange)="actualizarPescados($event)"></app-edit-pescado>
-
-
-<app-show-pescado [pescado]="pescado"></app-show-pescado>

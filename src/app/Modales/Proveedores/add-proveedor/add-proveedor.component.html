@@ -1,43 +1,68 @@
-<div class="modal fade" id="addProveedor" tabindex="-1" aria-labelledby="addProveedor" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+
       <div class="modal-header bg-custom">
         <h1 class="modal-title fs-5" id="addProveedor">Nuevo Proveedor</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form #formPescado="ngForm" (ngSubmit)="guardarDatos()">
+        <form [formGroup]="formProveedor" (ngSubmit)="guardarDatos()">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="nombre" [(ngModel)]="nombre" id="nombre" placeholder="Nombre" alt="Nombre">
+            <input type="text" class="form-control" name="nombre" formControlName="nombre" id="nombre" placeholder="Nombre" alt="Nombre">
             <label for="nombre">Nombre</label>
+            <div *ngIf="formProveedor && formProveedor.get('nombre') && (formProveedor.get('nombre')?.dirty || formProveedor.get('nombre')?.touched)">
+              <div *ngIf="formProveedor.get('nombre')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El nombre es requerido
+              </div>
+            </div>
           </div>
           <div class="form-floating">
-            <textarea class="form-control" placeholder="direccion" name="direccion"  [(ngModel)]="direccion" alt="direccion" id="direccion" style="height: 100px"></textarea>
+            <input class="form-control" placeholder="direccion" name="direccion"  formControlName="direccion" alt="direccion" id="direccion" >
             <label for="direccion">Direccion</label>
+            <div *ngIf="formProveedor && formProveedor.get('direccion') && (formProveedor.get('direccion')?.dirty || formProveedor.get('direccion')?.touched)">
+              <div *ngIf="formProveedor.get('direccion')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La direccion es requerida
+              </div>
+            </div>
           </div>
           <br>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="telefono" name="telefono"  [(ngModel)]="telefono" placeholder="Telefono" alt="Telefono">
+            <input type="text" class="form-control" id="telefono" name="telefono"  formControlName="telefono" placeholder="Telefono" alt="Telefono">
             <label for="telefono">Telefono</label>
+            <div *ngIf="formProveedor && formProveedor.get('telefono') && (formProveedor.get('telefono')?.dirty || formProveedor.get('telefono')?.touched)">
+              <div *ngIf="formProveedor.get('telefono')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El telefono es requerido
+              </div>
+              <div style="color: red;" *ngIf="formProveedor.get('telefono')?.errors?.['pattern']"><i class="fa-solid fa-xmark"></i> El telefono debe tener 9 digitos.</div>
+
+            </div>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="categoria" name="categoria"  [(ngModel)]="categoria" placeholder="Categoría" alt="Categoría">
+            <input type="text" class="form-control" id="categoria" name="categoria" formControlName="categoria" placeholder="Categoría" alt="Categoría">
             <label for="categoria">Categoría</label>
+            <div *ngIf="formProveedor && formProveedor.get('categoria') && (formProveedor.get('categoria')?.dirty || formProveedor.get('categoria')?.touched)">
+              <div *ngIf="formProveedor.get('categoria')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La categoria es requerida
+              </div>
+
+            </div>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="cif" name="cif"  [(ngModel)]="cif" placeholder="cif" alt="cif">
+            <input type="text" class="form-control" id="cif" name="cif" formControlName="cif" placeholder="cif" alt="cif">
             <label for="cif">CIF</label>
+            <div *ngIf="formProveedor.get('cif')?.touched && formProveedor.get('cif')" class="text-danger">
+              <div *ngIf="formProveedor.get('cif')?.errors?.['required']"><i class="fa-solid fa-xmark"></i> El CIF es obligatorio.</div>
+              <div *ngIf="formProveedor.get('cif')?.errors?.['pattern']"><i class="fa-solid fa-xmark"></i> El formato del CIF debe ser el siguiente A12345678</div>
+            </div>
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            <button type="button" class="btn btn-danger" (click)="modal.dismiss('cancel click')">Cancelar</button>
+            <button type="submit" class="btn btn-primary"  [disabled]="formProveedor.invalid">Guardar</button>
           </div>
         </form>
       </div>
-
-    </div>
-  </div>
-</div>

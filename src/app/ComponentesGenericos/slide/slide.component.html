@@ -1,0 +1,12 @@
+<div id="productos" class="grid-container">
+  <a *ngFor="let producto of productos" class="producto" [href]="producto.enlace">
+    <div class="imagen-container">
+      <div class="imagen-overlay">
+        <h3>{{ producto.nombre }}</h3>
+        <button class="enlace">Ver Detalle</button>
+      </div>
+      <img class="imagen" [src]="producto.imagen" alt="{{ producto.nombre }}">
+      <img class="imagen" [src]="producto.imagen2" alt="{{ producto.nombre }}">
+    </div>
+  </a>
+</div>

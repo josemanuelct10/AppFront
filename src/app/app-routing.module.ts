@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistroComponent } from './InicioSesion/registro/registro.component';
 import { InicioSesionComponent } from './InicioSesion/inicio-sesion/inicio-sesion.component';
-import { InicioComponent } from './Administrador/inicio/inicio.component';
+import { InicioComponent } from './ComponentesGenericos/inicio/inicio.component';
 import { PescadoComponent } from './Administrador/Pescado/pescado/pescado.component';
 import { MariscoComponent } from './Administrador/marisco/marisco.component';
 import { ProductosComponent } from './Administrador/productos/productos.component';
@@ -20,6 +20,10 @@ import { ListaProductosComponent } from './Clientes/lista-productos/lista-produc
 import { DetalleProductoComponent } from './ComponentesGenericos/detalle-producto/detalle-producto.component';
 import { CarritoComponent } from './Clientes/carrito/carrito.component';
 import { PerfilComponent } from './ComponentesGenericos/perfil/perfil.component';
+import { FinalizarCompraComponent } from './Clientes/finalizar-compra/finalizar-compra.component';
+import { RecuperarPwdComponent } from './InicioSesion/recuperar-pwd/recuperar-pwd.component';
+import { ChangePwdComponent } from './ComponentesGenericos/change-pwd/change-pwd.component';
+import { FacturasUsuarioComponent } from './Clientes/facturas-usuario/facturas-usuario.component';
 
 
 
@@ -44,7 +48,10 @@ const routes: Routes = [
   { path: 'detalleProducto/:tipo/:id', component: DetalleProductoComponent, data: {menuType: 'cliente'}, canActivate: [AuthGuardService]},
   { path: 'carrito', component: CarritoComponent, data: {menuType: 'cliente'}, canActivate: [AuthGuardService]},
   { path: 'perfil', component:PerfilComponent, canActivate: [AuthGuardService]},
-
+  {path: 'carrito/pedidoFinalizado', component: FinalizarCompraComponent, canActivate: [AuthGuardService]},
+  {path: 'recuperarContraseña', component: RecuperarPwdComponent},
+  { path: 'change-password/:token', component: ChangePwdComponent },
+  { path: 'facturas', component: FacturasUsuarioComponent, canActivate: [AuthGuardService]}
 
 ];
 

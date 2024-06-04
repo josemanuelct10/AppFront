@@ -1,45 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { VentasService } from '../../Services/ventas.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AddVentasComponent } from '../../Modales/Ventas/add-ventas/add-ventas.component';
 
 @Component({
   selector: 'app-ventas',
   templateUrl: './ventas.component.html',
-  styleUrl: './ventas.component.css'
+  styleUrls: ['./ventas.component.css'] // Corregir 'styleUrl' a 'styleUrls'
 })
 export class VentasComponent implements OnInit  {
 
-  ventas: any;
-  id: number;
-  referencia: string;
-  filtro: string;
-  page: number;
+  ventas: any; // Variable para almacenar las ventas
+  id: number; // Variable para almacenar el ID de la venta seleccionada
+  referencia: string; // Variable para almacenar la referencia de la venta seleccionada
+  filtro: string; // Variable para el filtro de búsqueda
+  page: number; // Variable para el número de página actual
 
   constructor(
-    private ventasService: VentasService
+    private ventasService: VentasService, // Servicio para gestionar las ventas
+    public modalService: NgbModal // Servicio para abrir modales
   ){}
 
+  // Método para actualizar la lista de ventas después de alguna operación
   ventasActualizadas(ventasActualizadas: any){
     this.ventas = ventasActualizadas;
   }
 
-
   ngOnInit(): void {
-    this.ventasService.getAll().subscribe(
-      data => {
-        this.ventas = data;
-      }
-    )
+    // Obtener todas las ventas al inicializar el componente
+    this.ventasService.getAll().subscribe(data => {
+      this.ventas = data; // Asignar las ventas obtenidas a la variable ventas
+    });
   }
 
+  // Método para establecer la venta que se eliminará
   setVentaAEliminar(id: number, referencia: string){
-    this.id = id,
+    this.id = id;
     this.referencia = referencia;
   }
 
+  // Método para limpiar el filtro de búsqueda
   limpiarFiltro() {
     this.filtro = '';
   }
 
+  // Método para calcular el total de las ventas filtradas
   calcularTotalFiltrado(): number {
     let total = 0;
     for (let i = 0; i < this.ventas.length; i++) {
@@ -50,7 +55,7 @@ export class VentasComponent implements OnInit  {
     return parseFloat(total.toFixed(2)); // Limitar a dos decimales y convertir de nuevo a número
   }
 
-
+  // Método para verificar si una venta pasa el filtro de búsqueda
   pasaFiltro(venta: any): boolean{
     if (!this.filtro){
       return true;
@@ -64,7 +69,14 @@ export class VentasComponent implements OnInit  {
     );
   }
 
+  // Método para abrir el modal de agregar venta
+  modalAdd(){
+    const modalRef: NgbModalRef = this.modalService.open(AddVentasComponent, {size: 'lg', centered: true })
 
-
-
+    // Actualizar las ventas después de agregar una nueva venta
+    modalRef.result.then((result) =>{
+      console.log(result);
+      this.ventas = result;
+    });
+  }
 }

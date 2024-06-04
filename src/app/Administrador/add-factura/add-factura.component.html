@@ -1,43 +1,38 @@
 <app-menu-dashboard></app-menu-dashboard>
 
-
-
 <div class="container mt-4">
   <h2>Crear Factura</h2>
-  <form (ngSubmit)="guardarDatos()">
+  <form #formFactura="ngForm" (ngSubmit)="guardarDatos()">
     <div class="form-floating mb-3">
-      <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" name="fecha" >
+      <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" name="fecha" required>
       <label for="fecha">Fecha</label>
     </div>
 
     <div class="form-floating mb-3">
-      <select class="form-select" id="cliente" name="cliente" [(ngModel)]="user_id">
+      <select class="form-select" id="cliente" name="cliente" [(ngModel)]="user_id" required>
         <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.name }}</option>
       </select>
       <label for="cliente">Cliente</label>
     </div>
 
     <div class="form-floating mb-3">
-      <input type="text" class="form-control" id="metodoPago" [(ngModel)]="metodoPago" name="metodoPago" readonly>
+      <input type="text" class="form-control" id="metodoPago" [(ngModel)]="metodoPago" name="metodoPago" readonly required>
       <label for="metodoPago">Metodo de Pago</label>
     </div>
 
     <div class="mb-4">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="m-0">Productos de la Factura</h3>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLinea">
+        <button type="button" class="btn btn-primary" (click)="modalAdd()">
           <i class="fa fa-plus"></i> Nuevo Producto
         </button>
       </div>
-
-
 
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
               <th scope="col">Producto</th>
-              <th scope="col">Descripcion</th>
               <th scope="col">Preparacion</th>
               <th scope="col">Cantidad</th>
               <th scope="col">Precio KG</th>
@@ -46,10 +41,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let linea of lineasFactura">
-              <td>
-                {{ linea.pescado ? linea.pescado.nombre : linea.marisco.nombre }}
-              </td>
-              <td>{{linea.descripcion}}</td>
+              <td>{{ linea.pescado ? linea.pescado.nombre : linea.marisco.nombre }}</td>
               <td>{{linea.preparacion}}</td>
               <td>{{linea.cantidad}}</td>
               <td>{{linea.precioKG}}€</td>
@@ -60,8 +52,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" >Crear Factura</button>
+    <button type="submit" class="btn btn-primary" [disabled]="formFactura.invalid || lineasFactura.length === 0">Crear Factura</button>
   </form>
 
-  <app-add-linea (actualizarLineas)="actualizarLineas($event)"></app-add-linea>
 </div>

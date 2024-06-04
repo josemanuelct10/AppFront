@@ -1,0 +1,23 @@
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="query"
+    (input)="onSearch()"
+    placeholder="Buscar productos..."
+    aria-label="Buscar productos"
+    class="search-input"
+  />
+  <div class="suggestions" *ngIf="suggestions.length > 0">
+    <div
+      class="suggestion-item"
+      *ngFor="let suggestion of suggestions"
+      (click)="navigateToDetail(suggestion)"
+    >
+      <img [src]="'http://80.31.158.21/api/storage/images/' + suggestion.imagen" alt="{{ suggestion.nombre }}" class="product-image"/>
+      <div class="product-info">
+        <span class="product-name">{{ suggestion.nombre }}</span>
+        <span class="product-price">{{ suggestion.precioKG | currency:'EUR' }}/kg</span>
+      </div>
+    </div>
+  </div>
+</div>

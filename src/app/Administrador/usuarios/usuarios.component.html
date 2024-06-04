@@ -1,65 +1,61 @@
 <app-menu-dashboard></app-menu-dashboard>
-<br>
-<div class="d-flex">
-  <h2 class="h2">Usuarios</h2>
-  <div class="divAnadir">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUsuario">
-      <i class="fa fa-plus"></i>
-    </button>
-    <app-add-usuario (onChange)="actualizarUsuarios($event)"></app-add-usuario>
+
+<div class="container">
+  <div class="header">
+    <h2 class="title">Usuarios</h2>
+    <div class="add-button-container">
+      <button type="button" class="btn add-btn" (click)="modalAdd()">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+      <button class="btn search-btn" type="button" (click)="limpiarFiltro()">Limpiar</button>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="usuarios">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Puesto</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios | filterUsuarios: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
+          <td>{{usuario.id}}</td>
+          <td>{{usuario.name}}</td>
+          <td>{{usuario.email}}</td>
+          <td>{{usuario.telefono}}</td>
+          <td>{{usuario.categoria_usuario.descripcion}}</td>
+          <td>
+            <button class="btn action-btn" (click)="editModal(usuario)">
+              <i class="fa fa-pen"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn action-btn danger-btn" (click)="rmModal(usuario)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination-container">
+      <pagination-controls
+          (pageChange)="page = $event"
+          previousLabel="Anterior"
+          nextLabel="Siguiente">
+      </pagination-controls>
+    </div>
   </div>
 </div>
-
-
-<div class="table-responsive mx-5">
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Email</th>
-      <th scope="col">Teléfono</th>
-      <th scope="col">Puesto</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 10, currentPage: page}">
-      <td>{{usuario.id}}</td>
-      <td>{{usuario.name}}</td>
-      <td>{{usuario.email}}</td>
-      <td>{{usuario.telefono}}</td>
-      <td>{{usuario.categoria_usuario.descripcion}}</td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUsuario" (click)="buscarUsuario(usuario.id)">
-          <i class="fa fa-pen"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarUsuario" (click)="setUsuarioAEliminar(usuario.id, usuario.name)">
-          <i class="fa fa-trash"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#showNominas" (click)="buscarUsuario(usuario.id)">
-          <i class="fa fa-file"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div style="display: flex; justify-content: center; align-items: center;">
-  <pagination-controls
-      (pageChange)="page = $event"
-      previousLabel="Anterior"
-      nextLabel="Siguiente">
-  </pagination-controls>
-</div>
-<app-edit-usuario *ngIf="usuario" [usuario]="usuario" (onChange)="actualizarUsuarios($event)"></app-edit-usuario>
-<app-rm-usuario [id]="id" [nombre]="nombre" (onChange)="actualizarUsuarios($event)"></app-rm-usuario>
-<app-show-nominas *ngIf="usuario" [usuario]="usuario"></app-show-nominas>
-
-

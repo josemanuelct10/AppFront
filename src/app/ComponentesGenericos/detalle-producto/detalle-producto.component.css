@@ -19,16 +19,6 @@
   text-align: center; /* Alineamos la imagen al centro */
 }
 
-.btn-primary{
-  background-color: #052659;
-  margin-left: 5px;
-  border: #052659;
-}
-
-.border-primary {
-  border-color: #052659; /* Reemplaza "your_custom_color" con el color primario personalizado que desees */
-}
-
 /* Estilos para inputs más pequeños */
 .input-small {
   width: 190px; /* Ancho personalizado */

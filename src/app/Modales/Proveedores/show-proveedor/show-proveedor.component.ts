@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-show-proveedor',
@@ -7,5 +8,9 @@ import { Component, Input } from '@angular/core';
 })
 export class ShowProveedorComponent {
   @Input() proveedor: any;
+
+  constructor(
+    public modal: NgbActiveModal
+  ){}
 
 }

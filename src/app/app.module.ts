@@ -10,10 +10,9 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { RouterModule } from '@angular/router';
 import { InicioSesionComponent } from './InicioSesion/inicio-sesion/inicio-sesion.component';
 import { HttpClientModule } from '@angular/common/http';
-import { InicioComponent } from './Administrador/inicio/inicio.component';
+import { InicioComponent } from './ComponentesGenericos/inicio/inicio.component';
 import { PescadoComponent } from './Administrador/Pescado/pescado/pescado.component';
 import { MenuDashboardComponent } from './Menus/menu-dashboard/menu-dashboard.component';
-import { SeccionesComponent } from './ComponentesGenericos/secciones/secciones.component';
 import { AddPescadoComponent } from './Modales/Pescado/add-pescado/add-pescado.component';
 import { RmPescadoComponent } from './Modales/Pescado/rm-pescado/rm-pescado.component';
 import { ShowPescadoComponent } from './Modales/Pescado/show-pescado/show-pescado.component';
@@ -35,7 +34,6 @@ import { RmCategoriasUsuariosComponent } from './Modales/Categorias-Usuarios/rm-
 import { UsuariosComponent } from './Administrador/usuarios/usuarios.component';
 import { RmUsuarioComponent } from './Modales/Usuarios/rm-usuario/rm-usuario.component';
 import { EditUsuarioComponent } from './Modales/Usuarios/edit-usuario/edit-usuario.component';
-import { CleanupService } from './Services/cleanup.service';
 import { provideToastr } from 'ngx-toastr';
 import { MenuClienteComponent } from './Menus/menu-cliente/menu-cliente.component';
 import { GastosComponent } from './Administrador/gastos/gastos.component';
@@ -43,9 +41,11 @@ import { AddNominaComponent } from './Modales/Gastos/add-nomina/add-nomina.compo
 import { AddCompraComponent } from './Modales/Gastos/add-compra/add-compra.component';
 import { AddGastosExtraComponent } from './Modales/Gastos/add-gastos-extra/add-gastos-extra.component';
 import { RmGastoComponent } from './Modales/Gastos/rm-gasto/rm-gasto.component';
-import { FilterPipe } from './Interfaces/Filtros';
-import { ShowGastosComponent } from './Modales/Proveedores/show-gastos/show-gastos.component';
-import { ShowNominasComponent } from './Modales/Usuarios/show-nominas/show-nominas.component';
+import { FiltroGastos } from './Interfaces/filtroGastos';
+import { FiltroFacturas } from './Interfaces/filtroFacturas';
+import { FiltroUsuarios } from './Interfaces/filtroUsuarios';
+import { FilterVentas } from './Interfaces/filtroVentas';
+import { FiltroProductos } from './Interfaces/filtroProductos';
 import { VentasComponent } from './Administrador/ventas/ventas.component';
 import { AddVentasComponent } from './Modales/Ventas/add-ventas/add-ventas.component';
 import { RmVentasComponent } from './Modales/Ventas/rm-ventas/rm-ventas.component';
@@ -67,6 +67,14 @@ import { UpdtUsuarioComponent } from './Modales/Usuarios/updt-usuario/updt-usuar
 import { UpdtPwdComponent } from './Modales/Usuarios/updt-pwd/updt-pwd.component';
 import { FiltroCategoriaPipe } from './Interfaces/FiltroCategoria';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FiltroProveedores } from './Interfaces/filtroProveedores';
+import { FinalizarCompraComponent } from './Clientes/finalizar-compra/finalizar-compra.component';
+import { RecuperarPwdComponent } from './InicioSesion/recuperar-pwd/recuperar-pwd.component';
+import { ChangePwdComponent } from './ComponentesGenericos/change-pwd/change-pwd.component';
+import { FacturasUsuarioComponent } from './Clientes/facturas-usuario/facturas-usuario.component';
+import { BuscadorComponent } from './Clientes/buscador/buscador.component';
+import { SlideComponent } from './ComponentesGenericos/slide/slide.component';
 
 
 
@@ -78,7 +86,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     InicioComponent,
     PescadoComponent,
     MenuDashboardComponent,
-    SeccionesComponent,
     AddPescadoComponent,
     RmPescadoComponent,
     ShowPescadoComponent,
@@ -103,13 +110,16 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MenuClienteComponent,
     GastosComponent,
     AddNominaComponent,
+    FiltroProductos,
     AddCompraComponent,
     AddGastosExtraComponent,
     RmGastoComponent,
-    FilterPipe,
+    FiltroGastos,
+    FilterVentas,
+    FiltroFacturas,
+    FiltroUsuarios,
+    FiltroProveedores,
     FiltroCategoriaPipe,
-    ShowGastosComponent,
-    ShowNominasComponent,
     VentasComponent,
     AddVentasComponent,
     RmVentasComponent,
@@ -127,7 +137,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CarritoComponent,
     PerfilComponent,
     UpdtUsuarioComponent,
-    UpdtPwdComponent
+    UpdtPwdComponent,
+    FinalizarCompraComponent,
+    RecuperarPwdComponent,
+    ChangePwdComponent,
+    FacturasUsuarioComponent,
+    BuscadorComponent,
+    SlideComponent,
+
     ],
   imports: [
     BrowserModule,
@@ -138,12 +155,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     ReactiveFormsModule,
     ModalModule.forRoot(), // Agrega el módulo de modales aquí
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModalModule
   ],
   providers: [
-    CleanupService,
     provideAnimations(), // required animations providers
     provideToastr(),
+    NgbActiveModal
   ],
   bootstrap: [AppComponent]
 })

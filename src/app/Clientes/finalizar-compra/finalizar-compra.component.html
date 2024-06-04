@@ -1,0 +1,39 @@
+<app-menu-cliente></app-menu-cliente>
+
+<div class="container" *ngIf="factura">
+  <div class="card">
+    <div class="card-header">
+      <h1>¡Pedido realizado con éxito!</h1>
+    </div>
+    <div class="card-body">
+      <h2>Detalles de la Factura</h2>
+      <p><strong>Referencia:</strong> {{ factura.referencia }}</p>
+      <p><strong>Fecha:</strong> {{ factura.fecha }}</p>
+      <p><strong>Hora de Recogida:</strong> {{ factura.horaRecogida }}</p>
+      <p><strong>Método de Pago:</strong> {{ factura.metodoPago }}</p>
+      <p><strong>Precio Total:</strong> {{ factura.precioFactura }} €</p>
+
+      <h3>Usuario</h3>
+      <p><strong>Nombre:</strong> {{ factura.user.name }}</p>
+      <p><strong>Email:</strong> {{ factura.user.email }}</p>
+      <p><strong>DNI:</strong> {{ factura.user.dni }}</p>
+
+      <h3>Productos Comprados</h3>
+      <ul>
+        <li *ngFor="let linea of factura.lineas">
+          <p *ngIf="linea.marisco"><strong>Producto:</strong> {{ linea.marisco.nombre }}</p>
+          <p *ngIf="linea.pescado"><strong>Producto:</strong> {{ linea.pescado.nombre }}</p>
+          <p *ngIf="linea.descripcion"><strong>Arreglo:</strong> {{ linea.descripcion }}</p>
+          <p><strong>Cantidad:</strong> {{ linea.cantidad }} KG</p>
+          <p><strong>Precio:</strong> {{ linea.precioLinea }} €</p>
+        </li>
+      </ul>
+
+      <button class="btn btn-primary" [routerLink]="['/inicio']">Volver al inicio</button>
+
+      <div style="margin-top: 10px;"></div>
+
+      <button class="btn btn-primary" (click)="abrirDocumento()">Abrir Factura</button>
+    </div>
+  </div>
+</div>

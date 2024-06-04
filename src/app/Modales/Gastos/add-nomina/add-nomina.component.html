@@ -6,38 +6,69 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="guardarDatos()">
+        <form [formGroup]="formNomina" (ngSubmit)="guardarDatos()">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="descripcion" [(ngModel)]="descripcion" id="descripcion" placeholder="Descripcion" alt="Descripcion">
+            <input type="text" class="form-control" name="descripcion" formControlName="descripcion" id="descripcion" placeholder="Descripcion" alt="Descripcion">
             <label for="descripcion">Descripcion</label>
+            <div *ngIf="formNomina && formNomina.get('descripcion') && (formNomina.get('descripcion')?.dirty || formNomina.get('descripcion')?.touched)">
+              <div *ngIf="formNomina.get('descripcion')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La descripcion es requerida.
+              </div>
+            </div>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="cantidad" name="cantidad"  [(ngModel)]="cantidad" placeholder="Cantidad" alt="Cantidad">
+            <input type="number" class="form-control" id="cantidad" name="cantidad"  formControlName="cantidad"  placeholder="Cantidad" alt="Cantidad">
             <label for="cantidad">Cantidad de Dinero</label>
+            <div *ngIf="formNomina && formNomina.get('cantidad') && (formNomina.get('cantidad')?.dirty || formNomina.get('cantidad')?.touched)">
+              <div *ngIf="formNomina.get('cantidad')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La cantidad es obligatoria
+              </div>
+              <div *ngIf="formNomina.get('cantidad')?.errors?.['min']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La cantidad debe ser al mayor a 0
+              </div>
+            </div>
           </div>
 
           <div>
             <label for="formFileLg" class="form-label">Documento</label>
             <input class="form-control form-control-lg" id="documento" name="documento" type="file" (change)="onFileSelected($event)">
+            <div *ngIf="formNomina.get('documento')?.errors?.['requiredFile']" style="color: red;">
+              <i class="fa-solid fa-xmark"></i>
+              El documento es obligatorio.
+            </div>
           </div>
 
           <div class="form-group">
             <label for="fecha ">Fecha</label>
-            <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" name="fecha" >
+            <input type="date" class="form-control" id="fecha" formControlName="fecha"  name="fecha" >
+            <div *ngIf="formNomina && formNomina.get('fecha') && (formNomina.get('fecha')?.dirty || formNomina.get('fecha')?.touched)">
+              <div *ngIf="formNomina.get('fecha')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La fecha es obligatoria
+              </div>
+            </div>
           </div>
-
           <br>
           <div class="form-floating">
-            <select class="form-select" id="trabajador" name="trabajador" aria-label="Floating label select example" [(ngModel)]="trabajador_id">
+            <select class="form-select" id="trabajador" name="trabajador"  formControlName="user_id">
               <option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">{{ trabajador.name }}</option>
             </select>
             <label for="trabajador">Trabajador</label>
+            <div *ngIf="formNomina && formNomina.get('user_id') && (formNomina.get('user_id')?.dirty || formNomina.get('user_id')?.touched)">
+              <div *ngIf="formNomina.get('user_id')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El Trabajador es obligatorio
+              </div>
+            </div>
           </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formNomina.invalid">Guardar</button>
           </div>
         </form>
       </div>

@@ -19,11 +19,10 @@
   </div>
   <div class="profile-actions">
     <!-- Aquí puedes agregar botones para permitir al usuario realizar acciones, como editar su perfil, cambiar la contraseña, etc. -->
-    <button class="btn-edit-profile" data-bs-toggle="modal" data-bs-target="#updtUsuario">Editar perfil</button>
+    <button class="btn-edit-profile" (click)="modalUpdt()">Editar perfil</button>
     <button class="btn-change-password" data-bs-toggle="modal" data-bs-target="#updtPwd">Cambiar contraseña</button>
   </div>
 </div>
 
 
 <app-updt-pwd></app-updt-pwd>
-<app-updt-usuario *ngIf="usuario" [usuario]="usuario" (onChange)="actualizarUsuario($event)"></app-updt-usuario>

@@ -1,65 +1,85 @@
-<div class="modal fade" id="editMarisco" tabindex="-1" aria-labelledby="editMarisco" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header  bg-custom">
-        <h1 class="modal-title fs-5" id="editMarisco">Actualizar Marisco</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal-header bg-custom">
+  <h1 class="modal-title fs-5" id="editPescado">Actualizar {{marisco.nombre}}</h1>
+  <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+  <form #formPescado="ngForm" (ngSubmit)="guardarDatos()" novalidate>
+      <div class="form-floating mb-3">
+          <input type="number" class="form-control" name="id" [(ngModel)]="newMarisco.ID" id="id" placeholder="Id" alt="Id" readonly required>
+          <label for="id">Id</label>
       </div>
-      <div class="modal-body">
-        <form #formMarisco="ngForm" (ngSubmit)="guardarDatos()">
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="id" [(ngModel)]="marisco.id" id="id" placeholder="Id" alt="Id" readonly>
-            <label for="id">Id</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="nombre" [(ngModel)]="marisco.nombre" id="nombre" placeholder="Nombre" alt="Nombre">
-            <label for="nombre">Nombre</label>
-          </div>
-          <div class="form-floating">
-            <textarea class="form-control" placeholder="Descripcion" name="descripcion"  [(ngModel)]="marisco.descripcion" alt="descripcion" id="descripcion" style="height: 100px"></textarea>
-            <label for="descripcion">Descripcion</label>
-          </div>
-          <br>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="origen" name="origen"  [(ngModel)]="marisco.origen" placeholder="Origen" alt="Origen">
-            <label for="origen">Origen</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="precioKG" name="precioKG"  [(ngModel)]="marisco.precioKG" placeholder="Precio del KG" alt="Precio del Kilogramo">
-            <label for="precioKG">Precio del KG</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="cantidad" name="cantidad"  [(ngModel)]="marisco.cantidad" placeholder="Cantidad" alt="Cantidad">
-            <label for="cantidad">Cantidad</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="fechaCompra" name="fechaCompra"  [(ngModel)]="marisco.fechaCompra" placeholder="Fecha de Compra" alt="Fecha de Compra">
-            <label for="fechaCompra">Fecha de Compra</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <select class="form-select" id="categoria" name="categoria" [(ngModel)]="marisco.categoria">
-              <option value="Crustacéo">Crustacéo</option>
-              <option value="Molusco">Molusco</option>
-              <option value="Cefalopodo">Cefalopodo</option>
-            </select>
-            <label for="categoria">Categoría</label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="cocido" id="cocido" [(ngModel)]="marisco.cocido">
-            <label class="form-check-label" for="cocido">Cocido</label>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-          </div>
-        </form>
+      <div class="form-floating mb-3">
+          <input type="text" class="form-control" name="nombre" [(ngModel)]="newMarisco.NOMBRE" id="nombre" placeholder="Nombre" alt="Nombre" required>
+          <label for="nombre">Nombre</label>
+          <span class="text-danger" *ngIf="!newMarisco.NOMBRE">
+              <i class="fa-solid fa-xmark"></i> Nombre requerido
+          </span>
+      </div>
+      <div class="form-floating">
+          <textarea class="form-control" name="descripcion" [(ngModel)]="newMarisco.DESCRIPCION" id="descripcion" placeholder="Descripción" alt="Descripción" style="height: 100px" required></textarea>
+          <label for="descripcion">Descripción</label>
+          <span class="text-danger" *ngIf="!newMarisco.DESCRIPCION">
+              <i class="fa-solid fa-xmark"></i> Descripción requerida
+          </span>
+      </div>
+      <br>
+      <div class="form-floating mb-3">
+          <input type="text" class="form-control" name="origen" [(ngModel)]="newMarisco.ORIGEN" id="origen" placeholder="Origen" alt="Origen" required>
+          <label for="origen">Origen</label>
+          <span class="text-danger" *ngIf="!newMarisco.ORIGEN">
+              <i class="fa-solid fa-xmark"></i> Origen requerido
+          </span>
+      </div>
+      <div class="form-floating mb-3">
+          <input type="number" class="form-control" name="cantidad" [(ngModel)]="newMarisco.CANTIDAD" id="cantidad" placeholder="Cantidad" alt="Cantidad" required min="0">
+          <label for="cantidad">Cantidad</label>
+          <span class="text-danger" *ngIf="newMarisco.CANTIDAD === null || newMarisco.CANTIDAD === undefined || newMarisco.CANTIDAD <= 0">
+              <i class="fa-solid fa-xmark"></i> La cantidad es requerida y debe ser mayor que cero
+          </span>
+      </div>
+      <div class="form-floating mb-3">
+          <input type="number" class="form-control" name="precioKG" [(ngModel)]="newMarisco.PRECIO_KG" id="precioKG" placeholder="Precio del KG" alt="Precio del Kilogramo" required min="0">
+          <label for="precioKG">Precio del KG</label>
+          <span class="text-danger" *ngIf="newMarisco.PRECIO_KG === null || newMarisco.PRECIO_KG === undefined || newMarisco.PRECIO_KG <= 0">
+              <i class="fa-solid fa-xmark"></i> El precio es requerido y debe ser mayor que cero
+          </span>
+      </div>
+      <div class="form-floating mb-3">
+          <input type="date" class="form-control" name="fechaCompra" [(ngModel)]="newMarisco.FECHA_COMPRA" id="fechaCompra" placeholder="Fecha de Compra" alt="Fecha de Compra" required>
+          <label for="fechaCompra">Fecha de Compra</label>
+          <span class="text-danger" *ngIf="!newMarisco.FECHA_COMPRA">
+              <i class="fa-solid fa-xmark"></i> Fecha de Compra requerida
+          </span>
+      </div>
+      <div class="form-floating mb-3">
+          <select class="form-select" name="categoria" [(ngModel)]="newMarisco.CATEGORIA" id="categoria" required>
+            <option value="Crustacéo">Crustacéo</option>
+            <option value="Molusco">Molusco</option>
+            <option value="Cefalopodo">Cefalopodo</option>
+          </select>
+          <label for="categoria">Categoría</label>
+          <span class="text-danger" *ngIf="!newMarisco.CATEGORIA">
+              <i class="fa-solid fa-xmark"></i> Categoría requerida
+          </span>
       </div>
 
-    </div>
-  </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="cocido" id="cocido" [(ngModel)]="newMarisco.COCIDO">
+        <label class="form-check-label" for="cocido">Cocido</label>
+      </div>
+
+      <div class="form-floating">
+          <select class="form-select" name="proveedor" [(ngModel)]="newMarisco.PROVEEDOR_ID" id="proveedor" aria-label="Floating label select example" required>
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
+          </select>
+          <label for="proveedor">Proveedor</label>
+          <span class="text-danger" *ngIf="!newMarisco.PROVEEDOR_ID">
+              <i class="fa-solid fa-xmark"></i> Proveedor requerido
+          </span>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="modal.dismiss('cancel click')">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="formPescado.invalid">Actualizar</button>
+      </div>
+  </form>
 </div>

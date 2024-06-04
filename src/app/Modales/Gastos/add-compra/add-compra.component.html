@@ -6,38 +6,71 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="guardarDatos()">
+        <form [formGroup]="formCompra" (ngSubmit)="guardarDatos()">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="descripcion" [(ngModel)]="descripcion" id="descripcion" placeholder="Descripcion" alt="Descripcion">
+            <input type="text" class="form-control" name="descripcion" formControlName="descripcion" id="descripcion" placeholder="Descripcion" alt="Descripcion">
             <label for="descripcion">Descripcion</label>
+            <div *ngIf="formCompra && formCompra.get('descripcion') && (formCompra.get('descripcion')?.dirty || formCompra.get('descripcion')?.touched)">
+              <div *ngIf="formCompra.get('descripcion')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La descripcion es requerida.
+              </div>
+            </div>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="cantidad" name="cantidad"  [(ngModel)]="cantidad" placeholder="Cantidad" alt="Cantidad">
+            <input type="number" class="form-control" id="cantidad" name="cantidad"  formControlName="cantidad"  placeholder="Cantidad" alt="Cantidad">
             <label for="cantidad">Cantidad de Dinero</label>
+            <div *ngIf="formCompra && formCompra.get('cantidad') && (formCompra.get('cantidad')?.dirty || formCompra.get('cantidad')?.touched)">
+              <div *ngIf="formCompra.get('cantidad')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La cantidad es obligatoria
+              </div>
+              <div *ngIf="formCompra.get('cantidad')?.errors?.['min']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La cantidad debe ser al mayor a 0
+              </div>
+
+            </div>
           </div>
 
           <div>
             <label for="formFileLg" class="form-label">Documento</label>
             <input class="form-control form-control-lg" id="documento" name="documento" type="file" (change)="onFileSelected($event)">
+            <div *ngIf="formCompra.get('documento')?.errors?.['requiredFile']" style="color: red;">
+              <i class="fa-solid fa-xmark"></i>
+              El documento es obligatorio.
+            </div>
           </div>
 
           <div class="form-group">
             <label for="fecha ">Fecha</label>
-            <input type="date" class="form-control" id="fecha" [(ngModel)]="fecha" name="fecha" >
+            <input type="date" class="form-control" id="fecha" formControlName="fecha"  name="fecha" >
+            <div *ngIf="formCompra && formCompra.get('fecha') && (formCompra.get('fecha')?.dirty || formCompra.get('fecha')?.touched)">
+              <div *ngIf="formCompra.get('fecha')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La fecha es obligatoria
+              </div>
+            </div>
           </div>
 
           <br>
           <div class="form-floating">
-            <select class="form-select" id="proveedor" name="proveedor" aria-label="Floating label select example" [(ngModel)]="proveedor_id">
+            <select class="form-select" id="proveedor" name="proveedor" aria-label="Floating label select example" formControlName="proveedor_id" >
               <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
             </select>
             <label for="proveedor">Proveedor</label>
+            <div *ngIf="formCompra && formCompra.get('proveedor') && (formCompra.get('proveedor')?.dirty || formCompra.get('proveedor')?.touched)">
+              <div *ngIf="formCompra.get('proveedor')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El proveedor es obligatorio
+              </div>
+            </div>
           </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formCompra.invalid">Guardar</button>
           </div>
         </form>
       </div>

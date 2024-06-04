@@ -1,68 +1,69 @@
 <app-menu-dashboard></app-menu-dashboard>
 
-<br>
-<div class="d-flex">
-  <h2 class="h2">Marisco</h2>
-  <div class="divAnadir">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMarisco">
-      <i class="fa fa-plus"></i>
-    </button>
-    <app-add-marisco (onChange)="actualizarMariscos($event)"></app-add-marisco>
+<div class="container">
+  <div class="header">
+    <h2 class="title">Marisco</h2>
+    <div class="add-button-container">
+      <button type="button" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#addMarisco">
+        <i class="fa fa-plus"></i>
+      </button>
+      <app-add-marisco (onChange)="actualizarMariscos($event)"></app-add-marisco>
+    </div>
+  </div>
 
+  <div class="search-container">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+      <button class="btn search-btn" type="button" (click)="limpiarFiltro()">Limpiar</button>
+    </div>
+  </div>
+
+
+  <div class="table-container" *ngIf="mariscos">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Precio KG</th>
+          <th>Cantidad</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let marisco of mariscos | filterProducto: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
+          <td>{{marisco.id}}</td>
+          <td>{{marisco.nombre}}</td>
+          <td>{{marisco.precioKG | number:'1.2-2'}} €</td>
+          <td>{{marisco.cantidad | number:'1.2-2'}} KG</td>
+          <td>
+            <button class="btn action-btn" (click)="showMarisco(marisco)">
+              <i class="fa fa-eye"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn action-btn danger-btn" (click)="rmMarisco(marisco.id, marisco.nombre)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn action-btn" (click)="editMarisco(marisco)">
+              <i class="fa fa-pen"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination-container">
+      <pagination-controls
+          (pageChange)="page = $event"
+          previousLabel="Anterior"
+          nextLabel="Siguiente">
+      </pagination-controls>
+    </div>
   </div>
 </div>
 
-
-<div class="table-responsive mx-5" *ngIf="mariscos">
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Precio KG</th>
-      <th scope="col">Cantidad</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let marisco of mariscos | paginate: { itemsPerPage: 10, currentPage: page}">
-      <td>{{marisco.id}}</td>
-      <td>{{marisco.nombre}}</td>
-      <td>{{marisco.precioKG | number:'1.2-2'}} €</td>
-      <td>{{marisco.cantidad | number:'1.2-2'}} KG</td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showMarisco" (click)="buscarMarisco(marisco.id)">
-          <i class="fa fa-eye"></i>
-        </button>
-
-      </td>
-      <td>
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarMarisco" (click)="setMariscoAEliminar(marisco.id, marisco.nombre)">
-          <i class="fa fa-trash"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editMarisco" (click)="buscarMarisco(marisco.id)">
-          <i class="fa fa-pen"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div style="display: flex; justify-content: center; align-items: center;">
-  <pagination-controls
-      (pageChange)="page = $event"
-      previousLabel="Anterior"
-      nextLabel="Siguiente">
-  </pagination-controls>
-</div>
-</div>
-
-
-
 <app-edit-marisco *ngIf="marisco" [marisco]="marisco" (onChange)="actualizarMariscos($event)"></app-edit-marisco>
-<app-rm-marisco [id]="id" [nombre]="nombre" (onChange)="actualizarMariscos($event)"></app-rm-marisco>
-<app-show-marisco  *ngIf="marisco" [marisco]="marisco"></app-show-marisco>

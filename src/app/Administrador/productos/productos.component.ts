@@ -5,30 +5,29 @@ import { MariscoServiceService } from '../../Services/marisco-service.service';
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html',
-  styleUrl: './productos.component.css'
+  styleUrls: ['./productos.component.css'] // Corregir 'styleUrl' a 'styleUrls'
 })
 export class ProductosComponent implements OnInit {
 
-  pescados: any;
-  mariscos: any;
+  pescados: any; // Variable para almacenar los pescados
+  mariscos: any; // Variable para almacenar los mariscos
 
   constructor(
-    private pescadosService: PescadoServiceService,
-    private mariscosService: MariscoServiceService
+    private pescadosService: PescadoServiceService, // Servicio para gestionar los pescados
+    private mariscosService: MariscoServiceService // Servicio para gestionar los mariscos
   ){}
 
   ngOnInit(): void {
+    // Obtener todos los pescados
     this.pescadosService.getAll().subscribe(data  => {
-      this.pescados = data;
+      this.pescados = data; // Asignar los pescados obtenidos a la variable pescados
       console.log(this.pescados);
     });
 
+    // Obtener todos los mariscos
     this.mariscosService.getAll().subscribe(data => {
-      this.mariscos = data;
+      this.mariscos = data; // Asignar los mariscos obtenidos a la variable mariscos
       console.log(this.mariscos);
     });
   }
-
-
-
 }

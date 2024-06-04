@@ -1,32 +1,26 @@
-<div class="modal fade" id="showMarisco" tabindex="-1" aria-labelledby="showMarisco" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+
       <div class="modal-header  bg-custom">
         <h1 class="modal-title fs-5" id="showMarisco">{{marisco.nombre}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
-            <label for="nombre">Nombre: {{marisco.nombre}}</label>
-            <br>
-            <label for="descripcion">Descripción: {{marisco.descripcion}}</label>
-            <br>
-            <label for="origen">Origen: {{marisco.origen}}</label>
-            <br>
-            <label for="precioKG">Precio del KG: {{marisco.precioKG}}</label>
-            <br>
-            <label for="cantidad">Cantidad: {{marisco.cantidad}}</label>
-            <br>
-            <label for="fechaCompra">Fecha de Compra: {{marisco.fechaCompra}}</label>
-            <br>
-            <label for="categoria">Categoría: {{marisco.categoria}}</label>
-            <br>
-            <label for="cocido">Cocido: {{ marisco.cocido ? 'Sí' : 'No' }}</label>
+            <label for="nombre"><strong>Nombre:</strong> {{marisco.nombre}}</label>
+            <br><br>
+            <label for="descripcion"><strong>Descripción:</strong> {{marisco.descripcion}}</label>
+            <br><br>
+            <label for="origen"><strong>Origen:</strong> {{marisco.origen}}</label>
+            <br><br>
+            <label for="precioKG"><strong>Precio del KG:</strong> {{marisco.precioKG}}</label>
+            <br><br>
+            <label for="cantidad"><strong>Cantidad:</strong> {{marisco.cantidad}}</label>
+            <br><br>
+            <label for="fechaCompra"><strong>Fecha de Compra:</strong> {{marisco.fechaCompra}}</label>
+            <br><br>
+            <label for="categoria"><strong>Categoría:</strong> {{marisco.categoria}}</label>
+            <br><br>
+            <label for="cocido"><strong>Cocido:</strong> {{ marisco.cocido ? 'Sí' : 'No' }}</label>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Ok</button>
+          <button type="submit" class="btn btn-primary" (click)="modal.dismiss('cancel click')" >Ok</button>
         </div>
       </div>
-
-    </div>
-  </div>
-</div>

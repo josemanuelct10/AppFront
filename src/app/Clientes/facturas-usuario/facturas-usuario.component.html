@@ -1,0 +1,22 @@
+<app-menu-cliente></app-menu-cliente>
+
+<div class="container">
+  <h2 class="title" *ngIf="facturas">Tus Facturas, {{facturas[0].user.name}}</h2>
+  <div class="empty-state" *ngIf="!facturas">
+    <p class="lead">¡Ups! Parece que no tienes facturas aún.</p>
+  </div>
+
+  <div class="cards-container" *ngIf="facturas">
+    <div class="card" *ngFor="let factura of facturas">
+      <div class="card-header">
+        <h3>Factura ID: {{factura.id}}</h3>
+      </div>
+      <div class="card-body">
+        <p><strong>Referencia:</strong> {{factura.referencia}}</p>
+        <p><strong>Precio Total:</strong> {{factura.precioFactura | number:'1.2-2' }} €</p>
+        <p><strong>Fecha:</strong> {{factura.fecha}}</p>
+        <button class="btn" (click)="abrirDocumento(factura.id)">Abrir Documento</button>
+      </div>
+    </div>
+  </div>
+</div>

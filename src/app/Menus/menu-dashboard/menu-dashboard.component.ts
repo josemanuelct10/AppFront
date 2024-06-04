@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MenuDashboardComponent {
 
-  categoriaUsuario: number = 0; // Valor predeterminado
+  categoriaUsuario: number = 0;
 
 
   constructor(

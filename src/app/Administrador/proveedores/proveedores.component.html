@@ -1,72 +1,67 @@
 <app-menu-dashboard></app-menu-dashboard>
-<br>
-<div class="d-flex">
-  <h2 class="h2">Proveedores</h2>
-  <div class="divAnadir">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProveedor">
-      <i class="fa fa-plus"></i>
-    </button>
-    <app-add-proveedor (onChange)="actualizarProveedores($event)"></app-add-proveedor>
+
+<div class="container">
+  <div class="header">
+    <h2 class="title">Proveedores</h2>
+    <div class="add-button-container">
+      <button type="button" class="btn add-btn" (click)="modalAdd()">
+        <i class="fa fa-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+      <button class="btn search-btn" type="button" (click)="limpiarFiltro()">Limpiar</button>
+    </div>
+  </div>
+
+  <div class="table-container" *ngIf="proveedores">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Dirección</th>
+          <th>Teléfono</th>
+          <th>CIF</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proveedor of proveedores | filterProveedores: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
+          <td>{{proveedor.id}}</td>
+          <td>{{proveedor.nombre}}</td>
+          <td>{{proveedor.direccion}}</td>
+          <td>{{proveedor.telefono}}</td>
+          <td>{{proveedor.cif}}</td>
+          <td>
+            <button class="btn action-btn" (click)="modalShow(proveedor)">
+              <i class="fa fa-eye"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn action-btn danger-btn" (click)="modalRM(proveedor.id, proveedor.nombre)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn action-btn" (click)="modalEdit(proveedor)">
+              <i class="fa fa-pen"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination-container">
+      <pagination-controls
+          (pageChange)="page = $event"
+          previousLabel="Anterior"
+          nextLabel="Siguiente">
+      </pagination-controls>
+    </div>
   </div>
 </div>
-
-
-<div class="table-responsive mx-5">
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Dirección</th>
-      <th scope="col">Teléfono</th>
-      <th scope="col">CIF</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let proveedor of proveedores  | paginate: { itemsPerPage: 10, currentPage: page} ">
-      <td>{{proveedor.id}}</td>
-      <td>{{proveedor.nombre}}</td>
-      <td>{{proveedor.direccion}}</td>
-      <td>{{proveedor.telefono}}</td>
-      <td>{{proveedor.cif}}</td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#showProveedor" (click)="buscarProveedor(proveedor.id)" >
-          <i class="fa fa-eye"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarProveedor" (click)="setProveedorAEliminar(proveedor.id, proveedor.nombre)">
-          <i class="fa fa-trash"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProveedor" (click)="buscarProveedor(proveedor.id)">
-          <i class="fa fa-pen"></i>
-        </button>
-      </td>
-      <td>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#showGastos" (click)="buscarProveedor(proveedor.id)">
-          <i class="fa fa-file"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div style="display: flex; justify-content: center; align-items: center;">
-  <pagination-controls
-      (pageChange)="page = $event"
-      previousLabel="Anterior"
-      nextLabel="Siguiente">
-  </pagination-controls>
-</div>
-</div>
-
-<!-- Aquí pasamos el proveedor seleccionado al componente -->
-<app-show-proveedor *ngIf="proveedor"[proveedor]="proveedor"></app-show-proveedor>
-<app-edit-proveedor *ngIf="proveedor" [proveedor]="proveedor" (onChange)="actualizarProveedores($event)"></app-edit-proveedor>
-<app-rm-proveedor [id]="id" [nombre]="nombre" (onChange)="actualizarProveedores($event)"></app-rm-proveedor>
-<app-show-gastos *ngIf="proveedor" [proveedor]="proveedor"></app-show-gastos>

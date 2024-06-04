@@ -1,92 +1,82 @@
 <app-menu-dashboard></app-menu-dashboard>
 
-<br>
-<div class="d-flex">
-  <h2 class="h2">Gastos</h2>
-  <div class="divAnadir">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNomina">
-      <i class="fa fa-plus"></i>
-      Añadir Nomina
-    </button>
-    <app-add-nomina (onChange)="actualizarGastos($event)"></app-add-nomina>
+<div class="container">
+  <div class="header">
+    <h2 class="title">Gastos</h2>
+    <div class="add-button-container">
+      <button type="button" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#addNomina">
+        <i class="fa fa-plus"></i> Añadir Nómina
+      </button>
+      <app-add-nomina (onChange)="actualizarGastos($event)"></app-add-nomina>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCompra">
-      <i class="fa fa-plus"></i>
-      Añadir Compra
-    </button>
-    <app-add-compra (onChange)="actualizarGastos($event)"></app-add-compra>
+      <button type="button" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#addCompra">
+        <i class="fa fa-plus"></i> Añadir Compra
+      </button>
+      <app-add-compra (onChange)="actualizarGastos($event)"></app-add-compra>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addGastoExtra">
-      <i class="fa fa-plus"></i>
-      Añadir Gasto Extra
-    </button>
-    <app-add-gastos-extra (onChange)="actualizarGastos($event)"></app-add-gastos-extra>
-
+      <button type="button" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#addGastoExtra">
+        <i class="fa fa-plus"></i> Añadir Gasto Extra
+      </button>
+      <app-add-gastos-extra (onChange)="actualizarGastos($event)"></app-add-gastos-extra>
+    </div>
   </div>
-</div>
 
-<div class="input-group mb-3" style="width: 20%; margin-left:50px;">
-  <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
-  <button class="btn btn-primary" type="button" (click)="limpiarFiltro()">Limpiar</button>
-</div>
+  <div class="search-container">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+      <button class="btn search-btn" type="button" (click)="limpiarFiltro()">Limpiar</button>
+    </div>
+  </div>
 
-
-<div class="table-responsive mx-5" *ngIf="gastos">
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Descripcion</th>
-        <th scope="col">Cantidad </th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Referencia</th>
-        <th scope="col">Involucrado</th>
-        <th scope="col">Documento</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let gasto of gastos | filter: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
-        <td>{{gasto.id}}</td>
-        <td>{{gasto.descripcion}}</td>
-        <td>{{gasto.cantidad}}€</td>
-        <td>{{gasto.fecha}}</td>
-        <td>{{gasto.referencia}}</td>
-        <td>
-          {{ gasto.user ? gasto.user.name : (gasto.proveedor ? gasto.proveedor.nombre : 'N/A') }}
-        </td>
-
-
-        <td>
-          <button type="button" class="btn btn-primary"  (click)="abrirDocumento(gasto.documento)">Abrir Documento</button>
-        </td>
-
-        <td>
-          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarGasto" (click)="setGastoAEliminar(gasto.id, gasto.referencia)">
-            <i class="fa fa-trash"></i>
-          </button>
-          <app-rm-gasto [id]="id" [referencia]="referencia" (onChange)="actualizarGastos($event)"></app-rm-gasto>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div style="display: flex; justify-content: center; align-items: center;">
-    <pagination-controls
+  <div class="table-container" *ngIf="gastos">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Fecha</th>
+          <th>Referencia</th>
+          <th>Involucrado</th>
+          <th>Documento</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gasto of gastos | filterGastos: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
+          <td>{{gasto.id}}</td>
+          <td>{{gasto.descripcion}}</td>
+          <td>{{gasto.cantidad}}€</td>
+          <td>{{gasto.fecha}}</td>
+          <td>{{gasto.referencia}}</td>
+          <td>
+            {{ gasto.user ? gasto.user.name : (gasto.proveedor ? gasto.proveedor.nombre : 'N/A') }}
+          </td>
+          <td>
+            <button class="btn action-btn" *ngIf="gasto.documento" (click)="abrirDocumento(gasto.documento)">Abrir Documento</button>
+          </td>
+          <td>
+            <button class="btn action-btn danger-btn" data-bs-toggle="modal" data-bs-target="#eliminarGasto" (click)="setGastoAEliminar(gasto.id, gasto.referencia)">
+              <i class="fa fa-trash"></i>
+            </button>
+            <app-rm-gasto [id]="id" [referencia]="referencia" (onChange)="actualizarGastos($event)"></app-rm-gasto>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination-container">
+      <pagination-controls
         (pageChange)="page = $event"
         previousLabel="Anterior"
         nextLabel="Siguiente">
-    </pagination-controls>
-  </div>
+      </pagination-controls>
+    </div>
   </div>
 
   <!-- Línea que muestra la suma total -->
-<div class="total-line text-end mx-5" *ngIf="gastos && gastos.length > 0">
-  <hr>
-  <div>TOTAL: {{calcularTotalFiltrado()}}€</div>
+  <div class="total-line text-end mx-5" *ngIf="gastos && gastos.length > 0">
+    <hr>
+    <div>TOTAL: {{calcularTotalFiltrado()}}€</div>
+  </div>
 </div>
-
-
-
-

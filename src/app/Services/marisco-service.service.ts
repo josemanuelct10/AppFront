@@ -1,39 +1,59 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { enviroment } from '../enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MariscoServiceService {
 
-  apiUrl: string = 'http://127.0.0.1:8000/api/mariscos';
+  apiUrl: string = enviroment.apiUrl + '/api/mariscos'; // URL base para las solicitudes al backend
 
+  constructor(private http: HttpClient) { }
 
-  constructor(
-    private http : HttpClient
-  ) { }
-
-  getAll(){
-    return this.http.get(this.apiUrl + '/show')
+  // Método para obtener todos los mariscos
+  getAll() {
+    return this.http.get(this.apiUrl + '/show', { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-  add(data: any){
-    return this.http.post<any>(this.apiUrl + '/create', data);
+  // Método para agregar un nuevo marisco
+  add(data: any) {
+    return this.http.post<any>(this.apiUrl + '/create', data, { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-  rm(id: any){
-    return this.http.delete<any>(`${this.apiUrl}/rm/${id}`);
+  // Método para eliminar un marisco por su ID
+  rm(id: any) {
+    return this.http.delete<any>(`${this.apiUrl}/rm/${id}`, { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-  getById(id: any){
-    return this.http.get(`${this.apiUrl}/getById/${id}`);
+  // Método para obtener un marisco por su ID
+  getById(id: any) {
+    return this.http.get(`${this.apiUrl}/getById/${id}`, { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-  update(id: any, mariscoActualizado: any){
-    return this.http.put(`${this.apiUrl}/update/${id}`, mariscoActualizado);
+  // Método para actualizar un marisco por su ID
+  update(id: any, mariscoActualizado: any) {
+    return this.http.put(`${this.apiUrl}/update/${id}`, mariscoActualizado, { headers: this.obtenerCabeceraAutorizacion() });
   }
 
+  // Método para actualizar la cantidad de un marisco por su ID
   updateCantidad(mariscoId: number, nuevaCantidad: number) {
-    return this.http.put<any>(`${this.apiUrl}/updateCantidad/${mariscoId}`, { cantidad: nuevaCantidad });
+    return this.http.put<any>(
+      `${this.apiUrl}/updateCantidad/${mariscoId}`,
+      { cantidad: nuevaCantidad },
+      { headers: this.obtenerCabeceraAutorizacion() }
+    );
+  }
+
+  // Método privado para obtener las cabeceras de autorización
+  private obtenerCabeceraAutorizacion(): HttpHeaders {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+    } else {
+      return new HttpHeaders();
+    }
   }
 }

@@ -6,51 +6,114 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form #formMarisco="ngForm" (ngSubmit)="guardarDatos()">
+        <form [formGroup]="formularioMarisco" (ngSubmit)="guardarDatos()">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="nombre" [(ngModel)]="nombre" id="nombre" placeholder="Nombre" alt="Nombre">
+            <input type="text" class="form-control" name="nombre" formControlName="nombre" id="nombre" placeholder="Nombre" alt="Nombre">
             <label for="nombre">Nombre</label>
+            <div *ngIf="formularioMarisco && formularioMarisco.get('nombre') && (formularioMarisco.get('nombre')?.dirty || formularioMarisco.get('nombre')?.touched)">
+              <div *ngIf="formularioMarisco.get('nombre')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El nombre es requerido
+              </div>
+            </div>
           </div>
+
+
           <div class="form-floating">
-            <textarea class="form-control" placeholder="Descripcion" name="descripcion"  [(ngModel)]="descripcion" alt="descripcion" id="descripcion" style="height: 100px"></textarea>
+            <textarea class="form-control" placeholder="Descripcion" name="descripcion"  formControlName="descripcion" alt="descripcion" id="descripcion" style="height: 100px"></textarea>
             <label for="descripcion">Descripcion</label>
+            <div *ngIf="formularioMarisco && formularioMarisco.get('descripcion') && (formularioMarisco.get('descripcion')?.dirty || formularioMarisco.get('descripcion')?.touched)">
+              <div *ngIf="formularioMarisco.get('descripcion')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La descripción es requerida
+              </div>
+            </div>
           </div>
           <br>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="origen" name="origen"  [(ngModel)]="origen" placeholder="Origen" alt="Origen">
+            <input type="text" class="form-control" id="origen" name="origen" formControlName="origen" placeholder="Origen" alt="Origen">
             <label for="origen">Origen</label>
+            <div *ngIf="formularioMarisco && formularioMarisco.get('origen') && (formularioMarisco.get('origen')?.dirty || formularioMarisco.get('origen')?.touched)">
+              <div *ngIf="formularioMarisco.get('origen')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El origen es requerido
+              </div>
+            </div>
           </div>
-
+          <br>
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="precioKG" name="precioKG"  [(ngModel)]="precioKG" placeholder="Precio del KG" alt="Precio del Kilogramo">
+            <input type="number" class="form-control" id="precioKG" name="precioKG"  formControlName="precioKG" placeholder="Precio del KG" alt="Precio del Kilogramo">
             <label for="precioKG">Precio del KG</label>
+            <div *ngIf="formularioMarisco && formularioMarisco.get('precioKG') && (formularioMarisco.get('precioKG')?.dirty || formularioMarisco.get('precioKG')?.touched)">
+              <div *ngIf="formularioMarisco.get('precioKG')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El precio del KG es requerido
+              </div>
+              <div *ngIf="formularioMarisco.get('precioKG')?.errors?.['min']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El precio del KG del pescado debe ser superior a 0.
+              </div>
+            </div>
           </div>
 
+
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="cantidad" name="cantidad"  [(ngModel)]="cantidad" placeholder="Cantidad" alt="Cantidad">
+            <input type="number" class="form-control" id="cantidad" name="cantidad"  formControlName="cantidad" placeholder="Cantidad" alt="Cantidad">
             <label for="cantidad">Cantidad</label>
+            <div *ngIf="formularioMarisco && formularioMarisco.get('cantidad') && (formularioMarisco.get('cantidad')?.dirty || formularioMarisco.get('cantidad')?.touched)">
+              <div *ngIf="formularioMarisco.get('cantidad')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La cantidad es requerida
+              </div>
+              <div *ngIf="formularioMarisco.get('cantidad')?.errors?.['min']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La cantidad debe ser al mayor a 0
+              </div>
+            </div>
           </div>
 
           <div class="form-floating mb-3">
-            <select class="form-select" id="categoria" name="categoria" [(ngModel)]="categoria">
+            <select class="form-select" id="categoria" name="categoria" formControlName="categoria">
               <option value="Crustacéo">Crustacéo</option>
               <option value="Molusco">Molusco</option>
               <option value="Cefalopodo">Cefalopodo</option>
             </select>
             <label for="categoria">Categoría</label>
-         </div>
+            <div *ngIf="formularioMarisco && formularioMarisco.get('categoria') && (formularioMarisco.get('categoria')?.dirty || formularioMarisco.get('categoria')?.touched)">
+              <div *ngIf="formularioMarisco.get('categoria')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La categoría es requerido
+              </div>
+            </div>
+          </div>
 
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="fechaCompra" name="fechaCompra"  formControlName="fechaCompra" placeholder="fechaCompra" alt="fechaCompra">
+            <label for="fechaCompra">Fecha de Compra</label>
+            <div *ngIf="formularioMarisco && formularioMarisco.get('fechaCompra') && (formularioMarisco.get('fechaCompra')?.dirty || formularioMarisco.get('fechaCompra')?.touched)">
+              <div *ngIf="formularioMarisco.get('fechaCompra')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                La fecha de Compra es requerida
+              </div>
+            </div>
+          </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="cocido" id="cocido" [(ngModel)]="cocido">
+            <input class="form-check-input" type="checkbox" name="cocido" id="cocido" formControlName="cocido">
             <label class="form-check-label" for="cocido">Cocido</label>
           </div>
 
           <div class="form-floating">
-            <select class="form-select" id="proveedor" name="proveedor" aria-label="Floating label select example" [(ngModel)]="proveedor_id">
+            <select class="form-select" id="proveedor_id" name="proveedor_id" aria-label="Floating label select example" formControlName="proveedor_id">
               <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
             </select>
             <label for="proveedor">Proveedor</label>
+            <div *ngIf="formularioMarisco && formularioMarisco.get('proveedor_id') && (formularioMarisco.get('proveedor_id')?.dirty || formularioMarisco.get('proveedor_id')?.touched)">
+              <div *ngIf="formularioMarisco.get('proveedor_id')?.errors?.['required']" style="color: red;">
+                <i class="fa-solid fa-xmark"></i>
+                El proveedor es requerido
+              </div>
+            </div>
           </div>
 
           <div>
@@ -58,9 +121,12 @@
             <input class="form-control form-control-lg" (change)="capturarImagen($event)" id="imagen" name="imagen" type="file">
           </div>
 
+          <br>
+
+
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"  [disabled]="formularioMarisco.invalid">Guardar</button>
           </div>
         </form>
       </div>

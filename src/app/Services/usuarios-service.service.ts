@@ -1,37 +1,50 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { enviroment } from '../enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuariosServiceService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  apiUrl: string = enviroment.apiUrl + '/api/usuarios'; // URL base para las solicitudes al backend
 
-  apiUrl: string = 'http://127.0.0.1:8000/api/usuarios';
+  constructor(private http: HttpClient) { }
 
-  getAll(){
-    return this.http.get(this.apiUrl + '/show')
+  // Método para obtener todos los usuarios
+  getAll() {
+    return this.http.get(this.apiUrl + '/show', { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-  update(id: any, usuarioActualizado: any){
-    return this.http.put(`${this.apiUrl}/update/${id}`, usuarioActualizado);
+  // Método para actualizar un usuario por su ID
+  update(id: any, usuarioActualizado: any) {
+    return this.http.put(`${this.apiUrl}/update/${id}`, usuarioActualizado, { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-  getById(id: any){
-    return this.http.get(`${this.apiUrl}/getById/${id}`);
+  // Método para obtener un usuario por su ID
+  getById(id: any) {
+    return this.http.get(`${this.apiUrl}/getById/${id}`, { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-
-  rm(id: any){
-    return this.http.delete<any>(`${this.apiUrl}/rm/${id}`);
+  // Método para eliminar un usuario por su ID
+  rm(id: any) {
+    return this.http.delete<any>(`${this.apiUrl}/rm/${id}`, { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-  getByCategoria(id: any){
-    return this.http.get(`${this.apiUrl}/getByCategoria/${id}`);
+  // Método para obtener usuarios por su categoría
+  getByCategoria(id: any) {
+    return this.http.get(`${this.apiUrl}/getByCategoria/${id}`, { headers: this.obtenerCabeceraAutorizacion() });
   }
 
-
+  // Método privado para obtener las cabeceras de autorización
+  private obtenerCabeceraAutorizacion(): HttpHeaders {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+    } else {
+      return new HttpHeaders();
+    }
+  }
 }

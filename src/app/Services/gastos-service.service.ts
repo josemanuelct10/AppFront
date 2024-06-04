@@ -1,38 +1,44 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { enviroment } from '../enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GastosServiceService {
 
-  apiUrl: string = 'http://127.0.0.1:8000/api/gastos';
+  apiUrl: string = enviroment.apiUrl + '/api/gastos';
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  // Obtener el token de autenticación del sessionStorage
+  private authToken: string | null = sessionStorage.getItem('token');
 
-  getAll(){
-    return this.http.get(this.apiUrl + '/show')
+  // Definir encabezados comunes que incluyan el token de autenticación
+  private headers = new HttpHeaders({
+    'Authorization': 'Bearer ' + this.authToken,
+    'Content-Type': 'application/json'
+  });
+
+  constructor(private http: HttpClient) { }
+
+  // Obtener todos los gastos
+  getAll() {
+    return this.http.get(this.apiUrl + '/show', { headers: this.headers });
   }
 
-  add(data: any){
-    const headers = new HttpHeaders();
-    // Establecer el encabezado Content-Type como multipart/form-data
-    headers.append('Content-Type', 'application/json');
-    return this.http.post<any>(this.apiUrl + '/create', data, {headers: headers});
+  // Agregar un nuevo gasto
+  add(data: any) {
+    return this.http.post<any>(this.apiUrl + '/create', data, { headers: this.headers });
   }
 
-  getDocumento(nombreArchivo: string){
-
+  // Obtener el documento de un gasto por su nombre de archivo
+  getDocumento(nombreArchivo: string) {
     const url = `${this.apiUrl}/document/${nombreArchivo}`;
     console.log(url);
-
-    return this.http.get<Blob>(url, { responseType: 'blob' as 'json' });
+    return this.http.get<Blob>(url, { headers: this.headers, responseType: 'blob' as 'json' });
   }
 
-  rm(id: any){
-    return this.http.delete<any>(`${this.apiUrl}/rm/${id}`);
+  // Eliminar un gasto por su ID
+  rm(id: any) {
+    return this.http.delete<any>(`${this.apiUrl}/rm/${id}`, { headers: this.headers });
   }
-
 }

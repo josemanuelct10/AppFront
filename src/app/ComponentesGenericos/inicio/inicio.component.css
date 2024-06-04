@@ -1,0 +1,21 @@
+.secciones-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.custom-card {
+  flex: 1 1 45%; /* Toma el 45% del espacio disponible en pantallas grandes */
+  margin: 10px;
+}
+
+.custom-card img {
+  max-width: 100%; /* Asegura que la imagen no se salga de su contenedor */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .custom-card {
+    flex: 1 1 100%; /* Toma el 100% del espacio disponible en pantallas pequeñas */
+  }
+}

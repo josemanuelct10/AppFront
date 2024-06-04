@@ -1,27 +1,22 @@
-<div class="modal fade" id="showProveedor" tabindex="-1" aria-labelledby="showProveedor" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
       <div class="modal-header bg-custom">
         <h1 class="modal-title fs-5" id="showProveedor">{{proveedor.nombre}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
-            <label for="nombre">Nombre: {{proveedor.nombre}}</label>
-            <br>
-            <label for="direccion">Dirección: {{proveedor.direccion}}</label>
-            <br>
-            <label for="cif">CIF: {{proveedor.cif}}</label>
-            <br>
-            <label for="telefono">Teléfono: {{proveedor.telefono}}</label>
-            <br>
-            <label for="categoria">Categoría: {{proveedor.categoria}}</label>
+            <label for="nombre"><strong>Nombre:</strong> {{proveedor.nombre}}</label>
+            <br><br>
+            <label for="direccion"><strong>Direccion: </strong>{{proveedor.direccion}}</label>
+            <br><br>
+            <label for="cif"><strong>CIF:</strong> {{proveedor.cif}}</label>
+            <br><br>
+            <label for="telefono"><strong>Telefono:</strong> {{proveedor.telefono}}</label>
+            <br><br>
+            <label for="categoria"><strong>Categoria:</strong> {{proveedor.categoria}}</label>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Ok</button>
+          <button type="submit" class="btn btn-primary" (click)="modal.dismiss('cancel click')" >Ok</button>
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
+

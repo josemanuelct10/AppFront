@@ -1,61 +1,87 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { PescadoServiceService } from '../../../Services/pescado-service.service';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProveedoresServiceService } from '../../../Services/proveedores-service.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-pescado',
   templateUrl: './edit-pescado.component.html',
-  styleUrl: './edit-pescado.component.css'
+  styleUrls: ['./edit-pescado.component.css']
 })
 export class EditPescadoComponent implements OnInit {
 
-  @Input() pescado: any;
-  @Output() onChange = new EventEmitter<any>();
+  @ViewChild('formPescado') formPescado: NgForm; // Referencia al formulario NgForm
 
-  proveedores: any;
+  @Input() pescado: any; // Pescado a editar
 
-  pescados: any;
+  proveedores: any; // Lista de proveedores
+  pescados: any; // Lista de pescados
+
+  newPescado: any = { // Objeto para almacenar los datos editados del pescado
+    ID: 0,
+    NOMBRE: '',
+    DESCRIPCION: '',
+    ORIGEN: '',
+    CANTIDAD: 0,
+    PRECIO_KG: 0,
+    FECHA_COMPRA: '',
+    CATEGORIA: '',
+    PROVEEDOR_ID: 0
+  };
 
   constructor(
     private pescadoService: PescadoServiceService,
     private toast: ToastrService,
-    private proveedorService: ProveedoresServiceService
+    private proveedorService: ProveedoresServiceService,
+    public modal: NgbActiveModal
   ) {}
 
-
   ngOnInit(): void {
+    // Obtener la lista de proveedores al inicializar el componente
     this.proveedorService.getAll().subscribe(
       data => this.proveedores = data
-    )
+    );
+
+    // Inicializar los datos del pescado a editar
+    if (this.pescado) {
+      this.newPescado.ID = this.pescado.id;
+      this.newPescado.NOMBRE = this.pescado.nombre;
+      this.newPescado.DESCRIPCION = this.pescado.descripcion;
+      this.newPescado.ORIGEN = this.pescado.origen;
+      this.newPescado.CANTIDAD = this.pescado.cantidad;
+      this.newPescado.PRECIO_KG = this.pescado.precioKG;
+      this.newPescado.FECHA_COMPRA = this.pescado.fechaCompra;
+      this.newPescado.CATEGORIA = this.pescado.categoria;
+      this.newPescado.PROVEEDOR_ID = this.pescado.proveedor_id;
+    }
   }
 
-
-
-  guardarDatos(){
+  guardarDatos(): void {
+    // Crear un objeto formData con los datos editados del pescado
     const formData = {
-      nombre: this.pescado.nombre,
-      descripcion: this.pescado.descripcion,
-      origen: this.pescado.origen,
-      precioKG: this.pescado.precioKG,
-      cantidad: this.pescado.cantidad,
-      fechaCompra: this.pescado.fechaCompra,
-      categoria: this.pescado.categoria
-    }
+      nombre: this.newPescado.NOMBRE,
+      descripcion: this.newPescado.DESCRIPCION,
+      origen: this.newPescado.ORIGEN,
+      precioKG: this.newPescado.PRECIO_KG,
+      cantidad: this.newPescado.CANTIDAD,
+      fechaCompra: this.newPescado.FECHA_COMPRA,
+      categoria: this.newPescado.CATEGORIA
+    };
 
-    this.pescadoService.update(this.pescado.id, formData).subscribe( data =>{
-
-      if (data){
+    // Llamar al servicio para actualizar los datos del pescado
+    this.pescadoService.update(this.newPescado.ID, formData).subscribe(data => {
+      if (data) {
+        // Si la operación es exitosa, obtener la lista actualizada de pescados y cerrar el modal
         this.pescadoService.getAll().subscribe(
           pescados => {
             this.pescados = pescados;
-            this.onChange.emit(this.pescados);
-            this.toast.success("Pescado actualizado correctamente", "Success!");
+            this.modal.close(this.pescados);
+            this.toast.success('Pescado actualizado correctamente', 'Success!');
           }
-        )
+        );
       }
-    })
+    });
   }
-
 }

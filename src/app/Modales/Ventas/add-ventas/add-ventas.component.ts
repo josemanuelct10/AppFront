@@ -1,70 +1,80 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VentasService } from '../../../Services/ventas.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-ventas',
   templateUrl: './add-ventas.component.html',
-  styleUrl: './add-ventas.component.css'
+  styleUrls: ['./add-ventas.component.css']
 })
-export class AddVentasComponent{
-  @Output() onChange = new EventEmitter<any>();
+export class AddVentasComponent implements OnInit {
 
-
-  descripcion: string;
-  fecha: Date;
-  referencia: string;
-  cantidad: number;
+  formVenta: FormGroup;
   opciones: string[] = ['BAENA', 'DOÑA MENCÍA'];
   seleccion: string;
 
   constructor(
+    private formBuilder: FormBuilder,
     private ventasService: VentasService,
-    private toast: ToastrService
-  ){}
+    private toast: ToastrService,
+    public modal: NgbActiveModal
+  ){
+    // Formulario para la entrada de datos de la venta
+    this.formVenta = formBuilder.group({
+      selectPesc: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      fecha: ['', Validators.required],
+      cantidad: ['', [Validators.required, Validators.min(0.1)]]
+    });
+  }
 
-  onChangeOpcion(): void{
-    if (this.seleccion == "BAENA"){
-      this.descripcion = "Venta de Baena";
-    }
-    else{
-      this.descripcion = "Venta de Doña Mencía";
+  ngOnInit(): void {}
+
+  // Método para actualizar la descripción basada en la opción seleccionada
+  onChangeOpcion() {
+    const seleccion = this.formVenta.get('selectPesc')?.value;
+    if (seleccion) {
+      this.formVenta.get('descripcion')?.setValue(`Venta de ${seleccion}`);
+    } else {
+      this.formVenta.get('descripcion')?.setValue('');
     }
   }
 
-
+  // Método para guardar los datos de la venta
   guardarDatos(){
-
-
-    if (this.seleccion == "BAENA"){
-      this.referencia = "VEN-BAE-" + this.fecha;
+    let referencia: '';
+    // Genera la referencia basada en la opción seleccionada y la fecha
+    if (this.formVenta.get('selectPesc')?.value == "BAENA"){
+      referencia = "VEN-BAE-" + this.formVenta.get('fecha')?.value;
     }
     else{
-      this.referencia = "VEN-DOM-" + this.fecha;
+      referencia = "VEN-DOM-" + this.formVenta.get('fecha')?.value;
     }
 
-    console.log(this.referencia);
-
+    // Construye el objeto formData con los datos de la venta
     const formData = {
-      descripcion: this.descripcion,
-      fecha: this.fecha,
-      referencia: this.referencia,
-      cantidad: this.cantidad
+      descripcion: this.formVenta.get('descripcion')?.value,
+      fecha: this.formVenta.get('fecha')?.value,
+      referencia: referencia,
+      cantidad: this.formVenta.get('cantidad')?.value
     }
 
+    // Llama al método del servicio para agregar la venta
     this.ventasService.add(formData).subscribe(
       data => {
-        console.log(data);
         if (data.success == true){
+          // Se recargan todas las ventas y se cierra el modal
           this.ventasService.getAll().subscribe(
             ventasActualizadas => {
-              this.onChange.emit(ventasActualizadas);
-              this.toast.success("Venta anadida correctamente.", "Success!");
+              this.modal.close(ventasActualizadas);
+              this.toast.success("Venta añadida correctamente.", "Success!");
             }
           )
         }
         else if (data.success === false && data.response == 0){
-          this.toast.error("Ya ha creado una venta con esa venta con esa referencia hoy.", "Error!");
+          this.toast.error("Ya ha creado una venta con esa referencia hoy.", "Error!");
         }
       }
     )

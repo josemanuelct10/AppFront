@@ -1,10 +1,6 @@
-
-<div class="modal fade" id="editUsuario" tabindex="-1" aria-labelledby="editUsuario" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-custom">
         <h1 class="modal-title fs-5" id="editUsuario">Editar Usuario</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form #formUsuario="ngForm" (ngSubmit)="guardarDatos()">
@@ -28,12 +24,8 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            <button type="button" class="btn btn-danger" (click)="modal.dismiss('cancel click')">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </form>
       </div>
-
-    </div>
-  </div>
-</div>

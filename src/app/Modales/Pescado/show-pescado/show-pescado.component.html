@@ -1,31 +1,24 @@
-<div class="modal fade" id="showPescado" tabindex="-1" aria-labelledby="showPescado" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-custom">
+<div class="modal-header bg-custom">
         <h1 class="modal-title fs-5" id="showPescado">{{pescado.nombre}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 
-            <label for="nombre">Nombre: {{pescado.nombre}}</label>
-            <br>
-            <label for="descripcion">Descripción: {{pescado.descripcion}}</label>
-            <br>
-            <label for="origen">Origen: {{pescado.origen}}</label>
-            <br>
-            <label for="precioKG">Precio del KG: {{pescado.precioKG | number:'1.2-2'}}s</label>
-            <br>
-            <label for="cantidad">Cantidad: {{pescado.cantidad}}</label>
-            <br>
-            <label for="fechaCompra">Fecha de Compra: {{pescado.fechaCompra}}</label>
-            <br>
-            <label for="categoria">Categoría: {{pescado.categoria}}</label>
+            <label for="nombre"><strong>Nombre:</strong> {{pescado.nombre}}</label>
+            <br><br>
+            <label for="descripcion"><strong>Descripción:</strong> {{pescado.descripcion}}</label>
+            <br><br>
+            <label for="origen"><strong>Origen:</strong> {{pescado.origen}}</label>
+            <br><br>
+            <label for="precioKG"><strong>Precio del KG:</strong> {{pescado.precioKG | number:'1.2-2'}}€</label>
+            <br><br>
+             <label for="cantidad"><strong>Cantidad:</strong> {{ pescado.cantidad | number:'1.2-2' }}€</label>
+            <br><br>
+            <label for="fechaCompra"><strong>Fecha de Compra:</strong> {{pescado.fechaCompra}}</label>
+            <br><br>
+            <label for="categoria"><strong>Categoría: </strong> {{pescado.categoria}}</label>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Ok</button>
+          <button type="submit" class="btn btn-primary"  (click)="modal.dismiss('cancel click')">Ok</button>
         </div>
       </div>
-
-    </div>
-  </div>
-</div>

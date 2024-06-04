@@ -1,75 +1,64 @@
 <app-menu-dashboard></app-menu-dashboard>
 
-<br>
-<div class="d-flex">
-  <h2 class="h2">Facturas</h2>
-  <div class="divAnadir">
-    <button type="button" class="btn btn-primary" [routerLink]="['/administrador/addFacturas']">
-      <i class="fa fa-plus"></i>
-      Añadir Factura
-    </button>
+<div class="container">
+  <div class="header">
+    <h2 class="title">Facturas</h2>
+    <div class="add-button-container">
+      <button type="button" class="btn add-btn" [routerLink]="['/administrador/addFacturas']">
+        <i class="fa fa-plus"></i>
+        Añadir Factura
+      </button>
+    </div>
   </div>
-</div>
 
-<div class="input-group mb-3" style="width: 20%; margin-left:50px;">
-  <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
-  <button class="btn btn-primary" type="button" (click)="limpiarFiltro()">Limpiar</button>
-</div>
+  <div class="search-container">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filtro">
+      <button class="btn search-btn" type="button" (click)="limpiarFiltro()">Limpiar</button>
+    </div>
+  </div>
 
-
-<div class="table-responsive mx-5" *ngIf="facturas">
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Referencia</th>
-        <th scope="col">Cantidad</th>
-        <th scope="col">Fecha</th>
-        <th scope="col">Involucrado</th>
-        <th scope="col">Documento</th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr *ngFor="let factura of facturas | filter: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
-        <td>{{factura.id}}</td>
-        <td>{{factura.referencia}}</td>
-        <td>{{factura.precioFactura}}€</td>
-        <td>{{factura.fecha}}</td>
-        <td>
-          {{ factura.user.name}}
-        </td>
-        <td>
-          <button type="button" class="btn btn-primary"  (click)="abrirDocumento(factura.id)">Abrir Documento</button>
-        </td>
-
-        <td>
-          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rmFactura" (click)="setFacturaAEliminar(factura.id, factura.referencia)">
-            <i class="fa fa-trash"></i>
-          </button>
-
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div style="display: flex; justify-content: center; align-items: center;">
-    <pagination-controls
+  <div class="table-container" *ngIf="facturas">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Referencia</th>
+          <th>Cantidad</th>
+          <th>Fecha</th>
+          <th>Involucrado</th>
+          <th>Documento</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let factura of facturas | filterFacturas: filtro | paginate: { itemsPerPage: 10, currentPage: page}">
+          <td>{{factura.id}}</td>
+          <td>{{factura.referencia}}</td>
+          <td>{{factura.precioFactura | number:'1.2-2'}} €</td>
+          <td>{{factura.fecha}}</td>
+          <td>{{factura.user.name}}</td>
+          <td>
+            <button type="button" class="btn action-btn" (click)="abrirDocumento(factura.id)">Abrir Documento</button>
+          </td>
+          <td>
+            <button class="btn action-btn danger-btn" (click)="rmModal(factura)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination-container">
+      <pagination-controls
         (pageChange)="page = $event"
         previousLabel="Anterior"
         nextLabel="Siguiente">
-    </pagination-controls>
+      </pagination-controls>
+    </div>
   </div>
+
+  <div class="total-line text-end mx-5" *ngIf="facturas && facturas.length > 0">
+    <hr>
+    <div>TOTAL: {{calcularTotalFiltrado()}}€</div>
   </div>
-
-  <!-- Línea que muestra la suma total -->
-<div class="total-line text-end mx-5" *ngIf="facturas && facturas.length > 0">
-  <hr>
-  <div>TOTAL: {{calcularTotalFiltrado()}}€</div>
-</div>
-
-<app-rm-factura [id]="id" [referencia]="referencia" (onChange)="actualizarFacturas($event)"></app-rm-factura>
-
-

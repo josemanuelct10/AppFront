@@ -1,7 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { PescadoServiceService } from './pescado-service.service';
-import { MariscoServiceService } from './marisco-service.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { enviroment } from '../enviroments/enviroments';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +11,18 @@ export class GestionLineasService {
 
   lineas: any[] = [];
 
-  apiUrl: string = 'http://127.0.0.1:8000/api/facturas/linea/create';
+  apiUrl: string = enviroment.apiUrl + '/api/facturas/linea/create';
 
+  // Obtener el token de autenticación del sessionStorage
+  private authToken: string | null = sessionStorage.getItem('token');
 
-  constructor(
-    private http: HttpClient
-  ){}
+  // Definir encabezados comunes que incluyan el token de autenticación
+  private headers = new HttpHeaders({
+    'Authorization': 'Bearer ' + this.authToken,
+    'Content-Type': 'application/json'
+  });
+
+  constructor(private http: HttpClient) {}
 
   addLinea(linea: any){
     this.lineas.push(linea);
@@ -28,12 +33,10 @@ export class GestionLineasService {
   }
 
   addLineaBD(data: any){
-    return this.http.post<any>(this.apiUrl, data);
+    return this.http.post<any>(this.apiUrl, data, { headers: this.headers });
   }
 
   vaciarLineas() {
     this.lineas = [];
   }
-
-
 }

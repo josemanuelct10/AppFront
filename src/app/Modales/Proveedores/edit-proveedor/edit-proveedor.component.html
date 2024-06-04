@@ -1,46 +1,62 @@
-<div class="modal fade" id="editProveedor" tabindex="-1" aria-labelledby="editProveedor" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header bg-custom">
-        <h1 class="modal-title fs-5" id="editProveedor">Actualizar Proveedor</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-header bg-custom">
+        <h1 class="modal-title fs-5" id="editnewProveedor">Actualizar Proveedor</h1>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form #formProveedor="ngForm" (ngSubmit)="guardarDatos()">
+        <form #formnewProveedor="ngForm" (ngSubmit)="guardarDatos()" novalidate>
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" name="id" [(ngModel)]="proveedor.id" id="id" placeholder="Id" alt="Id" readonly>
+            <input type="number" class="form-control" name="id" [(ngModel)]="newProveedor.ID" id="id" placeholder="Id" alt="Id" readonly>
             <label for="id">Id</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="nombre" [(ngModel)]="proveedor.nombre" id="nombre" placeholder="Nombre" alt="Nombre">
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="newProveedor.NOMBRE" id="nombre" placeholder="Nombre" alt="Nombre" required>
             <label for="nombre">Nombre</label>
+            <span class="text-danger" *ngIf="!newProveedor.NOMBRE">
+              <i class="fa-solid fa-xmark"></i> El nombre es requerido
+          </span>
           </div>
           <div class="form-floating">
-            <textarea class="form-control" placeholder="Dirección" name="direccion"  [(ngModel)]="proveedor.direccion" alt="direccion" id="direccion" style="height: 100px"></textarea>
+            <input class="form-control" placeholder="Dirección" name="direccion"  [(ngModel)]="newProveedor.DIRECCION" alt="direccion" id="direccion" required>
             <label for="direccion">Dirección</label>
+            <span class="text-danger" *ngIf="!newProveedor.DIRECCION">
+              <i class="fa-solid fa-xmark"></i> La dirección es requerida
+          </span>
           </div>
           <br>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="categoria" name="categoria"  [(ngModel)]="proveedor.categoria" placeholder="Categoría" alt="Categoría">
+            <input type="text" class="form-control" id="categoria" name="categoria"  [(ngModel)]="newProveedor.CATEGORIA" placeholder="Categoría" alt="Categoría" required>
             <label for="categoria">Categoría</label>
+            <span class="text-danger" *ngIf="!newProveedor.CATEGORIA">
+              <i class="fa-solid fa-xmark"></i> La categoría es requerida
+          </span>
           </div>
 
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="telefono" name="telefono"  [(ngModel)]="proveedor.telefono" placeholder="Teléfono" alt="Teléfono">
+            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="newProveedor.TELEFONO" placeholder="Teléfono" alt="Teléfono" required pattern="\d{9}">
             <label for="telefono">Teléfono</label>
+            <span class="text-danger" *ngIf="!newProveedor.TELEFONO">
+              <i class="fa-solid fa-xmark"></i> El teléfono es requerido
+            </span>
+            <span class="text-danger" *ngIf="newProveedor.TELEFONO && !validateTelefonoFormat(newProveedor.TELEFONO)">
+              <i class="fa-solid fa-xmark"></i> El formato del teléfono es incorrecto
+            </span>
           </div>
 
+
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="cif" name="cif"  [(ngModel)]="proveedor.cif" placeholder="CIF" alt="CIF">
+            <input type="text" class="form-control" id="cif" name="cif" [(ngModel)]="newProveedor.CIF" placeholder="CIF" alt="CIF" required pattern="[A-Za-z]\d{8}">
             <label for="cif">CIF</label>
+            <span class="text-danger" *ngIf="!newProveedor.CIF">
+              <i class="fa-solid fa-xmark"></i> El CIF es requerido
+            </span>
+            <span class="text-danger" *ngIf="newProveedor.CIF && !validateCIFFormat(newProveedor.CIF)">
+              <i class="fa-solid fa-xmark"></i> El formato del CIF es incorrecto
+            </span>
           </div>
+
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+            <button type="button" class="btn btn-danger" (click)="modal.dismiss('cancel click')" >Cancelar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="formnewProveedor.invalid">Guardar</button>
           </div>
         </form>
       </div>
-
-    </div>
-  </div>
-</div>
